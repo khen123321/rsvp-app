@@ -1,0 +1,300 @@
+/* src/components/RsvpForm.css */
+
+.rsvp-section {
+  background-color: #F4EBE1; 
+  padding: 100px 0;
+  color: #5C2A21; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+}
+
+.rsvp-container {
+  max-width: 1000px !important; /* Forces it to be wide */
+  width: 90%;
+  display: flex;
+  gap: 50px;
+  background: transparent !important; /* Removes the white card background */
+  box-shadow: none !important; /* Removes the card shadow */
+  margin: 0 auto;
+}
+
+/* --- Left Column: Vertical Text --- */
+.rsvp-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 20px;
+  min-width: 80px;
+}
+
+.kindly-text {
+  font-family: 'Georgia', serif; 
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+}
+
+.rsvp-vertical-text {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Georgia', serif;
+  font-size: 4.5rem;
+  line-height: 1.1;
+  text-align: center;
+}
+
+.rsvp-divider {
+  width: 1px;
+  border-left: 2px dotted #5C2A21;
+  opacity: 0.6;
+}
+
+/* --- Right Column: Form Area --- */
+.rsvp-right {
+  flex: 1;
+  padding-left: 10px;
+}
+
+.rsvp-title {
+  font-family: 'Pinyon Script', cursive; 
+  font-size: 4rem;
+  margin: 0 0 15px 0;
+  font-weight: normal;
+  line-height: 1;
+}
+
+.rsvp-description {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 40px;
+  opacity: 0.9;
+}
+
+/* --- Form Styles --- */
+.rsvp-form { display: flex; flex-direction: column; gap: 25px; }
+.form-group { display: flex; flex-direction: column; }
+.form-group label, .radio-question { font-family: 'Georgia', serif; font-size: 1.1rem; margin-bottom: 8px; font-weight: 600; }
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group input[type="tel"],
+.form-group textarea {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(92, 42, 33, 0.4);
+  padding: 8px 0;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  color: #5C2A21;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus, .form-group textarea:focus { border-bottom: 1px solid rgba(92, 42, 33, 1); }
+.form-group input:disabled, .form-group textarea:disabled { opacity: 0.5; cursor: not-allowed; }
+.form-group textarea { resize: vertical; min-height: 30px; }
+
+/* Radio Buttons */
+.radio-group { gap: 10px; }
+.radio-question { margin-bottom: 15px; line-height: 1.4; }
+.radio-label { display: flex; align-items: center; cursor: pointer; font-family: 'Georgia', serif; font-size: 1.05rem; }
+.radio-label input[type="radio"] { appearance: none; width: 16px; height: 16px; border: 1px solid #5C2A21; margin-right: 12px; display: grid; place-content: center; cursor: pointer; }
+.radio-label input[type="radio"]::before { content: ""; width: 10px; height: 10px; background-color: #5C2A21; transform: scale(0); transition: 120ms transform ease-in-out; }
+.radio-label input[type="radio"]:checked::before { transform: scale(1); }
+
+/* Submit Button */
+.submit-container { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
+.submit-btn { background: transparent; border: none; color: #5C2A21; font-family: 'Georgia', serif; font-size: 1.2rem; cursor: pointer; align-self: flex-start; padding: 0; position: relative; transition: opacity 0.3s ease; }
+.submit-btn::before { content: '{ '; }
+.submit-btn::after { content: ' }'; }
+.submit-btn:hover:not(:disabled) { opacity: 0.7; }
+.submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.status-message.error { color: #c62828; font-family: 'Poppins', sans-serif; font-size: 0.9rem; }
+
+
+/* =========================================
+   SUCCESS & TICKET VIEW STYLES
+   ========================================= */
+
+.animate-fade-in {
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.success-title {
+  font-family: 'Pinyon Script', cursive;
+  font-size: 4.5rem;
+  margin: 0 0 20px 0;
+  line-height: 1.1;
+  color: #5C2A21;
+}
+
+.success-message {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  margin-bottom: 40px;
+  background: rgba(255, 255, 255, 0.4);
+  padding: 25px;
+  border-radius: 8px;
+  border-left: 4px solid #5C2A21;
+}
+
+.success-footer {
+  margin-top: 15px;
+  font-weight: 600;
+  font-family: 'Georgia', serif;
+  font-style: italic;
+}
+
+/* --- Digital Ticket Design --- */
+.digital-ticket {
+  background: #FDF9F0;
+  border: 2px solid #5C2A21;
+  border-radius: 12px;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(92, 42, 33, 0.15);
+  max-width: 600px;
+}
+
+/* Ticket "Cutout" holes for realistic effect */
+.ticket-cutout-top,
+.ticket-cutout-bottom {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background-color: #F4EBE1; 
+  border: 2px solid #5C2A21;
+  border-radius: 50%;
+  left: 65%;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+
+.ticket-cutout-top { top: -17px; }
+.ticket-cutout-bottom { bottom: -17px; }
+
+/* Ticket Content */
+.ticket-left {
+  flex: 65%;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.ticket-right {
+  flex: 35%;
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(92, 42, 33, 0.05);
+}
+
+.ticket-divider {
+  width: 2px;
+  background-image: linear-gradient(to bottom, #5C2A21 50%, transparent 50%);
+  background-size: 2px 14px;
+  background-repeat: repeat-y;
+  position: relative;
+  left: 1px;
+}
+
+.ticket-label {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 3px;
+  margin: 0 0 5px 0;
+  opacity: 0.7;
+}
+
+.ticket-guests {
+  font-family: 'Georgia', serif;
+  font-size: 2rem;
+  margin: 0 0 5px 0;
+  text-transform: uppercase;
+}
+
+.ticket-name {
+  font-family: 'Pinyon Script', cursive;
+  font-size: 2.2rem;
+  margin: 0 0 25px 0;
+  line-height: 1;
+}
+
+.ticket-details {
+  display: flex;
+  gap: 30px;
+}
+
+.detail-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.detail-label {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  opacity: 0.7;
+}
+
+.detail-value {
+  font-family: 'Georgia', serif;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.id-value {
+  color: #6D071A; 
+  letter-spacing: 1px;
+}
+
+.qr-code {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 10px;
+  mix-blend-mode: multiply; 
+}
+
+.scan-text {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  font-weight: 600;
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 768px) {
+  .rsvp-container { flex-direction: column; gap: 30px; }
+  .rsvp-left { flex-direction: row; justify-content: center; gap: 20px; padding-top: 0; }
+  .kindly-text { margin-bottom: 0; font-size: 1.2rem; }
+  .rsvp-vertical-text { flex-direction: row; font-size: 3rem; gap: 8px; }
+  .rsvp-divider { display: none; }
+  .rsvp-right { padding-left: 0; }
+  .rsvp-title, .success-title { font-size: 3.5rem; text-align: center; }
+  .rsvp-description { text-align: center; }
+  
+  .digital-ticket { flex-direction: column; max-width: 100%; }
+  .ticket-cutout-top, .ticket-cutout-bottom { display: none; }
+  
+  .ticket-divider { 
+    height: 2px; 
+    width: 100%;
+    background-image: linear-gradient(to right, #5C2A21 50%, transparent 50%);
+    background-size: 14px 2px;
+    background-repeat: repeat-x;
+  }
+}

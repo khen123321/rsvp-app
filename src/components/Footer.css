@@ -1,0 +1,83 @@
+/* Slim Wedding Footer Styles */
+.wedding-footer-slim {
+  background-color: #6D071A; /* Signature Dark Red */
+  color: #F4EBE1; /* Signature Beige */
+  padding: 15px 20px;
+  width: 100%;
+  border-top: 1px solid rgba(244, 235, 225, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-slim-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+/* The Main Row: Names, Date, Location */
+.footer-main-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.footer-names-mini {
+  font-family: 'Great Vibes', cursive;
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+}
+
+.footer-dot {
+  opacity: 0.4;
+  font-size: 0.8rem;
+}
+
+.footer-date-mini, 
+.footer-location-mini {
+  font-size: 0.8rem;
+  font-weight: 300;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* The Attribution Line */
+.footer-tagline {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.6rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  opacity: 0.4;
+  margin: 0;
+}
+
+/* --- Mobile Responsiveness --- */
+
+@media (max-width: 600px) {
+  .wedding-footer-slim {
+    padding: 20px;
+  }
+
+  .footer-main-row {
+    flex-direction: column; /* Stacks names over date on tiny screens */
+    gap: 2px;
+  }
+
+  .footer-dot {
+    display: none; /* Hides the dots when stacked */
+  }
+
+  .footer-names-mini {
+    font-size: 1.3rem;
+    margin-bottom: 4px;
+  }
+
+  .footer-date-mini, 
+  .footer-location-mini {
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+  }
+}

@@ -1,0 +1,216 @@
+/* src/components/EventTimeline.css */
+
+/* Define a variable for the connector width so it perfectly syncs everywhere */
+:root {
+  --connector-width: clamp(15px, 4vw, 40px);
+}
+
+.timeline-section {
+  background-color: #6D071A; /* Maroon Base */
+  background-size: cover;
+  background-position: center;
+  padding: clamp(60px, 10vw, 120px) 0;
+  display: flex;
+  justify-content: center;
+  color: #F5F5DC; /* Beige/Cream Text */
+  overflow: hidden;
+}
+
+.timeline-container {
+  max-width: 1400px;
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+/* --- Left Side: Title Position --- */
+.timeline-left {
+  flex: 1;
+  padding-top: 20px;
+}
+
+.timeline-main-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(3.2rem, 6vw, 5rem);
+  font-weight: 300;
+  letter-spacing: clamp(6px, 2vw, 12px);
+  line-height: 1;
+  margin: 0;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.script-of {
+  font-family: 'Pinyon Script', cursive;
+  font-size: clamp(3rem, 5vw, 4.5rem);
+  text-transform: lowercase;
+  letter-spacing: 0;
+  margin-right: 15px;
+  vertical-align: middle;
+}
+
+.timeline-date-display {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  letter-spacing: clamp(4px, 1vw, 6px);
+  margin-top: clamp(20px, 4vw, 40px);
+  opacity: 0.9;
+}
+
+/* --- Right Side: Timeline Path --- */
+.timeline-right {
+  flex: 1.2;
+  position: relative;
+  padding: 40px 0;
+  width: 100%;
+}
+
+.vertical-line-path {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background-color: #F5F5DC;
+  opacity: 0.6;
+}
+
+.diamond-end {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 12px;
+  height: 12px;
+  background-color: #F5F5DC;
+}
+
+.diamond-end.top { top: -6px; }
+.diamond-end.bottom { bottom: -6px; }
+
+/* --- Row & Animation Positioning --- */
+.timeline-row {
+  display: flex;
+  width: 100%;
+  margin-bottom: clamp(40px, 6vw, 60px);
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.timeline-section.animate-in .timeline-row {
+  animation: popUpStagger 0.8s ease forwards;
+  animation-delay: calc(var(--index) * 0.4s);
+}
+
+@keyframes popUpStagger {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.event-item-wrapper {
+  display: flex;
+  align-items: center;
+  width: 50%; /* Keeps everything constrained to their half of the screen */
+  position: relative;
+}
+
+/* Logic for Left Rows (1:00, 5:00, 8:00) */
+.row-left { justify-content: flex-start; }
+.row-left .event-item-wrapper { 
+  flex-direction: row; 
+  justify-content: flex-end; 
+  padding-right: clamp(15px, 4vw, 40px); 
+}
+.row-left .event-text-group { text-align: right; }
+
+/* Logic for Right Rows (3:30, 6:00) */
+.row-right { justify-content: flex-end; }
+.row-right .event-item-wrapper { 
+  flex-direction: row-reverse; 
+  justify-content: flex-end; 
+  padding-left: clamp(15px, 4vw, 40px); 
+}
+.row-right .event-text-group { text-align: left; }
+
+/* --- Icons & Text --- */
+.event-text-group {
+  display: flex;
+  flex-direction: column;
+  margin: 0 clamp(10px, 2vw, 20px);
+}
+
+.event-time-tag {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+  font-weight: 600;
+  color: #e8dcb8;
+}
+
+.event-name-tag {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(0.85rem, 2vw, 1.5rem);
+  font-weight: 300;
+  margin: 0;
+  /* Removes nowrap so text can stack on tiny screens */
+  white-space: normal; 
+  line-height: 1.2;
+}
+
+.icon-connector-group {
+  position: relative;
+  /* Shrinks icons perfectly for mobile */
+  width: clamp(40px, 8vw, 80px);
+  height: clamp(40px, 8vw, 80px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.event-graphic {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: brightness(0) saturate(100%) invert(95%) sepia(10%) saturate(500%) hue-rotate(3deg);
+}
+
+/* The Horizontal Connectors */
+.horizontal-connector {
+  position: absolute;
+  top: 50%;
+  width: var(--connector-width);
+  height: 1.5px;
+  background-color: #F5F5DC;
+  opacity: 0.6;
+}
+
+.row-left .horizontal-connector { right: calc(var(--connector-width) * -1); }
+.row-right .horizontal-connector { left: calc(var(--connector-width) * -1); }
+
+/* =========================================
+   MOBILE RESPONSIVE LAYOUT
+========================================= */
+@media (max-width: 900px) {
+  .timeline-container { 
+    flex-direction: column; 
+    align-items: center; 
+  }
+  
+  .timeline-left { 
+    text-align: center; 
+    margin-bottom: 50px; /* Space between title and zigzag */
+    padding-top: 0;
+  }
+  
+  .timeline-right {
+    width: 100%;
+    padding: 0;
+  }
+}
+
+/* For very tiny screens (like iPhone SE), tighten the gaps slightly so the zigzag fits perfectly */
+@media (max-width: 480px) {
+  .event-text-group { margin: 0 8px; }
+  .row-left .event-item-wrapper { padding-right: 12px; }
+  .row-right .event-item-wrapper { padding-left: 12px; }
+} 

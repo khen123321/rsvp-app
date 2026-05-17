@@ -1,0 +1,117 @@
+/* src/components/Navigation.css */
+
+.main-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  
+  /* Transparent background with Glass Blur */
+  background-color: rgba(110, 1, 21, 0.192); 
+  backdrop-filter: blur(12px); 
+  -webkit-backdrop-filter: blur(12px);
+  
+  /* Thin elegant border at the bottom */
+  border-bottom: 1px solid rgba(245, 245, 220, 0.15); 
+  
+  padding: 5px 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  
+  /* Smooth transition for when the background changes on scroll (if needed) */
+  transition: all 0.5s ease;
+}
+
+.nav-container {
+  /* Reaches the sides with a safe margin */
+  width: 100%; 
+  padding: 0 60px; 
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+}
+
+/* --- Logo Styling --- */
+.nav-logo {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.nav-monogram {
+  height: 55px; /* Adjust this to change logo size */
+  width: auto;
+  /* Smooth high-end transition for the hover tilt */
+  transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.nav-monogram:hover {
+  transform: scale(1.1) rotate(3deg);
+}
+
+/* --- Links Styling --- */
+.nav-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 45px; /* Spacing between navigation items */
+}
+
+.nav-links li {
+  color: #6D071A; /* Beige font */
+  cursor: pointer;
+  font-size: 0.8rem; /* Adjust this to change text size */
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  
+  /* Clean design: No text-shadows as requested */
+  text-shadow: none;
+  
+  /* Transition for hover effects */
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.nav-links li:hover {
+  color: #ffffff; /* Goes white on hover */
+  transform: translateY(-2px); /* Subtle lift */
+}
+
+/* Simple underline effect that appears on hover */
+.nav-links li::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 1px;
+  bottom: -4px;
+  left: 0;
+  background-color: #F5F5DC;
+  transition: width 0.3s ease;
+}
+
+.nav-links li:hover::after {
+  width: 100%;
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 768px) {
+  .nav-container {
+    padding: 0 25px;
+  }
+  
+  .nav-links {
+    gap: 20px;
+  }
+
+  .nav-links li {
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+  }
+
+  .nav-monogram {
+    height: 40px;
+  }
+}

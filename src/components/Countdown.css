@@ -1,0 +1,154 @@
+/* src/components/Countdown.css */
+
+.countdown-section {
+  height: 600px;
+  background-size: cover;
+  background-position: center 100%; 
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #6D071A; /* Signature Maroon */
+  overflow: hidden;
+  position: relative;
+}
+
+/* Base Container Animation State */
+.countdown-container {
+  max-width: 1000px;
+  width: 95%;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Triggered when the user scrolls to this section */
+.countdown-section.animate-in .countdown-container {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.countdown-title {
+  font-family: 'Pinyon Script', cursive; /* UPDATED FONT HERE */
+  font-size: 4.8rem;
+  font-weight: 400;
+  margin-bottom: 60px;
+  text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.4);
+}
+
+.timer-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+/* --- THE INDIVIDUAL GLASS TILES --- */
+.glass-tile {
+  background: rgba(255, 255, 255, 0.086); 
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(12px);
+  
+  padding: 35px 25px;
+  border-radius: 20px;
+  min-width: 150px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.glass-tile:hover {
+  transform: translateY(-8px);
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.time-num {
+  font-size: 5.5rem;
+  font-weight: 400;
+  line-height: 1;
+  opacity: 0; 
+}
+
+.countdown-section.animate-in .time-num {
+  animation: numberPop 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  animation-delay: 0.6s;
+}
+
+.time-label {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-top: 15px;
+  letter-spacing: 4px;
+  opacity: 0.8;
+}
+
+.separator {
+  font-size: 4.5rem;
+  font-weight: 300;
+  color: rgba(109, 7, 26, 0.5);
+  padding-bottom: 40px; 
+}
+
+/* --- Animation Keyframes --- */
+@keyframes numberPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 900px) {
+  .countdown-section {
+    height: 550px;
+  }
+
+  .countdown-title {
+    font-size: 3.2rem;
+    margin-bottom: 40px;
+  }
+
+  .timer-display {
+    gap: 10px;
+  }
+  
+  .glass-tile {
+    min-width: 85px;
+    padding: 20px 10px;
+    border-radius: 12px;
+  }
+  
+  .time-num {
+    font-size: 3rem;
+  }
+  
+  .time-label {
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    margin-top: 10px;
+  }
+  
+  .separator {
+    font-size: 2.5rem;
+    padding-bottom: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .timer-display {
+    gap: 8px;
+  }
+  .glass-tile {
+    min-width: 75px;
+  }
+}

@@ -1,0 +1,113 @@
+/* src/components/OurJourney.css */
+
+.journey-section {
+  background-color: #6D071A; 
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: clamp(20px, 100px) 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.journey-container {
+  max-width: 1500px; 
+  width: 100%;
+  text-align: center;
+  
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.journey-section.animate-in .journey-container {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.journey-header {
+  margin-bottom: clamp(40px, 6vw, 60px);
+}
+
+.journey-leaf {
+  width: clamp(100px, 15vw, 160px); 
+  height: auto;
+  filter: drop-shadow(0 6px 12px rgba(0,0,0,0.3));
+  
+  opacity: 0;
+  transform: scale(0.4);
+  transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition-delay: 0.4s;
+}
+
+.journey-section.animate-in .journey-leaf {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.journey-title {
+  color: #F5F5DC; 
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(2.5rem, 6vw, 3.5rem);
+  font-weight: 300;
+  letter-spacing: clamp(5px, 2vw, 10px);
+  text-transform: uppercase;
+  line-height: 1.1;
+  margin: 0;
+}
+
+.script-font {
+  display: block;
+  font-family: 'Pinyon Script', cursive;
+  font-size: clamp(4.5rem, 10vw, 6.5rem);
+  text-transform: none;
+  letter-spacing: 2px;
+  margin-top: clamp(-15px, -3vw, -25px); 
+  font-weight: 400;
+  color: #F5F5DC;
+}
+
+/* --- TEXT BLOCK --- */
+.journey-text {
+  color: #F5F5DC;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 300;
+  
+  /* Constrain the width so the justified text forms a nice clean block */
+  max-width: 1200px;
+  margin: 0 auto;
+  margin-top: clamp(30px, 6vw, 50px);
+  padding: 0 clamp(20px, 5vw, 40px);
+}
+
+.journey-text p {
+  /* Fluid font sizing for perfect readability on all screens */
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  line-height: 2.2; 
+  margin-bottom: clamp(30px, 4vw, 40px);
+  opacity: 0.95;
+  
+  /* THE FIX: Justified text configuration */
+  text-align: justify;
+  text-justify: inter-word;
+  
+  clear: both; 
+}
+
+/* --- THE DROP CAP --- */
+.journey-text p::first-letter {
+  font-family: 'Pinyon Script', cursive;
+  font-size: clamp(4rem, 8vw, 6rem); 
+  float: left;
+  
+  /* Adjusted margins so the drop cap sits flush left with the justified text */
+  margin: -5px 15px -10px 0; 
+  
+  line-height: 1;
+  color: #F5F5DC;
+  font-weight: 400;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+

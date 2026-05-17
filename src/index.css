@@ -1,0 +1,214 @@
+/* src/index.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Poppins:wght@300;400;600&display=swap');
+
+:root {
+  --primary-maroon: #6D071A;
+  --accent-beige: #F5F5DC;
+  --text-dark: #2D030A;
+  --white: #ffffff;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  background-color: var(--accent-beige); /* Beige background for the whole site */
+  font-family: 'Poppins', sans-serif;
+  color: var(--text-dark);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* --- App Layout --- */
+.form-section {
+  background-color: #eef2f6;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+/* --- Hero Section --- */
+.hero {
+  background-color: var(--color-primary);
+  color: var(--color-text-light);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+}
+
+.hero-title {
+  font-size: 4rem;
+  color: var(--color-accent);
+  margin: 0 0 10px 0;
+}
+
+.hero-subtitle {
+  font-size: 1.5rem;
+  font-weight: 300;
+}
+
+/* --- Event Details Section --- */
+.details-section {
+  background-color: var(--color-bg-light);
+  color: var(--color-primary);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+.details-heading {
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+  font-weight: 600;
+}
+
+.details-card {
+  background-color: #ffffff;
+  padding: 50px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  text-align: center;
+  width: 100%;
+  max-width: 500px;
+}
+
+.details-subhead {
+  margin: 0 0 10px 0;
+  color: var(--color-primary);
+}
+
+.details-subhead-location {
+  margin: 30px 0 10px 0;
+  color: var(--color-primary);
+}
+
+.details-text {
+  margin: 5px 0;
+  color: #4a5568;
+}
+
+/* --- RSVP Form Section --- */
+.rsvp-wrapper {
+  width: 100%;
+}
+
+.rsvp-container {
+  background-color: var(--color-primary);
+  color: var(--color-text-light);
+  padding: 40px;
+  border-radius: 12px;
+  max-width: 500px;
+  margin: 0 auto;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.rsvp-heading {
+  text-align: center;
+  margin-bottom: 24px;
+  color: var(--color-accent);
+  font-weight: 600;
+  font-size: 2rem;
+}
+
+.rsvp-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.input-row {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.input-group-guest {
+  flex: 1;
+}
+
+.input-group-contact {
+  flex: 2;
+}
+
+.input-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #f0f0f0;
+}
+
+.input-field {
+  font-family: 'Poppins', sans-serif;
+  padding: 12px;
+  border-radius: 6px;
+  border: 1px solid var(--color-border);
+  background-color: #ffffff;
+  color: var(--color-primary);
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.input-field:focus {
+  border-color: var(--color-accent);
+}
+
+.input-textarea {
+  resize: vertical;
+}
+
+.submit-btn {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--color-accent);
+  color: var(--color-primary);
+  border: none;
+  padding: 14px;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: all 0.3s ease;
+}
+
+/* Here is the hover effect that inline styles couldn't do! */
+.submit-btn:hover:not(:disabled) {
+  background-color: var(--color-accent-hover);
+  transform: translateY(-2px);
+}
+
+.submit-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.success-text {
+  text-align: center;
+  color: #f0f0f0;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 600px) {
+  .input-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .hero-title {
+    font-size: 3rem;
+  }
+}

@@ -1,0 +1,225 @@
+/* src/components/SaveTheDate.css */
+
+.save-the-date {
+  background-color: #F5F5DC; 
+  padding: 100px 20px;
+  display: flex;
+  justify-content: center;
+  font-family: 'Poppins', sans-serif;
+  overflow: hidden; 
+}
+
+.std-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 100px;
+  max-width: 1100px;
+  width: 100%;
+}
+
+/* --- Initial Hidden States --- */
+
+.std-photos {
+  position: relative;
+  width: 340px;
+  height: 400px;
+  cursor: pointer;
+  perspective: 1000px; 
+  opacity: 0;
+  transform: translateX(-60px);
+  transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.std-content {
+  text-align: center;
+  color: #6D071A; 
+  opacity: 0;
+  transform: translateX(60px);
+  transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: 0.2s; 
+}
+
+/* --- Animated In States (Triggered by Scroll) --- */
+
+.save-the-date.animate-in .std-photos,
+.save-the-date.animate-in .std-content {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* --- Polaroid Stack --- */
+
+.polaroid {
+  background: white;
+  padding: 15px 15px 35px 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  position: absolute;
+  width: 280px;
+  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+  transform-origin: bottom left;
+}
+
+.photo-frame {
+  width: 100%;
+  aspect-ratio: 1/1;
+  background: #eee;
+  overflow: hidden;
+}
+
+.photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none; 
+}
+
+.photo-caption {
+  color: #6D071A;
+  text-align: center;
+  margin-top: 12px;
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 1px;
+}
+
+.polaroid.thrown {
+  transform: translateX(-900px) rotate(-60deg) scale(0.5) !important;
+  opacity: 0;
+  pointer-events: none; 
+}
+
+/* --- Calendar Section --- */
+
+.std-title {
+  font-size: 2.5rem;
+  letter-spacing: 6px;
+  margin-bottom: 0;
+  font-weight: 400;
+}
+
+.std-month {
+  font-size: 1.5rem;
+  letter-spacing: 3px;
+  margin-bottom: 30px;
+  font-weight: 300;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 15px 20px;
+}
+
+.calendar-day-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: lowercase;
+}
+
+/* THIS MUST BE RELATIVE FOR THE HEART TO POSITION CORRECTLY */
+.calendar-date {
+  position: relative;
+  font-size: 1rem;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.marked-date {
+  font-weight: 700;
+}
+
+/* --- The Heart (Tiny Bottom-Right Icon) --- */
+
+/* --- The Heart (Fixed Size & Position) --- */
+.heart-circle {
+  position: absolute;
+  
+  /* We make the box much bigger to account for the transparent empty space in your PNG */
+  width: 70px; 
+  height: 70px;
+  
+  /* We shift this bigger box so the drawing lands at the bottom right of the 11 */
+  bottom: 1px;
+  right: -15px;
+  
+  /* Start hidden */
+  opacity: 0;
+  transform: scale(0) rotate(-20deg); 
+  
+  z-index: 10; 
+  pointer-events: none; 
+}
+
+/* Fires the pop ONLY after the calendar scrolls onto the screen */
+.save-the-date.animate-in .heart-circle {
+  animation: popHeart 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  animation-delay: 1.2s; /* Waits for the section to slide in first */
+}
+
+.heart-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+@keyframes popHeart {
+  0% { opacity: 0; transform: scale(0) rotate(-20deg); }
+  100% { opacity: 1; transform: scale(7.5) rotate(0deg); }
+}
+
+/* --- Tap Hints & Button --- */
+
+.tap-hint {
+  position: absolute;
+  bottom: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.75rem;
+  color: #6D071A;
+  opacity: 0.5;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.add-calendar-btn {
+  background: none;
+  border: none;
+  color: #6D071A;
+  margin-top: 40px;
+  cursor: pointer;
+  letter-spacing: 2px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: opacity 0.3s;
+}
+
+.add-calendar-btn:hover {
+  opacity: 0.6;
+}
+
+/* --- Mobile Responsiveness --- */
+
+@media (max-width: 850px) {
+  .std-container { 
+    flex-direction: column; 
+    gap: 60px; 
+  }
+  
+  .std-photos { 
+    width: 280px; 
+    height: 350px; 
+    transform: translateY(40px); 
+  }
+  
+  .std-content {
+    transform: translateY(40px);
+  }
+
+  .save-the-date.animate-in .std-photos,
+  .save-the-date.animate-in .std-content {
+    transform: translateY(0);
+  }
+}

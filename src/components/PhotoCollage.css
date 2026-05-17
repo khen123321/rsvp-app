@@ -1,0 +1,151 @@
+/* src/components/PhotoCollage.css */
+
+.collage-section {
+  background-color: #FDF9F0; 
+  background-size: cover;
+  background-position: center;
+  padding: 120px 0; 
+  position: relative; 
+
+  /* Entrance animation */
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1.2s ease-out;
+}
+
+.collage-section.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.collage-container {
+  max-width: 1200px;
+  width: 85%; /* Slightly narrower to give the large icons room on the sides */
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 60px;
+}
+
+/* --- Layout Columns --- */
+.collage-left {
+  flex: 1.2;
+  display: flex;
+  flex-direction: column;
+  gap: 50px; 
+}
+
+.collage-right {
+  flex: 0.8;
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 50px; 
+}
+
+/* --- Photo Frames (No White Background) --- */
+.collage-frame {
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25); 
+  position: relative; /* Crucial: This anchors the icons to the photo! */
+  transition: transform 0.4s ease;
+}
+
+.collage-frame:hover {
+  transform: scale(1.02);
+  z-index: 20;
+}
+
+.main-photo {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* Sizing for the layout */
+.wide-frame.top-frame { width: 100%; }
+.small-frame.bottom-left-frame { width: 80%; align-self: flex-start; }
+.vertical-frame.right-frame { width: 100%; }
+
+/* --- Anchored Icons (Enlarged) --- */
+.frame-icon {
+  position: absolute;
+  object-fit: contain;
+  pointer-events: none; 
+  filter: drop-shadow(3px 6px 8px rgba(109, 7, 26, 0.2)); 
+  z-index: 10;
+  opacity: 0.9;
+}
+
+/* Groom Frame Icons */
+.icon-envelope {
+  top: -25px;
+  left: -35px;
+  transform: rotate(-12deg);
+  width: 200px; /* Enlarged */
+}
+
+.icon-sandal {
+  top: -95px; 
+  right: -30px; 
+  transform: rotate(10deg);
+  width: 150px; /* Enlarged */
+}
+
+/* Couple Frame Icons */
+.icon-glass {
+  top: -95px;
+  left: -150px;
+  transform: rotate(-15deg);
+  width: 175px; /* Enlarged */
+}
+
+.icon-shoe {
+  bottom: -100px;
+  left: -110px;
+  transform: rotate(-10deg);
+  width: 195px; /* Enlarged */
+}
+
+/* Bride Frame Icons */
+.icon-rings {
+  top: 40%;
+  right: -95px;
+  transform: translateY(-50%) rotate(55deg);
+  width: 150px; /* Enlarged */
+}
+
+.icon-champagne {
+  bottom: -95px;
+  right: -95px;
+  transform: rotate(50deg);
+  width: 185px; /* Enlarged */
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 1024px) {
+  .collage-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 70px;
+    width: 90%;
+  }
+
+  .collage-left, .collage-right { width: 100%; }
+  .collage-right { padding-top: 0; }
+  
+  .small-frame.bottom-left-frame { width: 90%; margin: 0 auto; }
+  .vertical-frame.right-frame { width: 85%; margin: 0 auto; }
+}
+
+@media (max-width: 768px) {
+  .collage-section { padding: 80px 0; }
+  
+  /* Scale down the enlarged icons slightly for mobile so they don't get cut off */
+  .icon-envelope { width: 10px; left: -20px; }
+  .icon-sandal { width: 75px; right: -10px; }
+  .icon-glass { width: 60px; }
+  .icon-shoe { width: 75px; left: -20px; }
+  .icon-rings { width: 70px; right: -25px; }
+  .icon-champagne { width: 65px; right: -20px; }
+}

@@ -1,0 +1,91 @@
+/* --- Event Details Section --- */
+.details-section {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f8fafc; /* Very light slate for a clean look */
+  color: #0C112A;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 80px 20px;
+}
+
+.details-heading {
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin-bottom: 50px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  position: relative;
+}
+
+/* Decorative underline for the heading */
+.details-heading::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 4px;
+  background-color: #FFB900;
+  border-radius: 2px;
+}
+
+/* --- Information Card --- */
+.details-card {
+  background-color: #ffffff;
+  padding: 60px 40px;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(12, 17, 42, 0.08);
+  text-align: center;
+  width: 100%;
+  max-width: 600px;
+  border: 1px solid rgba(12, 17, 42, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.details-card:hover {
+  transform: translateY(-5px);
+}
+
+/* --- Content Styling --- */
+.details-subhead {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #FFB900; /* Gold for titles */
+  margin: 0 0 15px 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.details-text {
+  font-size: 1.1rem;
+  margin: 5px 0;
+  color: #4a5568;
+  line-height: 1.6;
+}
+
+.details-divider {
+  height: 1px;
+  width: 100px;
+  background-color: #e2e8f0;
+  margin: 30px auto;
+}
+
+/* Specific spacing for the location block */
+.details-location-block {
+  margin-top: 10px;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 600px) {
+  .details-card {
+    padding: 40px 20px;
+  }
+  
+  .details-heading {
+    font-size: 2rem;
+  }
+}

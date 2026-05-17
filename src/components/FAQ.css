@@ -1,0 +1,170 @@
+/* src/components/FAQ.css */
+
+.faq-section {
+  background-size: cover;
+  background-position: top center; /* Anchors image to the top */
+  background-attachment: fixed; /* THE FIX: Locks the background to the screen */
+  padding: 120px 0;
+  color: #F5F5DC; /* Elegant Beige/Cream */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* THE FIX: Ensures accordion pushes down, not up */
+  min-height: 100vh; /* Gives the section a stable initial height */
+  overflow: hidden;
+}
+
+.faq-container {
+  max-width: 900px;
+  width: 90%;
+  
+  /* Initial state for the section animation */
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1.2s ease-out;
+}
+
+.faq-section.animate-in .faq-container {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- Header --- */
+.faq-header {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.faq-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 4.5rem;
+  font-weight: 300;
+  letter-spacing: 15px;
+  margin: 0;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.faq-subtitle {
+  font-family: 'Pinyon Script', cursive;
+  font-size: 3.5rem;
+  margin-top: -10px;
+  font-weight: 400;
+}
+
+/* --- Accordion List --- */
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid rgba(245, 245, 220, 0.3); /* Subtle beige border */
+}
+
+.faq-item {
+  border-bottom: 1px solid rgba(245, 245, 220, 0.3);
+  transition: background-color 0.3s ease;
+}
+
+.faq-item:hover {
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+/* --- Question Header --- */
+.faq-question {
+  padding: 25px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.faq-question span {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding-right: 20px;
+}
+
+.faq-icon {
+  font-size: 1.8rem;
+  font-weight: 300;
+  transition: transform 0.4s ease;
+}
+
+/* --- Answer Content (The Dropdown Logic) --- */
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+              opacity 0.4s ease;
+}
+
+.faq-item.active .faq-answer {
+  max-height: 500px; /* Large enough to fit any answer */
+  opacity: 1;
+}
+
+.faq-answer-content {
+  padding: 0 15px 30px 15px;
+}
+
+.faq-answer-content p {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  font-weight: 300;
+  margin: 0;
+  color: rgba(245, 245, 220, 0.85); /* Slightly softer beige */
+}
+
+/* Special styling for links inside FAQs if you add them later */
+.faq-answer-content p u {
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.faq-answer-content p u:hover {
+  color: #ffffff;
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 768px) {
+  .faq-section {
+    padding: 80px 0;
+  }
+
+  .faq-title {
+    font-size: 2.8rem;
+    letter-spacing: 8px;
+  }
+
+  .faq-subtitle {
+    font-size: 2.5rem;
+  }
+
+  .faq-question {
+    padding: 20px 10px;
+  }
+
+  .faq-question span {
+    font-size: 0.95rem;
+    letter-spacing: 1.5px;
+  }
+
+  .faq-answer-content p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .faq-title {
+    font-size: 2.2rem;
+    letter-spacing: 5px;
+  }
+
+  .faq-subtitle {
+    font-size: 2.2rem;
+  }
+}

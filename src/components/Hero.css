@@ -1,0 +1,121 @@
+/* C:\Users\khen\rsvp-app\src\components\Hero.css */
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 60px 20px;
+  overflow: hidden; /* Prevents scrollbars during animations */
+  position: relative;
+}
+
+/* --- DEDICATED BACKGROUND LAYER (Fixes Mobile Stacking) --- */
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  
+  /* Grabs the image variable passed from JSX */
+  background-image: var(--hero-bg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat; /* Stops the image from cloning itself! */
+  z-index: 1; /* Keeps it behind the text */
+  
+  /* Animate scale instead of size (Buttery smooth on mobile) */
+  animation: heroBackgroundZoom 20s ease-in-out infinite alternate;
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2; /* Sits above the background layer */
+  position: relative; /* Required for z-index to work here */
+}
+
+/* --- ANIMATION 2: Logo Fade & Drop --- */
+.hero-logo-animate {
+  max-width: 120px;
+  margin-bottom: 30px;
+  margin-top: -40px;
+  opacity: 0; /* Start invisible */
+  animation: fadeInDown 1.2s ease-out forwards;
+  animation-delay: 0.3s; /* First to appear */
+}
+
+/* --- ANIMATION 3: Names Fade & Slide Up --- */
+.hero-title-animate {
+  /* THE FIX: Changed to Pinyon Script */
+  font-family: 'Pinyon Script', cursive; 
+  font-size: clamp(4rem, 12vw, 7rem);
+  color: #6D071A; /* Lanie & Angelo's Dark Red */
+  margin: 0 0 15px 0;
+  font-weight: 400;
+  line-height: 1;
+  
+  opacity: 0;
+  animation: fadeInUp 1.5s ease-out forwards;
+  animation-delay: 0.8s; /* Second to appear */
+}
+
+/* --- ANIMATION 4: Subtitle Fade & Spread --- */
+.hero-subtitle-animate {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(1rem, 3vw, 1.4rem);
+  font-weight: 600;
+  color: #6D071A;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  
+  opacity: 0;
+  animation: fadeIn 2s ease-out forwards;
+  animation-delay: 1.5s; /* Last to appear */
+}
+
+/* --- KEYFRAME DEFINITIONS --- */
+
+@keyframes heroBackgroundZoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.15); }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* --- MOBILE ADJUSTMENTS --- */
+@media (max-width: 480px) {
+  .hero-logo-animate { max-width: 90px; }
+  .hero-title-animate { font-size: 3.5rem; }
+  .hero-subtitle-animate { letter-spacing: 3px; font-size: 0.9rem; }
+}
