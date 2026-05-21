@@ -20,20 +20,15 @@ import Chatbot from './components/Chatbot';
 import Footer from './components/Footer';
 import MusicPlayer from './components/MusicPlayer';
 import Admin from './components/admin/Admin'; 
-
-// ✨ Import the Interactive Envelope!
 import WelcomeEnvelope from './components/WelcomeEnvelope';
 
-// Import the music directly here for the Welcome Screen
 import bgMusic from './assets/bg-music.mp3';
-
 import './index.css';
 
 const Home = () => {
   const [hasEntered, setHasEntered] = useState(false);
   const audioRef = useRef(null);
 
-  // This is passed to the Envelope. It runs when the animation is complete or skipped.
   const handleEnterSite = () => {
     if (audioRef.current) {
       audioRef.current.play().catch(err => console.log("Audio play failed:", err));
@@ -43,33 +38,33 @@ const Home = () => {
 
   return (
     <>
-      {/* Hidden Audio Element */}
       <audio ref={audioRef} src={bgMusic} loop />
 
-      {/* 1. Show the Envelope Animation if they haven't entered yet */}
       {!hasEntered && (
         <WelcomeEnvelope onEnter={handleEnterSite} />
       )}
 
-      {/* 2. Show the main website once they enter */}
       {hasEntered && (
         <div className="main-wrapper fade-in-site">
-          {/* We pass a prop to MusicPlayer so it knows the music is already playing! */}
           <MusicPlayer initialPlaying={true} externalAudioRef={audioRef} />
           
           <Navigation />
-          <Hero />
+          
+          {/* NOTICE: The wrappers for gallery, timeline, and faq are gone 
+              because those IDs are now safely inside the components themselves! */}
+          <div id="home"><Hero /></div>
           <SaveTheDate />
           <PhotoGallery /> 
           <Countdown />
-          <OurJourney />
-          <div id="details"><WeddingDetails /></div>
+          <div id="our-journey"><OurJourney /></div>
+          <div id="wedding-details"><WeddingDetails /></div>
           <EventTimeline />
-          <DressCode />
-          <Entourage />
+          <div id="dresscode"><DressCode /></div>
+          <div id="entourage"><Entourage /></div>
           <PhotoCollage />
-          <FAQ />
-          <RsvpForm />
+          <div id="faq"><FAQ /></div>
+          <div id="rsvp"><RsvpForm /></div>
+          
           <Chatbot />
           <Footer />
         </div>

@@ -1,7 +1,7 @@
 // C:\Users\khen\rsvp-app\src\components\Hero.jsx
 import './Hero.css';
 import logo from '../assets/logo.png';
-import heroBg from "../assets/bgImage/hero.png";
+import heroBg from "../assets/bgImage/hero.webp";
 
 const Hero = () => {
   // Pass the image as a CSS variable to the new background layer

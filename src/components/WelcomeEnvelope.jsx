@@ -1,4 +1,5 @@
-import { useState } from 'react';
+// src/components/WelcomeEnvelope.jsx
+import { useState, useEffect } from 'react';
 import './WelcomeEnvelope.css';
 import letterImg from '../assets/letter.png';
 
@@ -10,11 +11,23 @@ const WelcomeEnvelope = ({
   const [isZooming, setIsZooming] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
   const [petals, setPetals] = useState([]);
+  
+  // NEW: Controls exactly when the text hint appears
+  const [showHint, setShowHint] = useState(false);
+
+  // NEW: Wait 1.5 seconds on load for the envelope to finish falling before showing text
+  useEffect(() => {
+    const timer = setTimeout(() => setShowHint(true), 1500);
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleEnvelopeClick = () => {
     if (isAnimating || isZooming) return;
 
     if (!isOpen) {
+      // Hide the text hint while the opening animation plays
+      setShowHint(false);
+      
       const generatedPetals = Array.from({ length: 50 }).map((_, i) => ({
         id: i,
         left: `${Math.random() * 100}%`,
@@ -28,29 +41,33 @@ const WelcomeEnvelope = ({
       setPetals(generatedPetals);
       setIsOpen(true);
       setIsAnimating(true);
-      setTimeout(() => setIsAnimating(false), 3300);
+      
+      setTimeout(() => {
+        setIsAnimating(false);
+        // Show the text hint again once the letter is fully open
+        setShowHint(true); 
+      }, 3300);
 
     } else {
+      // Hide the text hint permanently when zooming
+      setShowHint(false);
       setIsAnimating(true);
       setIsZooming(true);
+      
       setTimeout(() => {
         if (onEnter) onEnter();
-      }, 1500);
+      }, 1500); 
     }
   };
 
   return (
-    <div className="scene-container">
+    <div className="scene-container" onClick={handleEnvelopeClick}>
+      
+      {/* UPDATED: We now use the showHint state to control the is-hidden class */}
+      <div className={`click-hint ${!showHint ? 'is-hidden' : ''}`}>
+        {!isOpen ? "Click anywhere to Open" : "Click anywhere to proceed"}
+      </div>
 
-      {/*
-        --- PETALS: sibling of envelope-wrapper, NOT inside it ---
-        position: fixed here is relative to the VIEWPORT (full screen coverage)
-        because envelope-wrapper's animation was trapping fixed children inside it.
-        
-        zIndex logic:
-          - isZooming = false → 9999: petals float in FRONT of everything
-          - isZooming = true  → 0:    petals fall BEHIND the zooming letter
-      */}
       {isOpen && (
         <div
           className="petals-container"
@@ -60,7 +77,7 @@ const WelcomeEnvelope = ({
             left: 0,
             width: '100vw',
             height: '100vh',
-            zIndex: isZooming ? 0 : 9999,
+            zIndex: isZooming ? 0 : 9999, 
             pointerEvents: 'none',
             overflow: 'hidden',
           }}
@@ -83,10 +100,7 @@ const WelcomeEnvelope = ({
       )}
 
       {/* --- THE ENVELOPE --- */}
-      <div
-        className={`envelope-wrapper ${isOpen ? 'is-open' : ''}`}
-        onClick={handleEnvelopeClick}
-      >
+      <div className={`envelope-wrapper ${isOpen ? 'is-open' : ''}`}>
         <div
           className="envelope-back drop-down"
           style={{ backgroundColor: envelopeColor }}

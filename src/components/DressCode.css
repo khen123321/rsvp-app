@@ -3,27 +3,29 @@
 .dress-section {
   background-size: cover;
   background-position: center;
+  background-attachment: scroll;
   background-repeat: no-repeat;
-  padding: 100px 20px;
+  padding: clamp(80px, 8vw, 100px) 20px;
   display: flex;
   justify-content: center;
   align-items: center;
   color: #6D071A; /* Signature Maroon */
   overflow: hidden;
+  min-height: 90vh;
 }
 
 .dress-container {
-  max-width: 1100px;
+  max-width: 1200px;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 60px;
+  gap: 50px;
   
   /* Entrance Animation Initial State */
   opacity: 0;
   transform: translateY(30px);
-  transition: all 1.2s ease-out;
+  transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .dress-section.animate-in .dress-container {
@@ -34,140 +36,179 @@
 /* --- Title Styling --- */
 .dress-header {
   text-align: center;
+  margin-bottom: 20px;
 }
 
 .dress-title {
-  font-family: 'Poppins', sans-serif;
-  font-size: 5rem;
-  font-weight: 300;
-  letter-spacing: 12px;
-  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(3.5rem, 5vw, 4.5rem);
+  letter-spacing: 6px;
   margin: 0;
   line-height: 1;
+  color: #6D071A;
 }
 
 .script-code {
   font-family: 'Pinyon Script', cursive;
-  font-size: 6rem;
+  font-size: clamp(4.5rem, 7vw, 6.5rem);
   text-transform: none;
   letter-spacing: 0;
-  margin-left: -15px; /* Elegant overlap */
+  margin-left: -5px; 
+  transform: translateY(8px); 
   font-weight: 400;
 }
 
-/* --- Columns Layout --- */
-.dress-columns {
-  display: flex;
-  justify-content: space-around;
+/* --- EXACT GRID LAYOUT --- */
+.dress-layout {
+  display: grid;
+  /* 4 Columns: Image (left edge) | Text | Text | Image (right edge) */
+  grid-template-columns: minmax(150px, 1fr) auto auto minmax(150px, 1fr);
+  align-items: center;
+  gap: clamp(20px, 4vw, 60px);
   width: 100%;
-  gap: 40px;
+  margin-bottom: 20px;
 }
 
-.dress-column {
-  flex: 1;
+/* Keeps your desktop downward nudge intact */
+.left-img { 
+  justify-self: start; 
+  transform: translateY(150px); 
+}
+
+.right-img { 
+  justify-self: end; 
+}
+
+.dress-content {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
 }
 
+/* --- Illustrations --- */
+.dress-illustration {
+  height: 280px; 
+  width: auto;
+  object-fit: contain;
+}
+
+/* --- Typography --- */
 .column-subtitle {
-  font-family: 'Poppins', sans-serif;
-  font-size: 1.3rem;
+  font-family: 'Georgia', serif;
+  font-size: clamp(1.05rem, 2vw, 1.15rem);
   font-weight: 600;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   text-decoration: underline;
-  margin-bottom: 25px;
-  text-underline-offset: 5px;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+  margin-bottom: 15px;
+  color: #6D071A;
 }
 
 .attire-info {
-  font-family: 'Poppins', sans-serif;
-  font-size: 1.15rem;
-  line-height: 1.8;
-  font-weight: 300;
-  margin-bottom: 30px;
-}
-
-.attire-info strong {
-  font-weight: 600;
+  font-family: 'Georgia', serif;
+  font-size: clamp(0.95rem, 1.5vw, 1.05rem);
+  line-height: 1.6; 
+  color: #6D071A;
+  margin-top: 0;
+  margin-bottom: 15px;
 }
 
 /* --- Color Swatches --- */
 .color-palette {
   display: flex;
-  gap: 20px;
+  gap: 15px;
+  justify-content: center;
 }
 
 .color-swatch {
-  width: 70px;
-  height: 70px;
+  width: 105px; 
+  height: 105px;
   border-radius: 50%;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  border: 2px solid #ffffff; /* Gives that clean border look from the image */
+  border: 3px solid rgba(255, 255, 255, 0.8); 
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+  transition: transform 0.2s ease;
+}
+
+.color-swatch:hover {
+  transform: translateY(-3px);
 }
 
 /* --- Footer Notes --- */
 .dress-footer {
   text-align: center;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Georgia', serif;
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 20px;
 }
 
-.note-text {
-  font-size: 1.1rem;
-  line-height: 1.8;
-  font-weight: 400;
+.note-text, .climate-text {
+  font-size: clamp(0.95rem, 1.5vw, 1.05rem);
+  line-height: 1.6;
+  color: #6D071A;
+  margin: 0;
 }
 
-.note-text u {
+.dark-underline {
+  text-decoration: underline;
+  text-decoration-color: #6D071A;
+  text-decoration-thickness: 1px;
   text-underline-offset: 3px;
 }
 
-.climate-text {
-  font-size: 1.1rem;
-  line-height: 1.8;
-  font-weight: 300;
+.quattrocento-font { 
+  font-family: 'Quattrocento', serif; 
 }
 
-/* --- Mobile Responsiveness --- */
+
+/* =========================================
+   📱 MOBILE & TABLET RESPONSIVENESS
+   ========================================= */
 @media (max-width: 992px) {
-  .dress-title {
-    font-size: 3rem;
-    letter-spacing: 6px;
-  }
-  
-  .script-code {
-    font-size: 4rem;
+  .dress-layout {
+    grid-template-columns: 1fr; /* Stacks to a single column */
+    gap: 30px;
   }
 
-  .dress-columns {
-    flex-direction: column;
-    gap: 60px;
+  /* Reorders the grid elements into a clean stack */
+  .left-img { 
+    order: 1; 
+    justify-self: center; 
+    transform: translateY(0); /* ✨ THE FIX: Resets the push so it doesn't overlap text! ✨ */
+  }
+  .principal-text { 
+    order: 2; 
+    margin-bottom: 20px;
+  }
+  .right-img { 
+    order: 3; 
+    justify-self: center; 
+  }
+  .guest-text { 
+    order: 4; 
   }
 
-  .color-swatch {
-    width: 60px;
-    height: 60px;
-  }
-}
-
-@media (max-width: 480px) {
-  .dress-title {
-    font-size: 2.2rem;
-  }
-
-  .script-code {
-    font-size: 3rem;
-  }
-
-  .attire-info {
-    font-size: 1rem;
+  .dress-illustration {
+    height: 240px; 
   }
 
   .note-text br, .climate-text br {
-    display: none; /* Let text flow naturally on tiny screens */
+    display: none; /* Allows text to wrap perfectly on small screens */
+  }
+}
+
+/* Tiny screens / mobile phones optimization */
+@media (max-width: 480px) {
+  .color-swatch {
+    width: 80px; /* Scales down swatches slightly so they fit cleanly side-by-side */
+    height: 80px;
+  }
+  
+  .color-palette {
+    gap: 10px;
   }
 }

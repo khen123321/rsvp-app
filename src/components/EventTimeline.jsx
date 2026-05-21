@@ -1,3 +1,4 @@
+// src/components/EventTimeline.jsx
 import { useState, useEffect, useRef } from 'react';
 import './EventTimeline.css';
 
@@ -30,7 +31,7 @@ const EventTimeline = () => {
 
   const events = [
     { time: "1:00PM", title: "Wedding Ceremony", icon: ringIcon },
-    { time: "3:30PM", title: "Cocktail Hour", icon: cocktailIcon },
+    { time: "4:00PM", title: "Cocktail Hour", icon: cocktailIcon },
     { time: "5:00PM", title: "Grand Entrance", icon: archIcon },
     { time: "6:00PM", title: "Dinner", icon: dinnerIcon },
     { time: "8:00PM", title: "Party", icon: partyIcon }
@@ -38,6 +39,7 @@ const EventTimeline = () => {
 
   return (
     <section 
+      id="timeline" /* ✨ THIS IS THE MAGIC FIX FOR THE NAVBAR ✨ */
       ref={sectionRef}
       className={`timeline-section ${isVisible ? 'animate-in' : ''}`}
       style={{ backgroundImage: `url(${bgDamask})` }}

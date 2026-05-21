@@ -1,3 +1,4 @@
+// src/components/RsvpForm.jsx
 import { useState } from 'react';
 import './RsvpForm.css';
 // 1. Added the background image import
@@ -156,7 +157,7 @@ const RsvpForm = () => {
             <>
               <h2 className="rsvp-title">Will you be there?</h2>
               <p className="rsvp-description">
-                We would be truly grateful if you could kindly confirm your attendance by completing the form below. You may also reply through our personal Facebook accounts or reach us at 091234567890.
+                We would be truly grateful if you could kindly confirm your attendance by completing the form below. You may also reply through our personal Facebook accounts or message HM Events at 0917-723-3000.
               </p>
 
               <form className="rsvp-form" onSubmit={handleSubmit}>
@@ -201,7 +202,7 @@ const RsvpForm = () => {
 
                 <div className="submit-container">
                   <button type="submit" className="submit-btn" disabled={isSubmitting}>
-                    {isSubmitting ? 'submitting...' : 'submit'}
+                    {isSubmitting ? 'SUBMITTING...' : 'SUBMIT'}
                   </button>
                   {submitStatus === 'error' && (
                     <p className="status-message error">Oops! Something went wrong. Please try again.</p>

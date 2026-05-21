@@ -33,7 +33,7 @@ const EventTimeline = () => {
   // Event Data: Easily edit times and titles here!
   const events = [
     { time: "1:00 PM", title: "Wedding Ceremony", icon: ringIcon },
-    { time: "3:30 PM", title: "Cocktail Hour", icon: cocktailIcon },
+    { time: "4:00 PM", title: "Cocktail Hour", icon: cocktailIcon }, /* 👈 Updated to 4:00 PM and fixed spelling! */
     { time: "5:00 PM", title: "Grand Entrance", icon: archIcon },
     { time: "6:00 PM", title: "Dinner", icon: dinnerIcon },
     { time: "8:00 PM", title: "Party", icon: partyIcon }

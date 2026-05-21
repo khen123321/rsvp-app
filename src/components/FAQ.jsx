@@ -1,3 +1,4 @@
+// src/components/FAQ.jsx
 import { useState, useEffect, useRef } from 'react';
 import './FAQ.css';
 
@@ -27,6 +28,18 @@ const FAQ = () => {
     setActiveIndex(activeIndex === index ? null : index);
   };
 
+  // ✨ THE FIX: This function intercepts the click and forces a smooth scroll
+  const scrollToSection = (e, targetId) => {
+    e.preventDefault(); // Stops the instant jump
+    const element = document.getElementById(targetId);
+    if (element) {
+      element.scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'start' 
+      });
+    }
+  };
+
   const faqData = [
     {
       q: "WHAT TIME SHOULD I ARRIVE?",
@@ -34,7 +47,13 @@ const FAQ = () => {
     },
     {
       q: "HOW DO I GET TO THE CEREMONY VENUE?",
-      a: "Guests may arrange their own transportation going to and from the venue. Travel time is approximately 1hr to 1hr 30 mins from CDO, depending on traffic, so we recommend leaving early."
+      a: (
+        <>
+          Guests may arrange their own transportation going to and from the venue. Travel time is approximately 1hr & 30 mins from CDO, depending on traffic, so we recommend leaving early. 
+          {/* ✨ Updated to trigger the smooth scroll */}
+          <a href="#wedding-details" onClick={(e) => scrollToSection(e, 'wedding-details')} className="faq-inline-link">CLICK HERE FOR THE MAP</a>
+        </>
+      )
     },
     {
       q: "IS THERE PARKING AVAILABLE?",
@@ -45,16 +64,18 @@ const FAQ = () => {
       a: "As much as we’d love to accommodate everyone, we kindly request that only the guest/s named on the invitation attend due to limited space and resources."
     },
     {
-      q: "CAN I USE MY PHONE DURING THE CEREMONY?",
-      a: "We’re having an unplugged ceremony, so we kindly ask everyone to keep phones and cameras away during this time. Our photographer will capture all the special moments."
-    },
-    {
       q: "IS THERE MOBILE SIGNAL OR WIFI AT THE VENUE?",
-      a: "Since our celebration will be held in a mountain area in Bukidnon, mobile signal may be limited or intermittent. We encourage guests to inform loved ones ahead of time and take this as a chance to fully disconnect."
+      a: "Since our celebration will be held in a mountain area in Bukidnon, mobile signal may be limited or intermittent. We encourage guests to inform loved ones ahead of time and take this as a chance to fully disconnect and be present with us during the celebration."
     },
     {
       q: "WHAT SHOULD I WEAR?",
-      a: "We encourage guests to follow the indicated dress code to match the theme of our special day."
+      a: (
+        <>
+          We encourage guests to follow the indicated dress code to match the theme of our special day. 
+          {/* ✨ Updated to trigger the smooth scroll */}
+          <a href="#dresscode" onClick={(e) => scrollToSection(e, 'dresscode')} className="faq-inline-link">CLICK HERE FOR THE DRESSCODE.</a>
+        </>
+      )
     },
     {
       q: "ARE KIDS ALLOWED?",
@@ -62,7 +83,11 @@ const FAQ = () => {
     },
     {
       q: "CAN I TAKE PHOTOS AND SHARE THEM?",
-      a: "Yes! After the ceremony, feel free to take photos and share them using our wedding hashtag #YourHashtagHere."
+      a: "Yes! After the ceremony, feel free to take photos and share them using our wedding hashtag #them forever. #ANGELOtooktherightLANIEtoforever"
+    },
+    {
+      q: "CAN I USE MY PHONE DURING THE CEREMONY?",
+      a: "We’re having an unplugged ceremony, so we kindly ask everyone to keep phones and cameras away during this time. Our photographer will capture all the special moments."
     },
     {
       q: "HOW FAR IS THE RECEPTION VENUE FROM THE CEREMONY?",
@@ -74,7 +99,7 @@ const FAQ = () => {
     },
     {
       q: "WHAT SHOULD I EXPECT WEATHER-WISE?",
-      a: "As our celebration will be held in the cool climate of Bukidnon, bringing a shawl or wrap is highly recommended. We also suggest bringing an umbrella as a precaution for occasional rain."
+      a: "As our celebration will be held in the cool climate of Bukidnon, bringing a shawl or wrap is highly recommended for your comfort, especially in the evening. As Bukidnon can also experience occasional rain, we kindly suggest bringing an umbrella as a precaution."
     },
     {
       q: "WHAT KIND OF GIFTS DO YOU PREFER?",
@@ -86,7 +111,7 @@ const FAQ = () => {
     },
     {
       q: "WHO CAN I CONTACT FOR QUESTIONS ON THE DAY?",
-      a: "For any concerns or assistance, you may reach out to our coordinator: HM Events (091234567890)"
+      a: "For any concerns or assistance, you may reach out to our coordinator: HM Events (0917-723-3000)"
     }
   ];
 
@@ -118,7 +143,7 @@ const FAQ = () => {
               </div>
               <div className="faq-answer">
                 <div className="faq-answer-content">
-                   <p>{item.a}</p>
+                   <div className="faq-text-wrapper">{item.a}</div>
                 </div>
               </div>
             </div>

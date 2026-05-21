@@ -35,9 +35,9 @@ const Scanner = ({ guests }) => {
 
   useEffect(() => {
     const scanner = new Html5QrcodeScanner('qr-reader', {
-  qrbox: { width: 200, height: 200 },  // was 250
-  fps: 10,
-  rememberLastUsedCamera: true,
+      qrbox: { width: 200, height: 200 },  
+      fps: 10,
+      rememberLastUsedCamera: true,
     });
     scannerRef.current = scanner;
 
@@ -90,40 +90,43 @@ const Scanner = ({ guests }) => {
         </section>
       </div>
 
-      {/* Result */}
+      {/* Result MODAL */}
       {scanResult && (
-        <div
-          className={`scan-result-card ${
-            scanResult.status === 'valid' ? 'result-valid' : 'result-invalid'
-          }`}
-          role="status"
-          aria-live="polite"
-        >
-          {scanResult.status === 'valid' ? (
-            <>
-              <h2 className="result-heading result-heading-valid">
-                ✅ Access Granted
-              </h2>
-              <h3 className="result-name">{scanResult.guest.name}</h3>
-              <p className="result-count">
-                +{scanResult.guest.guestsCount} Total Guests
-              </p>
-              <p className="result-id">ID: {scanResult.guest.id}</p>
-            </>
-          ) : (
-            <>
-              <h2 className="result-heading result-heading-invalid">
-                ❌ Access Denied
-              </h2>
-              <p className="result-message">{scanResult.message}</p>
-            </>
-          )}
-          <button
-            onClick={() => setScanResult(null)}
-            className="result-next-btn"
+        <div className="scanner-modal-overlay" onClick={() => setScanResult(null)}>
+          <div
+            className={`scanner-modal-content ${
+              scanResult.status === 'valid' ? 'modal-valid' : 'modal-invalid'
+            }`}
+            onClick={(e) => e.stopPropagation()} /* Prevent clicks inside from closing it */
+            role="dialog"
+            aria-modal="true"
           >
-            Scan Next Guest
-          </button>
+            {scanResult.status === 'valid' ? (
+              <>
+                <h2 className="result-heading result-heading-valid">
+                  ✅ Access Granted
+                </h2>
+                <h3 className="result-name">{scanResult.guest.name}</h3>
+                <p className="result-count">
+                  +{scanResult.guest.guestsCount} Total Guests
+                </p>
+                <p className="result-id">ID: {scanResult.guest.id}</p>
+              </>
+            ) : (
+              <>
+                <h2 className="result-heading result-heading-invalid">
+                  ❌ Access Denied
+                </h2>
+                <p className="result-message">{scanResult.message}</p>
+              </>
+            )}
+            <button
+              onClick={() => setScanResult(null)}
+              className="result-next-btn"
+            >
+              Scan Next Guest
+            </button>
+          </div>
         </div>
       )}
     </div>

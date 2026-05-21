@@ -1,8 +1,13 @@
+// src/components/DressCode.jsx
 import { useState, useEffect, useRef } from 'react';
 import './DressCode.css';
 
-// Using the same damask background for consistency
+// Background Import
 import bgDamask from '../assets/bgImage/bg2.png';
+
+// Character Illustration Imports
+import principalDressImg from '../assets/principaldress.png';
+import guestDressImg from '../assets/guestdress.png';
 
 const DressCode = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -23,7 +28,6 @@ const DressCode = () => {
     return () => observer.disconnect();
   }, []);
 
-  // Your provided Hex Colors
   const sponsorColors = ['#f0c4cb', '#c87d87', '#c1536b'];
   const guestColors = ['#d7c9b8', '#b89c82', '#5e3f2a'];
 
@@ -32,62 +36,68 @@ const DressCode = () => {
       ref={sectionRef}
       className={`dress-section ${isVisible ? 'animate-in' : ''}`}
       style={{ backgroundImage: `url(${bgDamask})` }}
+      id="dresscode"
     >
       <div className="dress-container">
         
         {/* Title Area */}
         <div className="dress-header">
-          <h2 className="dress-title">
-            DRESS <span className="script-code">Code</span>
+          <h2 className="dress-title quattrocento-font">
+            DRESS<span className="script-code">Code</span>
           </h2>
         </div>
 
-        {/* Two Column Layout */}
-        <div className="dress-columns">
+        {/* EXACT POSITIONING LAYOUT (Grid) */}
+        <div className="dress-layout">
           
-          {/* Principal Sponsors Column */}
-          <div className="dress-column">
+          {/* 1. Far Left Image */}
+          <div className="img-container left-img">
+            <img src={principalDressImg} alt="Principal Sponsor Attire" className="dress-illustration" />
+          </div>
+
+          {/* 2. Center-Left Text */}
+          <div className="dress-content principal-text">
             <h3 className="column-subtitle">PRINCIPAL SPONSORS</h3>
-            <div className="attire-info">
-              <p><strong>Gentlemen:</strong> Traditional Beige Barong <br /> with Brown Pants</p>
-              <p><strong>Ladies:</strong> Long gown with these colors:</p>
-            </div>
+            {/* Exact wording, no bolding, exact line breaks */}
+            <p className="attire-info">
+              Gentlemen: Traditional Beige Barong <br />
+              with Brown Pants <br />
+              Ladies: Long gown with these colors:
+            </p>
             <div className="color-palette">
               {sponsorColors.map((color) => (
-                <div 
-                  key={color} 
-                  className="color-swatch" 
-                  style={{ backgroundColor: color }}
-                />
+                <div key={color} className="color-swatch" style={{ backgroundColor: color }} />
               ))}
             </div>
           </div>
 
-          {/* Guests Column */}
-          <div className="dress-column">
+          {/* 3. Center-Right Text */}
+          <div className="dress-content guest-text">
             <h3 className="column-subtitle">GUESTS</h3>
-            <div className="attire-info">
-              <p><strong>Gentlemen:</strong> Polo or Longsleeves</p>
-              <p><strong>Ladies:</strong> Long gown or Formal Dress</p>
-              <p>We'd love to see you in these colors:</p>
-            </div>
+            {/* Exact wording, no bolding, exact line breaks */}
+            <p className="attire-info">
+              Gentlemen: Polo or Longsleeves <br />
+              Ladies: Long gown or Formal Dress <br />
+              We'd love to see you in these colors:
+            </p>
             <div className="color-palette">
               {guestColors.map((color) => (
-                <div 
-                  key={color} 
-                  className="color-swatch" 
-                  style={{ backgroundColor: color }}
-                />
+                <div key={color} className="color-swatch" style={{ backgroundColor: color }} />
               ))}
             </div>
+          </div>
+
+          {/* 4. Far Right Image */}
+          <div className="img-container right-img">
+            <img src={guestDressImg} alt="Guest Attire" className="dress-illustration" />
           </div>
 
         </div>
 
-        {/* Footer Notes */}
+        {/* Footer Notes (Exact Lining & No Bold) */}
         <div className="dress-footer">
           <p className="note-text">
-            To help set the tone for our special day, we kindly request <u>no white attire</u> <br />
+            To help set the tone for our special day, we kindly request <u className="dark-underline">no white attire</u> <br />
             and ask that guests avoid jeans, t-shirts, and rubber shoes.
           </p>
           <p className="climate-text">

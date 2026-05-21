@@ -5,9 +5,8 @@
   background-position: center;
   background-attachment: scroll;
   background-repeat: no-repeat;
-  /* Fluid padding: shrinks on mobile, grows on desktop */
   padding: clamp(60px, 10vw, 100px) 0;
-  color: #F5F5DC; /* Gold-Cream text */
+  color: #F5F5DC; 
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,9 +14,9 @@
 }
 
 .entourage-container {
-  max-width: 1200px;
+  max-width: 1000px; 
   width: 92%;
-  text-align: center;
+  margin: 0 auto;
   
   /* Section Entrance Animation */
   opacity: 0;
@@ -32,151 +31,79 @@
 
 /* --- Header Styling --- */
 .entourage-header {
-  margin-bottom: clamp(50px, 8vw, 80px);
+  margin-bottom: clamp(40px, 8vw, 60px);
+  text-align: center;
 }
 
 .entourage-names {
-  /* Scales smoothly between 3rem and 5.5rem */
   font-size: clamp(3.5rem, 8vw, 5.5rem);
   margin: 0;
   letter-spacing: 2px;
   text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
 }
 
+/* MATCHED IMAGE: Serif font, slightly larger, tighter letter spacing */
 .nuptials-tag {
-  font-family: 'Poppins', sans-serif;
-  font-size: clamp(0.9rem, 2vw, 1.2rem);
-  letter-spacing: clamp(6px, 2vw, 12px);
-  margin-top: clamp(-5px, -1vw, -15px);
+  font-family: 'Georgia', serif; 
+  font-size: clamp(1.2rem, 3vw, 1.6rem);
+  letter-spacing: clamp(4px, 1vw, 6px);
+  margin-top: clamp(-5px, -1vw, -10px);
   opacity: 0.9;
-  text-transform: uppercase;
 }
 
-/* --- Grid Layouts for Parent/Sponsor/Children Blocks --- */
-.parents-grid, .major-roles-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(30px, 5vw, 50px);
-  margin-bottom: clamp(60px, 8vw, 80px);
-}
-
-.secondary-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: clamp(30px, 5vw, 40px);
-  margin-bottom: clamp(60px, 8vw, 80px);
-}
-
-.children-grid {
-  display: grid;
-  /* THE FIX: Force exactly 3 equal columns on desktop */
-  grid-template-columns: repeat(3, 1fr);
-  gap: clamp(30px, 5vw, 40px);
-  margin-bottom: clamp(60px, 8vw, 80px);
-}
-
-.full-width { grid-column: 1 / -1; }
-
-/* --- The New Names Grid (For Ninongs, Groomsmen, etc.) --- */
-.entourage-group {
-  margin-bottom: clamp(50px, 8vw, 70px);
-}
-
-.group-label {
-  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
-  letter-spacing: 5px;
-  margin-bottom: clamp(20px, 4vw, 35px);
-  text-transform: uppercase;
+/* --- Classic Invitation Layout Structure --- */
+.section-script-title {
+  font-size: clamp(3rem, 6vw, 4.5rem);
+  text-align: center;
+  margin: 0 0 40px 0;
   color: #e8dcb8;
-  font-weight: 600;
+  font-weight: normal;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
 }
 
-.names-grid {
-  display: grid;
-  /* This creates flexible columns that wrap beautifully on all screens */
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 15px 20px;
+.invite-split-row {
+  display: flex;
   justify-content: center;
-  align-items: center;
+  /* Uses a flexible gap that shrinks automatically on smaller screens */
+  gap: clamp(15px, 5vw, 200px); 
+  width: 100%;
+}
+
+.invite-col {
+  flex: 1;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.align-left {
+  text-align: left;
+}
+
+.invite-center-block {
+  text-align: center;
+  margin-bottom: 30px;
+  width: 100%;
 }
 
 /* --- Typography --- */
-.role-title {
-  font-family: 'Poppins', sans-serif;
-  font-size: clamp(0.85rem, 1.5vw, 1rem);
-  font-weight: 600;
-  letter-spacing: 3px;
+.invite-role {
+  font-family: 'Georgia', serif; 
+  font-size: clamp(0.85rem, 1.5vw, 1.05rem);
+  font-weight: 700;
+  letter-spacing: 2px;
   text-transform: uppercase;
-  margin-bottom: clamp(10px, 2vw, 15px);
-  color: #e8dcb8; /* Slightly darker gold for contrast */
+  margin: 0 0 12px 0;
+  color: #e8dcb8;
 }
 
-.name-p {
-  font-family: 'Poppins', sans-serif;
-  font-size: clamp(1.05rem, 2vw, 1.2rem);
-  font-weight: 300;
-  margin: 6px 0;
-  line-height: 1.5;
-  opacity: 0.95;
-}
-
-.highlight-name {
-  font-size: clamp(1.2rem, 2.5vw, 1.5rem);
-  color: #F5F5DC;
+/* MATCHED IMAGE: Names are now Serif to match the parents and entourage list */
+.invite-name {
+  font-family: 'Georgia', serif; 
+  font-size: clamp(0.9rem, 1.8vw, 1.1rem);
   font-weight: 400;
-  opacity: 1;
-}
-
-.major-card.text-only {
-  padding: 20px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(245, 245, 220, 0.1);
-  border-radius: 8px;
-}
-
-/* --- Section Dividers --- */
-.main-divider {
-  margin: clamp(50px, 8vw, 80px) 0;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.main-divider::before, .main-divider::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: rgba(245, 245, 220, 0.3);
-}
-
-.main-divider h3 {
-  font-size: clamp(2.5rem, 6vw, 4rem);
-  padding: 0 clamp(15px, 4vw, 30px);
-  margin: 0;
-  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+  margin: 0 0 5px 0;
+  line-height: 1.3;
   color: #F5F5DC;
-}
-
-/* --- Font Utility Classes --- */
-.pinyon-font { font-family: 'Pinyon Script', cursive; }
-.poppins-font { font-family: 'Poppins', sans-serif; }
-
-/* --- Mobile Breakpoints --- */
-@media (max-width: 768px) {
-  /* Stack 2-column layouts into a single column for phones */
-  .parents-grid, .major-roles-row {
-    grid-template-columns: 1fr;
-    gap: 45px;
-  }
-  
-  .names-grid {
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
-
-  .main-divider h3 {
-    text-align: center;
-    line-height: 1.1;
-  }
-}
+ }

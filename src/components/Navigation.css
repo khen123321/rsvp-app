@@ -1,5 +1,8 @@
 /* src/components/Navigation.css */
 
+/* =========================================
+   BASE NAVIGATION (Transparent/Glass Mode)
+   ========================================= */
 .main-nav {
   position: fixed;
   top: 0;
@@ -18,15 +21,12 @@
   z-index: 1000;
   display: flex;
   justify-content: center;
-  
-  /* Smooth transition for when the background changes on scroll (if needed) */
   transition: all 0.5s ease;
 }
 
 .nav-container {
-  /* Reaches the sides with a safe margin */
   width: 100%; 
-  padding: 0 60px; 
+  padding: 0 40px; 
   display: flex;
   justify-content: space-between; 
   align-items: center;
@@ -37,13 +37,14 @@
   cursor: pointer;
   display: flex;
   align-items: center;
+  flex-shrink: 0;
+  margin-right: 20px;
 }
 
 .nav-monogram {
-  height: 55px; /* Adjust this to change logo size */
+  height: 55px;
   width: auto;
-  /* Smooth high-end transition for the hover tilt */
-  transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1), filter 0.5s ease;
 }
 
 .nav-monogram:hover {
@@ -56,28 +57,25 @@
   margin: 0;
   padding: 0;
   display: flex;
-  gap: 45px; /* Spacing between navigation items */
+  align-items: center;
+  gap: 25px; 
 }
 
 .nav-links li {
-  color: #6D071A; /* Beige font */
+  color: #6D071A; /* Default dark red text */
   cursor: pointer;
-  font-size: 0.8rem; /* Adjust this to change text size */
+  font-size: 0.75rem; 
   font-weight: 600;
-  letter-spacing: 2px;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
-  
-  /* Clean design: No text-shadows as requested */
-  text-shadow: none;
-  
-  /* Transition for hover effects */
+  white-space: nowrap; 
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
 }
 
 .nav-links li:hover {
-  color: #ffffff; /* Goes white on hover */
-  transform: translateY(-2px); /* Subtle lift */
+  color: #ffffff; 
+  transform: translateY(-2px); 
 }
 
 /* Simple underline effect that appears on hover */
@@ -96,18 +94,53 @@
   width: 100%;
 }
 
-/* --- Mobile Responsiveness --- */
-@media (max-width: 768px) {
+/* =========================================
+   ✨ DYNAMIC LIGHT MODE (For Dark Backgrounds) 
+   ========================================= */
+
+/* Notice: The background-color is NOT changed here, so it stays clear! */
+
+/* 1. Change link text to Beige */
+.main-nav.nav-light-mode .nav-links li {
+  color: #F5F5DC; 
+}
+
+.main-nav.nav-light-mode .nav-links li:hover {
+  color: #ffffff;
+}
+
+/* 2. Change the hover underline to white */
+.main-nav.nav-light-mode .nav-links li::after {
+  background-color: #ffffff;
+}
+
+/* 3. Magic CSS Filter: Turns your dark red logo into Beige! */
+.main-nav.nav-light-mode .nav-monogram {
+  filter: brightness(0) invert(91%) sepia(14%) saturate(836%) hue-rotate(332deg) brightness(101%) contrast(93%);
+}
+
+/* =========================================
+   📱 MOBILE RESPONSIVENESS
+   ========================================= */
+@media (max-width: 992px) {
   .nav-container {
-    padding: 0 25px;
+    padding: 0 15px;
   }
   
   .nav-links {
     gap: 20px;
+    overflow-x: auto; 
+    padding-bottom: 5px;
+    -ms-overflow-style: none; 
+    scrollbar-width: none;  
+  }
+
+  .nav-links::-webkit-scrollbar { 
+    display: none; 
   }
 
   .nav-links li {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     letter-spacing: 1px;
   }
 

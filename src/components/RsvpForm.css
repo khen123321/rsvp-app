@@ -11,12 +11,12 @@
 }
 
 .rsvp-container {
-  max-width: 1000px !important; /* Forces it to be wide */
+  max-width: 1000px !important; 
   width: 90%;
   display: flex;
   gap: 50px;
-  background: transparent !important; /* Removes the white card background */
-  box-shadow: none !important; /* Removes the card shadow */
+  background: transparent !important; 
+  box-shadow: none !important; 
   margin: 0 auto;
 }
 
@@ -25,15 +25,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  padding-top: 20px;
-  min-width: 80px;
+  height: 100%; 
+  padding-top: 10px;
+  min-width: 100px; 
 }
 
 .kindly-text {
   font-family: 'Georgia', serif; 
   font-size: 1.4rem;
-  margin-bottom: 20px;
+  margin: 0; 
   letter-spacing: 1px;
 }
 
@@ -41,9 +41,12 @@
   display: flex;
   flex-direction: column;
   font-family: 'Georgia', serif;
-  font-size: 4.5rem;
-  line-height: 1.1;
+  font-size: 10rem; /* Massive, balanced font size */
+  line-height: 0.9; 
   text-align: center;
+  flex: 1; 
+  justify-content: space-between; 
+  margin-top: 20px; 
 }
 
 .rsvp-divider {
@@ -56,6 +59,7 @@
 .rsvp-right {
   flex: 1;
   padding-left: 10px;
+  min-width: 0; 
 }
 
 .rsvp-title {
@@ -74,46 +78,94 @@
   opacity: 0.9;
 }
 
-/* --- Form Styles --- */
+/* --- Form Styles (Real Boxed Input Fields) --- */
 .rsvp-form { display: flex; flex-direction: column; gap: 25px; }
 .form-group { display: flex; flex-direction: column; }
-.form-group label, .radio-question { font-family: 'Georgia', serif; font-size: 1.1rem; margin-bottom: 8px; font-weight: 600; }
+.form-group label, .radio-question { font-family: 'Georgia', serif; font-size: 1.1rem; margin-bottom: 10px; font-weight: 600; }
 
 .form-group input[type="text"],
 .form-group input[type="number"],
 .form-group input[type="tel"],
 .form-group textarea {
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid rgba(92, 42, 33, 0.4);
-  padding: 8px 0;
+  background-color: #ffffff; /* Solid white background */
+  border: 1px solid rgba(109, 7, 26, 0.3); /* Subtle burgundy border */
+  border-radius: 8px; /* Modern rounded corners */
+  padding: 14px 16px; /* Comfortable spacing inside the box */
   font-family: 'Poppins', sans-serif;
   font-size: 1rem;
   color: #5C2A21;
   outline: none;
-  transition: border-color 0.3s ease;
+  width: 100%;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); /* Very subtle inner depth */
+  transition: all 0.3s ease;
 }
 
-.form-group input:focus, .form-group textarea:focus { border-bottom: 1px solid rgba(92, 42, 33, 1); }
-.form-group input:disabled, .form-group textarea:disabled { opacity: 0.5; cursor: not-allowed; }
-.form-group textarea { resize: vertical; min-height: 30px; }
+.form-group input:focus, .form-group textarea:focus { 
+  border-color: #6D071A; 
+  box-shadow: 0 0 0 3px rgba(109, 7, 26, 0.1); /* Soft glow when typing */
+}
+.form-group input:disabled, .form-group textarea:disabled { opacity: 0.5; cursor: not-allowed; background-color: #f9f9f9; }
+.form-group textarea { resize: vertical; min-height: 80px; }
 
 /* Radio Buttons */
-.radio-group { gap: 10px; }
+.radio-group { gap: 10px; display: flex; flex-direction: column;}
 .radio-question { margin-bottom: 15px; line-height: 1.4; }
 .radio-label { display: flex; align-items: center; cursor: pointer; font-family: 'Georgia', serif; font-size: 1.05rem; }
-.radio-label input[type="radio"] { appearance: none; width: 16px; height: 16px; border: 1px solid #5C2A21; margin-right: 12px; display: grid; place-content: center; cursor: pointer; }
+.radio-label input[type="radio"] { appearance: none; width: 16px; height: 16px; border: 1px solid #5C2A21; margin-right: 12px; display: grid; place-content: center; cursor: pointer; flex-shrink: 0; background: #fff;}
 .radio-label input[type="radio"]::before { content: ""; width: 10px; height: 10px; background-color: #5C2A21; transform: scale(0); transition: 120ms transform ease-in-out; }
 .radio-label input[type="radio"]:checked::before { transform: scale(1); }
 
-/* Submit Button */
-.submit-container { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
-.submit-btn { background: transparent; border: none; color: #5C2A21; font-family: 'Georgia', serif; font-size: 1.2rem; cursor: pointer; align-self: flex-start; padding: 0; position: relative; transition: opacity 0.3s ease; }
-.submit-btn::before { content: '{ '; }
-.submit-btn::after { content: ' }'; }
-.submit-btn:hover:not(:disabled) { opacity: 0.7; }
-.submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-.status-message.error { color: #c62828; font-family: 'Poppins', sans-serif; font-size: 0.9rem; }
+
+/* --- Elegant Submit Button (Matching the Image) --- */
+.submit-container { 
+  display: flex; 
+  flex-direction: column; 
+  gap: 10px; 
+  margin-top: 15px; 
+}
+
+.submit-btn { 
+  background-color: #6D071A; 
+  color: #ffffff; 
+  border: 2px solid #6D071A; 
+  padding: 14px 40px; 
+  border-radius: 50px; 
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700; 
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer; 
+  align-self: flex-start; 
+  box-shadow: 0 8px 20px rgba(109, 7, 26, 0.25); 
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  outline: none;
+}
+
+.submit-btn:hover:not(:disabled) { 
+  background-color: transparent; 
+  color: #6D071A; 
+  transform: translateY(-3px); 
+  box-shadow: 0 12px 25px rgba(109, 7, 26, 0.35); 
+}
+
+.submit-btn:active:not(:disabled) {
+  transform: translateY(1px); 
+  box-shadow: 0 4px 10px rgba(109, 7, 26, 0.2);
+}
+
+.submit-btn:disabled { 
+  opacity: 0.5; 
+  cursor: not-allowed; 
+  box-shadow: none;
+  transform: none;
+}
+
+.status-message.error { 
+  color: #c62828; 
+  font-family: 'Poppins', sans-serif; 
+  font-size: 0.9rem; 
+}
 
 
 /* =========================================
@@ -124,10 +176,7 @@
   animation: fadeIn 0.8s ease-out forwards;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+
 
 .success-title {
   font-family: 'Pinyon Script', cursive;
@@ -276,17 +325,64 @@
   font-weight: 600;
 }
 
-/* --- Mobile Responsiveness --- */
+/* =========================================
+   MOBILE RESPONSIVENESS
+   ========================================= */
 @media (max-width: 768px) {
-  .rsvp-container { flex-direction: column; gap: 30px; }
-  .rsvp-left { flex-direction: row; justify-content: center; gap: 20px; padding-top: 0; }
-  .kindly-text { margin-bottom: 0; font-size: 1.2rem; }
-  .rsvp-vertical-text { flex-direction: row; font-size: 3rem; gap: 8px; }
-  .rsvp-divider { display: none; }
-  .rsvp-right { padding-left: 0; }
-  .rsvp-title, .success-title { font-size: 3.5rem; text-align: center; }
-  .rsvp-description { text-align: center; }
+  /* ✨ KEEP THE SIDE-BY-SIDE LAYOUT ON MOBILE */
+  .rsvp-container { 
+    flex-direction: row; 
+    gap: 15px; /* Tighter gap to save space */
+  }
   
+  .rsvp-left { 
+    min-width: 50px; /* Slimmer left column */
+    padding-top: 5px; 
+  }
+  
+  .kindly-text { 
+    font-size: 1rem; /* Smaller "Kindly" */
+  }
+  
+  /* Keep RSVP vertical, but scale down the font size safely */
+  .rsvp-vertical-text { 
+    font-size: 6rem; 
+    margin-top: 10px;
+  }
+  
+  /* Hide the dotted line to give the form more room */
+  .rsvp-divider { display: none; }
+  
+  .rsvp-right { padding-left: 0; }
+  
+  .rsvp-title, .success-title { 
+    font-size: 2.8rem; /* Scale down title */
+    margin-bottom: 10px;
+  }
+  
+  .rsvp-description { 
+    font-size: 0.85rem; 
+    margin-bottom: 25px;
+  }
+
+  /* Scale down form elements so they don't break the layout */
+  .form-group label, .radio-question { font-size: 0.95rem; }
+  .form-group input[type="text"],
+  .form-group input[type="number"],
+  .form-group input[type="tel"],
+  .form-group textarea {
+    font-size: 0.9rem;
+    padding: 12px 14px;
+  }
+  .radio-label { font-size: 0.9rem; }
+  
+  .submit-btn {
+    width: 100%; /* Make button full width on mobile */
+    max-width: 290px;
+    padding: 14px 20px;
+  }
+  
+  /* Ticket adjustments */
   .digital-ticket { flex-direction: column; max-width: 100%; }
   .ticket-cutout-top, .ticket-cutout-bottom { display: none; }
   

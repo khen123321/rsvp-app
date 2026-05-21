@@ -7,6 +7,7 @@
   background-color: #ffffff;
   overflow: hidden;
   perspective: 1200px;
+  cursor: pointer; 
 }
 
 .envelope-wrapper {
@@ -16,7 +17,6 @@
   animation: cinematicEntrance 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   opacity: 0;
   transform: translateY(80px);
-  cursor: pointer; 
 }
 
 @keyframes cinematicEntrance {
@@ -33,7 +33,7 @@
     opacity: 1;
   }
   80% {
-    opacity: 1; /* Keeps the letter visible as it scales up */
+    opacity: 1; 
   }
   100% {
     transform: scale(40) translateY(-10px);
@@ -41,10 +41,9 @@
   }
 }
 
-/* This applies ONLY to the letter when clicked the second time */
 .scene-container .letter-wrapper.is-zooming {
   animation: letterZoom 1.5s cubic-bezier(0.7, 0, 0.3, 1) forwards !important;
-  z-index: 9999 !important; /* Forces the letter IN FRONT of the envelope pocket */
+  z-index: 9999 !important; 
   pointer-events: none;
   transform-origin: center center;
 }
@@ -185,11 +184,10 @@
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 2; /* Behind the letter (z-index: 9999 when zooming) */
+  z-index: 2; 
   overflow: hidden;
 }
 
-/* Base petal — shared styles */
 .petal {
   position: absolute;
   top: -12%;
@@ -198,9 +196,7 @@
   filter: drop-shadow(0 3px 6px rgba(74, 4, 16, 0.35));
 }
 
-/* ── SHAPE VARIANTS (assigned via nth-child cycles) ── */
-
-/* Shape A — classic teardrop / wide oval petal */
+/* Shape A */
 .petal:nth-child(5n + 1) {
   width: 22px;
   height: 28px;
@@ -209,7 +205,7 @@
   transform-origin: 50% 80%;
 }
 
-/* Shape B — slim elongated petal */
+/* Shape B */
 .petal:nth-child(5n + 2) {
   width: 14px;
   height: 32px;
@@ -218,29 +214,27 @@
   transform-origin: 50% 85%;
 }
 
-/* Shape C — cupped / scooped petal with concave base */
+/* Shape C */
 .petal:nth-child(5n + 3) {
   width: 26px;
   height: 20px;
   background: radial-gradient(ellipse at 50% 20%, #BA1A35 0%, #800018 60%, #3D000C 100%);
   border-radius: 50% 50% 30% 30% / 70% 70% 30% 30%;
   transform-origin: 50% 75%;
-  /* Slight inner curve suggestion via box-shadow */
   box-shadow: inset 0 4px 8px rgba(0,0,0,0.25), inset 0 -2px 4px rgba(220,80,100,0.2);
 }
 
-/* Shape D — ruffled / irregular petal */
+/* Shape D */
 .petal:nth-child(5n + 4) {
   width: 20px;
   height: 24px;
   background: radial-gradient(ellipse at 45% 35%, #CC2040 0%, #8B0000 45%, #4A0410 100%);
-  /* Asymmetric border-radius mimics a ruffled edge */
   border-radius: 55% 45% 60% 40% / 50% 65% 35% 55%;
   transform-origin: 55% 80%;
   box-shadow: inset 2px 2px 6px rgba(255,120,140,0.15), inset -1px -1px 4px rgba(0,0,0,0.3);
 }
 
-/* Shape E — small round inner petal */
+/* Shape E */
 .petal:nth-child(5n + 5) {
   width: 16px;
   height: 16px;
@@ -249,7 +243,6 @@
   transform-origin: 50% 70%;
 }
 
-/* ── VEIN DETAIL overlay (adds natural petal texture) ── */
 .petal::after {
   content: '';
   position: absolute;
@@ -263,7 +256,6 @@
   border-radius: inherit;
 }
 
-/* ── FALL KEYFRAMES — gentle tumble + lateral drift ── */
 @keyframes fall {
   0% {
     top: -12%;
@@ -273,12 +265,10 @@
   8% {
     opacity: 0.9;
   }
-  /* Gentle lateral sway at 1/3 */
   33% {
     transform: rotate(210deg) translateX(var(--sway-a)) scale(var(--scale));
     opacity: 0.85;
   }
-  /* Sway back at 2/3 */
   66% {
     transform: rotate(480deg) translateX(var(--sway-b)) scale(var(--scale));
     opacity: 0.8;
@@ -293,20 +283,93 @@
   }
 }
 
-/* --- 7. MOBILE RESPONSIVENESS (FIXED PIXELS) --- */
+/* --- 7. CLICK ANYWHERE HINT --- */
+.click-hint {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 300;
+  letter-spacing: 3px;
+  color: #6A0F1F; 
+  text-transform: uppercase;
+  z-index: 10000;
+  pointer-events: none; 
+  animation: pulseHint 2s ease-in-out infinite;
+  transition: opacity 0.5s ease;
+}
+
+.click-hint.is-hidden {
+  opacity: 0;
+  animation: none;
+}
+
+@keyframes pulseHint {
+  0% { opacity: 0.4; }
+  50% { opacity: 1; }
+  100% { opacity: 0.4; }
+}
+
+/* --- 8. MOBILE RESPONSIVENESS --- */
 @media (max-width: 768px) {
   .envelope-wrapper {
-    /* Hardcoded smaller size to prevent it from stretching to the edges */
     width: 345px;
-    height: 230px; /* Perfectly maintains the 3:2 rectangular shape */
+    height: 230px; 
+  }
+  .click-hint {
+    bottom: 30px;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
   }
 }
 
 @media (max-width: 380px) {
   .envelope-wrapper {
-    /* An even smaller fallback for very narrow phones (like the iPhone SE) */
     width: 285px;
     height: 190px;
   }
+  /* --- CLICK ANYWHERE TEXT INDICATION --- */
+.scene-container {
+  /* Ensure cursor changes to pointer anywhere on screen */
+  cursor: pointer; 
 }
 
+.click-hint {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 3px;
+  color: #6A0F1F;
+  text-transform: uppercase;
+  z-index: 10000;
+  pointer-events: none; /* Prevents text from blocking the click */
+  animation: pulseText 2s ease-in-out infinite;
+  transition: opacity 0.5s ease;
+}
+
+/* Fades the text out during the final zoom transition */
+.click-hint.is-hidden {
+  opacity: 0;
+  animation: none;
+}
+
+@keyframes pulseText {
+  0% { opacity: 0.3; }
+  50% { opacity: 1; }
+  100% { opacity: 0.3; }
+}
+
+@media (max-width: 768px) {
+  .click-hint {
+    bottom: 30px;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+  }
+}
+}

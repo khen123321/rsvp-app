@@ -12,7 +12,7 @@
 }
 
 .details-container {
-  max-width: 1400px; /* Slightly wider to accommodate side-by-side cards */
+  max-width: 1400px; 
   width: 90%;
   display: flex;
   flex-direction: column;
@@ -41,12 +41,11 @@
   flex: 1;
 }
 
-/* --- THE SPAN-BASED FLEX FIX FOR TITLES --- */
-
+/* --- Title Flexbox Control --- */
 .card-title {
-  display: flex; /* flex container for perfect intersection control */
-  align-items: center; /* vertical center alignment */
-  justify-content: center; /* overall centering of title in card */
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
   font-family: 'Poppins', sans-serif;
   text-transform: uppercase;
   line-height: 1.2;
@@ -58,7 +57,7 @@
   font-family: 'Pinyon Script', cursive;
   font-size: 5rem;
   font-weight: 400;
-  line-height: 0.8; /* precise alignment with text top */
+  line-height: 0.8; 
   color: #6D071A; 
 }
 
@@ -70,17 +69,16 @@
 }
 
 /* --- Specific Intersection Gaps --- */
-
 .ceremony-card .script-cap {
-  padding-right: 15px; /* no collision! exact intersection space */
+  padding-right: 15px; 
 }
 
 .reception-card .script-cap {
-  padding-right: 15px; /* no collision! exact intersection space */
+  padding-right: 15px; 
 }
 
 .accommodation-card .script-cap {
-  padding-right: 20px; /* Accommodation 'A' needs a little more gap */
+  padding-right: 20px; 
   margin-top: 15px;
 }
 
@@ -107,13 +105,13 @@
 /* --- Image & Button Alignment --- */
 .card-bottom {
   display: flex;
-  align-items: flex-end; /* keeps buttons aligned with bottom of image */
+  align-items: flex-end; 
   gap: 25px;
 }
 
 .venue-img {
-  width: 320px; /* Increased width for better display */
-  height: 180px; /* Proportionate height */
+  width: 320px; 
+  height: 180px; 
   object-fit: cover;
   border: 1px solid #6D071A;
 }
@@ -125,26 +123,38 @@
   flex-grow: 1;
 }
 
-/* --- Pill Buttons --- */
+/* --- The Elegant Burgundy Buttons --- */
 .detail-btn {
   display: inline-block;
+  background-color: #6D071A; 
+  color: #ffffff; 
+  border: 2px solid #6D071A;
   padding: 12px 24px;
-  border: 1.5px solid #6D071A;
-  border-radius: 50px; /* pill shape */
+  border-radius: 30px; 
   text-decoration: none;
-  color: #6D071A;
   font-family: 'Poppins', sans-serif;
   font-size: 0.85rem;
-  font-weight: 500;
+  font-weight: 600;
   text-align: center;
-  transition: all 0.3s ease;
-  letter-spacing: 1px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  white-space: nowrap; /* Forces text to one line */
+  box-shadow: 0 4px 15px rgba(109, 7, 26, 0.2);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  outline: none;
+  cursor: pointer;
 }
 
 .detail-btn:hover {
-  background-color: #6D071A;
-  color: #F5F5DC;
-  transform: translateY(-2px);
+  background-color: transparent; 
+  color: #6D071A;
+  transform: translateY(-3px); 
+  box-shadow: 0 8px 20px rgba(109, 7, 26, 0.3);
+}
+
+.detail-btn:active {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(109, 7, 26, 0.2);
 }
 
 .centered-btn {
@@ -185,6 +195,203 @@
   font-weight: 300;
 }
 
+/* ==================================================
+   ✨ NEW ACCOMMODATION MODAL STYLES ✨
+================================================== */
+
+.hotel-modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(109, 7, 26, 0.5); /* Deep burgundy tint */
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100000; /* Stays on top of everything */
+  padding: 20px;
+  opacity: 1;
+  /* ✨ FIXED: Uses the unique modalFadeIn animation */
+  animation: modalFadeIn 0.3s ease; 
+}
+
+.hotel-modal-content {
+  background-color: #fdfbf7; /* Warm white paper look */
+  width: 100%;
+  max-width: 750px;
+  max-height: 85vh; /* Prevents it from going off-screen */
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  animation: slideUpFade 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+  border: 1px solid rgba(109, 7, 26, 0.2);
+}
+
+.hotel-modal-header {
+  padding: 30px 30px 20px;
+  text-align: center;
+  position: relative;
+  border-bottom: 1px solid rgba(109, 7, 26, 0.1);
+  background-color: #fdfbf7;
+  flex-shrink: 0;
+}
+
+.hotel-modal-header .modal-title {
+  font-size: 3.5rem;
+  color: #6D071A;
+  margin: 0;
+  line-height: 0.8;
+}
+
+.hotel-modal-header .modal-subtitle {
+  font-size: 0.95rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #6D071A;
+  margin: 15px 0 0;
+  opacity: 0.8;
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 20px; right: 25px;
+  background: none; border: none;
+  font-size: 1.5rem; 
+  color: #6D071A;
+  cursor: pointer; 
+  transition: transform 0.2s;
+  padding: 10px;
+}
+
+.modal-close-btn:hover {
+  transform: scale(1.1) rotate(90deg);
+}
+
+.hotel-list-container {
+  padding: 25px 30px;
+  overflow-y: auto; /* Allows scrolling inside the modal */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: rgba(0,0,0,0.01);
+}
+
+/* Custom Elegant Scrollbar */
+.hotel-list-container::-webkit-scrollbar { width: 8px; }
+.hotel-list-container::-webkit-scrollbar-track { background: transparent; }
+.hotel-list-container::-webkit-scrollbar-thumb { 
+  background: rgba(109, 7, 26, 0.2); 
+  border-radius: 10px; 
+}
+.hotel-list-container::-webkit-scrollbar-thumb:hover { 
+  background: rgba(109, 7, 26, 0.5); 
+}
+
+.hotel-card {
+  border: 1px solid rgba(109, 7, 26, 0.15);
+  border-radius: 12px;
+  padding: 24px;
+  background: #ffffff;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+
+.hotel-card:hover {
+  box-shadow: 0 8px 24px rgba(109, 7, 26, 0.08);
+  border-color: rgba(109, 7, 26, 0.3);
+  transform: translateY(-2px);
+}
+
+.hotel-name {
+  margin: 0 0 12px 0;
+  color: #6D071A;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.hotel-details p {
+  margin: 6px 0;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.95rem;
+  color: #444;
+  line-height: 1.5;
+}
+
+.hotel-details strong {
+  color: #6D071A;
+  font-weight: 600;
+}
+
+.hotel-links {
+  display: flex; 
+  gap: 12px; 
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.hotel-link-btn {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.75rem;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-weight: 600;
+  transition: all 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.fb-btn { 
+  background: rgba(109, 7, 26, 0.05); 
+  color: #6D071A; 
+  border: 1px solid rgba(109, 7, 26, 0.2); 
+}
+.fb-btn:hover { 
+  background: rgba(109, 7, 26, 0.1); 
+}
+
+.map-btn { 
+  background: #6D071A; 
+  color: #ffffff; 
+  border: 1px solid #6D071A; 
+}
+.map-btn:hover { 
+  background: transparent; 
+  color: #6D071A; 
+}
+
+.hotel-modal-footer {
+  padding: 20px 30px;
+  text-align: center;
+  border-top: 1px solid rgba(109, 7, 26, 0.1);
+  background-color: #fdfbf7;
+  flex-shrink: 0;
+}
+
+.hotel-modal-footer p {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.85rem;
+  color: #888;
+  font-style: italic;
+  line-height: 1.4;
+}
+
+/* ✨ FIXED: Renamed to modalFadeIn to prevent conflicts */
+@keyframes modalFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUpFade {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
 /* --- Mobile Responsiveness --- */
 @media (max-width: 1100px) {
   .venue-row {
@@ -210,6 +417,12 @@
   .btn-group {
     width: 100%;
   }
+  
+  .detail-btn {
+    width: 100%;
+    max-width: 290px;
+    padding: 14px 20px;
+  }
 }
 
 @media (max-width: 600px) {
@@ -221,7 +434,7 @@
     letter-spacing: 2px;
   }
   .card-title {
-    flex-direction: column; /* stack on mobile */
+    flex-direction: column; 
     align-items: center;
   }
   .ceremony-card .script-cap, .reception-card .script-cap, .accommodation-card .script-cap {
@@ -229,5 +442,34 @@
     margin-right: 0;
     margin-top: 0;
     margin-bottom: 10px;
+  }
+  .detail-btn {
+    font-size: 0.75rem; 
+    padding: 12px 15px;
+    letter-spacing: 1px;
+  }
+  
+  /* Modal Mobile Tweaks */
+  .hotel-modal-content {
+    max-height: 90vh;
+  }
+  .hotel-modal-header {
+    padding: 25px 20px 15px;
+  }
+  .hotel-modal-header .modal-title {
+    font-size: 2.5rem;
+  }
+  .hotel-list-container {
+    padding: 15px 20px;
+  }
+  .hotel-card {
+    padding: 15px;
+  }
+  .hotel-link-btn {
+    width: 100%;
+    text-align: center;
+  }
+  .hotel-modal-footer {
+    padding: 15px 20px;
   }
 }
