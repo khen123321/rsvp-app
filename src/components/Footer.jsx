@@ -7,11 +7,11 @@ const Footer = () => {
         
         {/* Main Branding Line */}
         <div className="footer-main-row">
-          <span className="footer-names-mini">Lanie & Angelo</span>
+          <span className="footer-names-mini">Angelo & Lanie</span>
           <span className="footer-dot">•</span>
           <span className="footer-date-mini">July 11, 2026</span>
           <span className="footer-dot">•</span>
-          <span className="footer-location-mini">Bukidnon</span>
+          <span className="footer-location-mini">Manolo Fortich, Bukidnon</span>
         </div>
 
         {/* Small Attribution Line */}

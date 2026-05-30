@@ -103,7 +103,8 @@
   user-select: none;
 }
 
-.faq-question span {
+/* Changed to target ONLY the text, not the icons */
+.faq-question span:first-child {
   font-family: 'Poppins', sans-serif;
   font-size: 1.1rem;
   font-weight: 500;
@@ -112,14 +113,41 @@
   padding-right: 20px;
 }
 
-.faq-icon {
-  font-size: 1.8rem;
-  font-weight: 300;
-  transition: transform 0.4s ease;
+/* --- THE CLEAN DISSOLVE ANIMATION --- */
+.faq-icon-wrapper {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
 }
 
-.faq-item.active .faq-icon {
-  transform: rotate(180deg);
+.icon-plus, .icon-minus {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Pins both perfectly to the center */
+  line-height: 0; /* Removes weird font spacing */
+  font-size: 1.8rem;
+  font-weight: 300;
+  transition: opacity 0.35s ease;
+}
+
+/* Default state: Plus is visible, Minus is invisible */
+.faq-item:not(.active) .icon-plus {
+  opacity: 1;
+}
+
+.faq-item:not(.active) .icon-minus {
+  opacity: 0;
+}
+
+/* Active state: Plus dissolves, Minus fades in */
+.faq-item.active .icon-plus {
+  opacity: 0;
+}
+
+.faq-item.active .icon-minus {
+  opacity: 1;
 }
 
 /* --- Answer Content (The Dropdown Logic) --- */
@@ -184,7 +212,7 @@
     padding: 20px 10px;
   }
 
-  .faq-question span {
+  .faq-question span:first-child {
     font-size: 0.95rem;
     letter-spacing: 1.5px;
   }

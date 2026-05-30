@@ -1,21 +1,15 @@
 // src/components/WelcomeEnvelope.jsx
 import { useState, useEffect } from 'react';
 import './WelcomeEnvelope.css';
-import letterImg from '../assets/letter.png';
+import letterImg from '../assets/letter.jpg';
 
-const WelcomeEnvelope = ({
-  envelopeColor = '#6A0F1F',
-  onEnter
-}) => {
+const WelcomeEnvelope = ({ onEnter }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isZooming, setIsZooming] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
   const [petals, setPetals] = useState([]);
-  
-  // NEW: Controls exactly when the text hint appears
   const [showHint, setShowHint] = useState(false);
 
-  // NEW: Wait 1.5 seconds on load for the envelope to finish falling before showing text
   useEffect(() => {
     const timer = setTimeout(() => setShowHint(true), 1500);
     return () => clearTimeout(timer);
@@ -25,7 +19,6 @@ const WelcomeEnvelope = ({
     if (isAnimating || isZooming) return;
 
     if (!isOpen) {
-      // Hide the text hint while the opening animation plays
       setShowHint(false);
       
       const generatedPetals = Array.from({ length: 50 }).map((_, i) => ({
@@ -44,12 +37,10 @@ const WelcomeEnvelope = ({
       
       setTimeout(() => {
         setIsAnimating(false);
-        // Show the text hint again once the letter is fully open
         setShowHint(true); 
       }, 3300);
 
     } else {
-      // Hide the text hint permanently when zooming
       setShowHint(false);
       setIsAnimating(true);
       setIsZooming(true);
@@ -63,11 +54,6 @@ const WelcomeEnvelope = ({
   return (
     <div className="scene-container" onClick={handleEnvelopeClick}>
       
-      {/* UPDATED: We now use the showHint state to control the is-hidden class */}
-      <div className={`click-hint ${!showHint ? 'is-hidden' : ''}`}>
-        {!isOpen ? "Click anywhere to Open" : "Click anywhere to proceed"}
-      </div>
-
       {isOpen && (
         <div
           className="petals-container"
@@ -101,10 +87,12 @@ const WelcomeEnvelope = ({
 
       {/* --- THE ENVELOPE --- */}
       <div className={`envelope-wrapper ${isOpen ? 'is-open' : ''}`}>
-        <div
-          className="envelope-back drop-down"
-          style={{ backgroundColor: envelopeColor }}
-        />
+        
+        <div className={`click-hint ${!showHint ? 'is-hidden' : ''}`}>
+          {!isOpen ? "Click anywhere to Open" : "Click anywhere to proceed"}
+        </div>
+
+        <div className="envelope-back drop-down" />
 
         <div className={`letter-wrapper ${isZooming ? 'is-zooming' : ''}`}>
           <div className="letter">
@@ -117,16 +105,10 @@ const WelcomeEnvelope = ({
           </div>
         </div>
 
-        <div
-          className="envelope-front drop-down"
-          style={{ backgroundColor: envelopeColor }}
-        />
+        <div className="envelope-front drop-down" />
 
         <div className="envelope-flap-wrapper drop-down">
-          <div
-            className="envelope-flap"
-            style={{ backgroundColor: envelopeColor }}
-          />
+          <div className="envelope-flap" />
         </div>
       </div>
 

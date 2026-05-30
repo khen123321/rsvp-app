@@ -1,4 +1,4 @@
-/* C:\Users\khen\rsvp-app\src\components\Hero.css */
+/* src/components/Hero.css */
 
 .hero {
   min-height: 100vh;
@@ -8,11 +8,11 @@
   align-items: center;
   text-align: center;
   padding: 60px 20px;
-  overflow: hidden; /* Prevents scrollbars during animations */
+  overflow: hidden; 
   position: relative;
 }
 
-/* --- DEDICATED BACKGROUND LAYER (Fixes Mobile Stacking) --- */
+/* --- DEDICATED BACKGROUND LAYER --- */
 .hero::before {
   content: "";
   position: absolute;
@@ -20,15 +20,11 @@
   left: 0;
   width: 100%;
   height: 100%;
-  
-  /* Grabs the image variable passed from JSX */
   background-image: var(--hero-bg);
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat; /* Stops the image from cloning itself! */
-  z-index: 1; /* Keeps it behind the text */
-  
-  /* Animate scale instead of size (Buttery smooth on mobile) */
+  background-repeat: no-repeat; 
+  z-index: 1; 
   animation: heroBackgroundZoom 20s ease-in-out infinite alternate;
 }
 
@@ -36,47 +32,47 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  z-index: 2; /* Sits above the background layer */
-  position: relative; /* Required for z-index to work here */
+  z-index: 2; 
+  position: relative; 
 }
 
-/* --- ANIMATION 2: Logo Fade & Drop --- */
+/* --- ANIMATION 1: Logo Fade & Drop --- */
 .hero-logo-animate {
   max-width: 120px;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
   margin-top: -40px;
-  opacity: 0; /* Start invisible */
+  opacity: 0; 
   animation: fadeInDown 1.2s ease-out forwards;
-  animation-delay: 0.3s; /* First to appear */
+  animation-delay: 0.3s; 
 }
 
-/* --- ANIMATION 3: Names Fade & Slide Up --- */
+/* --- ANIMATION 2: Tagline (Quattrocento, 30px, Normal Weight) --- */
+.hero-subtitle-animate {
+  font-family: 'Quattrocento', serif; 
+  font-size: 30px; /* Exact size to match your mockup */
+  font-weight: 400; /* Removed bold */
+  color: #6D071A;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  margin-bottom: 15px; 
+  
+  opacity: 0;
+  animation: fadeIn 2s ease-out forwards;
+  animation-delay: 0.8s; 
+}
+
+/* --- ANIMATION 3: Names (Pinyon Script) --- */
 .hero-title-animate {
-  /* THE FIX: Changed to Pinyon Script */
-  font-family: 'Pinyon Script', cursive; 
+  font-family: 'Pinyon Script', cursive; /* Original script protected */
   font-size: clamp(4rem, 12vw, 7rem);
-  color: #6D071A; /* Lanie & Angelo's Dark Red */
-  margin: 0 0 15px 0;
+  color: #6D071A; 
+  margin: 0; 
   font-weight: 400;
   line-height: 1;
   
   opacity: 0;
   animation: fadeInUp 1.5s ease-out forwards;
-  animation-delay: 0.8s; /* Second to appear */
-}
-
-/* --- ANIMATION 4: Subtitle Fade & Spread --- */
-.hero-subtitle-animate {
-  font-family: 'Poppins', sans-serif;
-  font-size: clamp(1rem, 3vw, 1.4rem);
-  font-weight: 600;
-  color: #6D071A;
-  text-transform: uppercase;
-  letter-spacing: 5px;
-  
-  opacity: 0;
-  animation: fadeIn 2s ease-out forwards;
-  animation-delay: 1.5s; /* Last to appear */
+  animation-delay: 1.2s; 
 }
 
 /* --- KEYFRAME DEFINITIONS --- */
@@ -89,7 +85,7 @@
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(40px);
+    transform: translateY(30px);
   }
   to {
     opacity: 1;
@@ -115,7 +111,17 @@
 
 /* --- MOBILE ADJUSTMENTS --- */
 @media (max-width: 480px) {
-  .hero-logo-animate { max-width: 90px; }
-  .hero-title-animate { font-size: 3.5rem; }
-  .hero-subtitle-animate { letter-spacing: 3px; font-size: 0.9rem; }
+  .hero-logo-animate { 
+    max-width: 90px; 
+  }
+  
+  .hero-subtitle-animate { 
+    letter-spacing: 2px; 
+    font-size: 16px; /* Scaled down perfectly for phones */
+    margin-bottom: 5px;
+  }
+  
+  .hero-title-animate { 
+    font-size: 3.5rem; 
+  }
 }

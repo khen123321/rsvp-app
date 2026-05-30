@@ -1,8 +1,8 @@
 // src/components/OurJourney.jsx
 import { useState, useEffect, useRef } from 'react';
 import './OurJourney.css';
-import bgImage from '../assets/bgImage/bg.png';
-import leafIcon from '../assets/leaf.png';
+import bgImage from '../assets/bgImage/bg.svg';
+import leafIcon from '../assets/leaf.svg';
 
 const OurJourney = () => {
   const [isVisible, setIsVisible] = useState(false);

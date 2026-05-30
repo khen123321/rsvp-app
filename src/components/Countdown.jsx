@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import './Countdown.css';
-import heroBg from '../assets/bgImage/bg1.png';
+import heroBg from '../assets/bgImage/bg1.svg';
 
 const Countdown = () => {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });

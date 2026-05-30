@@ -1,5 +1,17 @@
 /* src/components/RsvpForm.css */
 
+/* Global canvas fix for confetti transparency */
+body > canvas {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  pointer-events: none !important;
+  z-index: 999999 !important;
+  background: transparent !important;
+}
+
 .rsvp-section {
   background-color: #F4EBE1; 
   padding: 100px 0;
@@ -41,7 +53,7 @@
   display: flex;
   flex-direction: column;
   font-family: 'Georgia', serif;
-  font-size: 10rem; /* Massive, balanced font size */
+  font-size: 10rem; 
   line-height: 0.9; 
   text-align: center;
   flex: 1; 
@@ -78,45 +90,105 @@
   opacity: 0.9;
 }
 
-/* --- Form Styles (Real Boxed Input Fields) --- */
-.rsvp-form { display: flex; flex-direction: column; gap: 25px; }
-.form-group { display: flex; flex-direction: column; }
-.form-group label, .radio-question { font-family: 'Georgia', serif; font-size: 1.1rem; margin-bottom: 10px; font-weight: 600; }
+/* --- Form Styles --- */
+.rsvp-form { 
+  display: flex; 
+  flex-direction: column; 
+  gap: 25px; 
+}
+
+.form-group { 
+  display: flex; 
+  flex-direction: column; 
+}
+
+.form-group label, .radio-question { 
+  font-family: 'Georgia', serif; 
+  font-size: 1.1rem; 
+  margin-bottom: 10px; 
+  font-weight: 600; 
+}
 
 .form-group input[type="text"],
 .form-group input[type="number"],
 .form-group input[type="tel"],
 .form-group textarea {
-  background-color: #ffffff; /* Solid white background */
-  border: 1px solid rgba(109, 7, 26, 0.3); /* Subtle burgundy border */
-  border-radius: 8px; /* Modern rounded corners */
-  padding: 14px 16px; /* Comfortable spacing inside the box */
+  background-color: #ffffff; 
+  border: 1px solid rgba(109, 7, 26, 0.3); 
+  border-radius: 8px; 
+  padding: 14px 16px; 
   font-family: 'Poppins', sans-serif;
   font-size: 1rem;
   color: #5C2A21;
   outline: none;
   width: 100%;
-  box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); /* Very subtle inner depth */
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); 
   transition: all 0.3s ease;
 }
 
 .form-group input:focus, .form-group textarea:focus { 
   border-color: #6D071A; 
-  box-shadow: 0 0 0 3px rgba(109, 7, 26, 0.1); /* Soft glow when typing */
+  box-shadow: 0 0 0 3px rgba(109, 7, 26, 0.1); 
 }
-.form-group input:disabled, .form-group textarea:disabled { opacity: 0.5; cursor: not-allowed; background-color: #f9f9f9; }
-.form-group textarea { resize: vertical; min-height: 80px; }
+
+.form-group input:disabled, .form-group textarea:disabled { 
+  opacity: 0.5; 
+  cursor: not-allowed; 
+  background-color: #f9f9f9; 
+}
+
+.form-group textarea { 
+  resize: vertical; 
+  min-height: 80px; 
+}
 
 /* Radio Buttons */
-.radio-group { gap: 10px; display: flex; flex-direction: column;}
-.radio-question { margin-bottom: 15px; line-height: 1.4; }
-.radio-label { display: flex; align-items: center; cursor: pointer; font-family: 'Georgia', serif; font-size: 1.05rem; }
-.radio-label input[type="radio"] { appearance: none; width: 16px; height: 16px; border: 1px solid #5C2A21; margin-right: 12px; display: grid; place-content: center; cursor: pointer; flex-shrink: 0; background: #fff;}
-.radio-label input[type="radio"]::before { content: ""; width: 10px; height: 10px; background-color: #5C2A21; transform: scale(0); transition: 120ms transform ease-in-out; }
-.radio-label input[type="radio"]:checked::before { transform: scale(1); }
+.radio-group { 
+  gap: 10px; 
+  display: flex; 
+  flex-direction: column;
+}
 
+.radio-question { 
+  margin-bottom: 15px; 
+  line-height: 1.4; 
+}
 
-/* --- Elegant Submit Button (Matching the Image) --- */
+.radio-label { 
+  display: flex; 
+  align-items: center; 
+  cursor: pointer; 
+  font-family: 'Georgia', serif; 
+  font-size: 1.05rem; 
+}
+
+.radio-label input[type="radio"] { 
+  appearance: none; 
+  width: 16px; 
+  height: 16px; 
+  border: 1px solid #5C2A21; 
+  margin-right: 12px; 
+  display: grid; 
+  place-content: center; 
+  cursor: pointer; 
+  flex-shrink: 0; 
+  background: #fff;
+}
+
+.radio-label input[type="radio"]::before { 
+  content: ""; 
+  width: 10px; 
+  height: 10px; 
+  background-color: #5C2A21; 
+  transform: scale(0); 
+  transition: 120ms transform ease-in-out; 
+}
+
+.radio-label input[type="radio"]:checked::before { 
+  transform: scale(1); 
+}
+
+/* --- Elegant Submit Button --- */
 .submit-container { 
   display: flex; 
   flex-direction: column; 
@@ -167,7 +239,6 @@
   font-size: 0.9rem; 
 }
 
-
 /* =========================================
    SUCCESS & TICKET VIEW STYLES
    ========================================= */
@@ -176,7 +247,10 @@
   animation: fadeIn 0.8s ease-out forwards;
 }
 
-
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
 .success-title {
   font-family: 'Pinyon Script', cursive;
@@ -318,6 +392,11 @@
   mix-blend-mode: multiply; 
 }
 
+.qr-code svg {
+  width: 100% !important;
+  height: 100% !important;
+}
+
 .scan-text {
   font-family: 'Poppins', sans-serif;
   font-size: 0.75rem;
@@ -326,71 +405,126 @@
 }
 
 /* =========================================
-   MOBILE RESPONSIVENESS
+   📱 MOBILE RESPONSIVENESS (UI/UX Upgraded)
    ========================================= */
 @media (max-width: 768px) {
-  /* ✨ KEEP THE SIDE-BY-SIDE LAYOUT ON MOBILE */
+  .rsvp-section {
+    padding: 60px 15px; 
+  }
+
+  /* Stack the layout vertically on phones */
   .rsvp-container { 
-    flex-direction: row; 
-    gap: 15px; /* Tighter gap to save space */
+    flex-direction: column; 
+    gap: 20px; 
+    width: 100%;
   }
   
+  /* Transform Left Column to a Beautiful Top Header */
   .rsvp-left { 
-    min-width: 50px; /* Slimmer left column */
-    padding-top: 5px; 
+    min-width: 100%; 
+    padding-top: 0; 
+    align-items: center;
   }
   
   .kindly-text { 
-    font-size: 1rem; /* Smaller "Kindly" */
+    font-size: 1.2rem; 
   }
   
-  /* Keep RSVP vertical, but scale down the font size safely */
+  /* Turns the vertical letters into a horizontal word */
   .rsvp-vertical-text { 
-    font-size: 6rem; 
-    margin-top: 10px;
+    flex-direction: row; 
+    font-size: 4.5rem; 
+    margin-top: -10px;
+    gap: 15px; 
   }
   
-  /* Hide the dotted line to give the form more room */
+  /* Hide the dotted line for a cleaner mobile look */
   .rsvp-divider { display: none; }
   
-  .rsvp-right { padding-left: 0; }
+  /* --- Form Area --- */
+  .rsvp-right { 
+    padding-left: 0; 
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+  }
   
   .rsvp-title, .success-title { 
-    font-size: 2.8rem; /* Scale down title */
+    font-size: 3.2rem; 
     margin-bottom: 10px;
+    text-align: center;
   }
   
+  /* ✨ Changed text-align to justify for mobile readability ✨ */
   .rsvp-description { 
-    font-size: 0.85rem; 
-    margin-bottom: 25px;
+    font-size: 0.9rem; 
+    margin-bottom: 30px;
+    text-align: justify;
   }
 
-  /* Scale down form elements so they don't break the layout */
-  .form-group label, .radio-question { font-size: 0.95rem; }
+  .rsvp-form {
+    width: 100%; 
+  }
+
+  /* IMPORTANT: Input font-size MUST be 16px (1rem) on mobile 
+     to stop iPhones from aggressively zooming in when typing */
+  .form-group label, .radio-question { font-size: 1rem; }
   .form-group input[type="text"],
   .form-group input[type="number"],
   .form-group input[type="tel"],
   .form-group textarea {
-    font-size: 0.9rem;
-    padding: 12px 14px;
+    font-size: 1rem; 
+    padding: 14px;
   }
-  .radio-label { font-size: 0.9rem; }
   
+  .submit-container {
+    align-items: center; 
+    width: 100%;
+  }
+
   .submit-btn {
-    width: 100%; /* Make button full width on mobile */
-    max-width: 290px;
-    padding: 14px 20px;
+    width: 100%; 
+    padding: 16px 20px; 
   }
   
-  /* Ticket adjustments */
-  .digital-ticket { flex-direction: column; max-width: 100%; }
-  .ticket-cutout-top, .ticket-cutout-bottom { display: none; }
+  /* --- Ticket Adjustments --- */
+  .digital-ticket { 
+    flex-direction: column; 
+    max-width: 100%; 
+  }
   
+  .ticket-cutout-top, .ticket-cutout-bottom { 
+    display: none; 
+  }
+  
+  .ticket-left { 
+    padding: 25px 20px; 
+    align-items: center; 
+    text-align: center; 
+  }
+  
+  .ticket-details { 
+    justify-content: center; 
+  }
+
+  /* Turns the vertical ticket divider horizontal */
   .ticket-divider { 
     height: 2px; 
     width: 100%;
     background-image: linear-gradient(to right, #5C2A21 50%, transparent 50%);
     background-size: 14px 2px;
     background-repeat: repeat-x;
+    left: 0;
+  }
+  
+  /* ✨ Ensured the special note class is also justified if used later ✨ */
+  .rsvp-special-note {
+    font-style: italic;
+    font-size: 0.85rem;
+    opacity: 0.85;
+    margin-top: -20px;
+    margin-bottom: 30px;
+    text-align: justify;
+    line-height: 1.6;
   }
 }

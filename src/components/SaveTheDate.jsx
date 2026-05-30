@@ -2,13 +2,20 @@
 import { useState, useEffect, useRef } from 'react';
 import './SaveTheDate.css';
 
-// Make sure your assets are named correctly in your folders!
-import photo from '../assets/photo.png'; 
-import heartScribble from '../assets/heart.gif'; // Or heart.jpg, whichever you are using now
+// --- Asset Imports ---
 import bgDamask from '../assets/bgImage/bg2.png'; 
+import heartScribble from '../assets/heart.gif'; 
+import logo from '../assets/logo.png'; // ✨ NEW: Logo import
+
+// Your custom SVG photos!
+import photo28 from '../assets/savethedate/28.svg';
+import photo29 from '../assets/savethedate/29.svg';
+import photo30 from '../assets/savethedate/30.svg';
+import photo31 from '../assets/savethedate/31.svg';
 
 const SaveTheDate = () => {
-  const [topIndex, setTopIndex] = useState(4);
+  // Starts at 3 because we now have exactly 4 photos (index 0, 1, 2, 3)
+  const [topIndex, setTopIndex] = useState(3);
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef(null);
 
@@ -35,7 +42,7 @@ const SaveTheDate = () => {
 
   // Generates the Google Calendar invite link
   const handleAddToCalendar = () => {
-    const title = encodeURIComponent("Lanie & Angelo's Wedding");
+    const title = encodeURIComponent("Angelo & Lanie's Wedding");
     const details = encodeURIComponent("We can't wait to celebrate our special day with you!");
     const location = encodeURIComponent("Cagayan De Oro City, Philippines");
     // Format: YYYYMMDDTHHMMSSZ
@@ -44,13 +51,12 @@ const SaveTheDate = () => {
     window.open(googleCalendarUrl, '_blank');
   };
 
-  // The 5 photos in the stack with slight random rotations
+  // Exactly 4 custom photos.
   const stackItems = [
-    { id: 1, rotation: -6, left: -10, top: 15 },
-    { id: 2, rotation: 4, left: 15, top: 5 },
-    { id: 3, rotation: -3, left: -5, top: 10 },
-    { id: 4, rotation: 5, left: 20, top: -5 },
-    { id: 5, rotation: 0, left: 5, top: 5 },
+    { id: 1, rotation: -6, left: -10, top: 15, img: photo28 },
+    { id: 2, rotation: 4, left: 15, top: 5, img: photo29 },
+    { id: 3, rotation: -3, left: -5, top: 10, img: photo30 },
+    { id: 4, rotation: 0, left: 5, top: 5, img: photo31 }, // The top photo
   ];
 
   // Calendar setup for July 2026 (Starts on a Wednesday)
@@ -78,6 +84,12 @@ const SaveTheDate = () => {
         
         {/* LEFT SIDE: Interactive Polaroid Stack */}
         <div className="std-photos" onClick={handleThrow}>
+          
+          {/* ✨ NEW: Logo container hidden underneath the polaroids */}
+          <div className={`std-logo-container ${topIndex < 0 ? 'revealed' : ''}`}>
+            <img src={logo} alt="Wedding Logo" className="std-logo" />
+          </div>
+
           {stackItems.map((item, index) => {
             const isThrown = index > topIndex;
             return (
@@ -88,17 +100,18 @@ const SaveTheDate = () => {
                   transform: isThrown ? undefined : `rotate(${item.rotation}deg)`,
                   left: `${item.left}px`,
                   top: `${item.top}px`,
-                  zIndex: index 
+                  // Add +1 to ensure they stay above the newly added logo container (z-index 0)
+                  zIndex: index + 1 
                 }}
               >
                 <div className="photo-frame">
-                  <img src={photo} alt={`Couple ${item.id}`} />
+                  <img src={item.img} alt={`Couple ${item.id}`} />
                 </div>
                 <div className="photo-caption">L&A | 07.11.26</div>
               </div>
             );
           })}
-          <p className="tap-hint">{topIndex >= 0 ? "Click to throw" : "Can't wait!"}</p>
+          <p className="tap-hint">{topIndex >= 0 ? "Click to View more" : "Can't wait!"}</p>
         </div>
 
         {/* RIGHT SIDE: Calendar & Details */}

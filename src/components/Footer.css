@@ -1,6 +1,12 @@
 /* Slim Wedding Footer Styles */
 .wedding-footer-slim {
   background-color: #6D071A; /* Signature Dark Red */
+  /* ✨ NEW: The SVG Background Image */
+  background-image: url('../assets/bgImage/bg.svg'); 
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  
   color: #F4EBE1; /* Signature Beige */
   padding: 15px 20px;
   width: 100%;
@@ -26,7 +32,7 @@
 }
 
 .footer-names-mini {
-  font-family: 'Great Vibes', cursive;
+  font-family: 'Pinyon Script', cursive; /* ✨ FIXED Typo here */
   font-size: 1.5rem;
   letter-spacing: 1px;
 }
@@ -54,30 +60,49 @@
   margin: 0;
 }
 
-/* --- Mobile Responsiveness --- */
+/* =========================================
+   📱 MOBILE RESPONSIVENESS
+   ========================================= */
 
 @media (max-width: 600px) {
   .wedding-footer-slim {
-    padding: 20px;
+    padding: 25px 15px; /* Slightly more padding for breathing room */
+  }
+
+  .footer-slim-container {
+    gap: 8px; /* Adds a bit more space between the main text and the tagline */
   }
 
   .footer-main-row {
-    flex-direction: column; /* Stacks names over date on tiny screens */
-    gap: 2px;
-  }
-
-  .footer-dot {
-    display: none; /* Hides the dots when stacked */
+    /* ✨ Instead of a single column, we allow it to wrap naturally */
+    flex-wrap: wrap; 
+    justify-content: center;
+    row-gap: 5px;
+    column-gap: 8px;
   }
 
   .footer-names-mini {
-    font-size: 1.3rem;
-    margin-bottom: 4px;
+    /* ✨ Forces the names to take the full width so they sit on their own line */
+    width: 100%; 
+    text-align: center;
+    font-size: 1.8rem; /* Kept slightly larger so it stands out */
+    margin-bottom: 2px;
+  }
+
+  /* ✨ Magic trick: Hides ONLY the first dot (after the names), 
+     but keeps the dot between the Date and Location! */
+  .footer-dot:nth-child(2) {
+    display: none; 
   }
 
   .footer-date-mini, 
   .footer-location-mini {
-    font-size: 0.7rem;
-    letter-spacing: 1px;
+    font-size: 0.75rem;
+    letter-spacing: 1.5px;
+  }
+  
+  .footer-tagline {
+    margin-top: 5px;
+    font-size: 0.55rem;
   }
 }

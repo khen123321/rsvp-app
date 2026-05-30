@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import './EventTimeline.css';
 
 // Asset Imports (Make sure these match your actual folder structure!)
-import bgDamask from '../assets/bgImage/bg.png';
+import bgDamask from '../assets/bgImage/bg.svg';
 import ringIcon from '../assets/icons/ring.png'; 
 import cocktailIcon from '../assets/icons/cocktail.png'; 
 import archIcon from '../assets/icons/arch.png'; 

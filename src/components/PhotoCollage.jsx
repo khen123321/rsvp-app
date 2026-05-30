@@ -1,10 +1,11 @@
+// src/components/PhotoCollage.jsx
 import { useState, useEffect, useRef } from 'react';
 import './PhotoCollage.css';
 
 // Image Imports
-import img4 from '../assets/coupleImage/img4.png'; 
-import img5 from '../assets/coupleImage/img5.png'; 
-import img6 from '../assets/coupleImage/img6.png'; 
+import collage29 from '../assets/photocollage/31.svg'; 
+import collage30 from '../assets/photocollage/30.svg'; 
+import collage31 from '../assets/photocollage/29.svg'; 
 
 // Icon Imports
 import ring2 from '../assets/icons/ring2.png';
@@ -43,7 +44,7 @@ const PhotoCollage = () => {
         <div className="collage-left">
           {/* Top Frame: Groom */}
           <div className="collage-frame wide-frame top-frame">
-            <img src={img4} alt="Groom Adjusting Cuffs" className="main-photo" />
+            <img src={collage29} alt="Groom" className="main-photo" />
             {/* Icons anchored near the Groom photo */}
             <img src={envelope} alt="" className="frame-icon icon-envelope" />
             <img src={sandal} alt="" className="frame-icon icon-sandal" />
@@ -51,7 +52,7 @@ const PhotoCollage = () => {
 
           {/* Bottom-Left Frame: Couple */}
           <div className="collage-frame small-frame bottom-left-frame">
-            <img src={img5} alt="Couple Sitting" className="main-photo" />
+            <img src={collage30} alt="Couple" className="main-photo" />
             {/* Icons anchored near the Couple photo */}
             <img src={glass} alt="" className="frame-icon icon-glass" />
             <img src={shoe} alt="" className="frame-icon icon-shoe" />
@@ -61,7 +62,7 @@ const PhotoCollage = () => {
         <div className="collage-right">
           {/* Vertical Frame: Bride */}
           <div className="collage-frame vertical-frame right-frame">
-            <img src={img6} alt="Bride with Bouquet" className="main-photo" />
+            <img src={collage31} alt="Bride" className="main-photo" />
             {/* Icons anchored near the Bride photo */}
             <img src={ring2} alt="" className="frame-icon icon-rings" />
             <img src={champaine} alt="" className="frame-icon icon-champagne" />

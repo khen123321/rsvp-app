@@ -22,8 +22,9 @@
 
 .std-photos {
   position: relative;
-  width: 340px;
-  height: 400px;
+  /* Container size fits the bigger polaroids */
+  width: 420px;
+  height: 480px;
   cursor: pointer;
   perspective: 1000px; 
   opacity: 0;
@@ -48,6 +49,31 @@
   transform: translateX(0);
 }
 
+/* --- Logo Hidden Underneath Stack (NEW) --- */
+
+.std-logo-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.7); /* Starts slightly smaller */
+  opacity: 0;
+  z-index: 0; /* Kept at the absolute back */
+  transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  pointer-events: none; /* Prevents it from blocking clicks on the container */
+}
+
+.std-logo-container.revealed {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1); /* Pops to full size */
+}
+
+.std-logo {
+  width: 250px; /* Adjust this to fit your specific logo perfectly */
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0px 10px 15px rgba(0,0,0,0.08)); 
+}
+
 /* --- Polaroid Stack --- */
 
 .polaroid {
@@ -55,8 +81,10 @@
   padding: 15px 15px 35px 15px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.1);
   position: absolute;
-  width: 280px;
-  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+  /* Polaroid size */
+  width: 340px;
+  /* Slowed down throw */
+  transition: all 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
   transform-origin: bottom left;
 }
 
@@ -77,14 +105,15 @@
 .photo-caption {
   color: #6D071A;
   text-align: center;
-  margin-top: 12px;
+  margin-top: 15px;
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 1.1rem; 
   letter-spacing: 1px;
 }
 
 .polaroid.thrown {
-  transform: translateX(-900px) rotate(-60deg) scale(0.5) !important;
+  /* Pushes it further away so it has room to float off-screen */
+  transform: translateX(-1000px) rotate(-60deg) scale(0.5) !important;
   opacity: 0;
   pointer-events: none; 
 }
@@ -117,7 +146,6 @@
   text-transform: lowercase;
 }
 
-/* THIS MUST BE RELATIVE FOR THE HEART TO POSITION CORRECTLY */
 .calendar-date {
   position: relative;
   font-size: 1rem;
@@ -176,14 +204,13 @@
   text-transform: uppercase;
 }
 
-/* NEW DESIGN: A real, premium wedding-themed CTA button */
 .add-calendar-btn {
-  background-color: #6D071A; /* Filled Burgundy background */
-  color: #ffffff; /* Crisp white text */
+  background-color: #6D071A; 
+  color: #ffffff; 
   border: 2px solid #6D071A;
   margin-top: 40px;
   padding: 12px 36px;
-  border-radius: 30px; /* Elegant pill shape */
+  border-radius: 30px; 
   cursor: pointer;
   letter-spacing: 2px;
   font-family: 'Poppins', sans-serif;
@@ -196,9 +223,9 @@
 }
 
 .add-calendar-btn:hover {
-  background-color: transparent; /* Seamless outline inversion */
+  background-color: transparent; 
   color: #6D071A;
-  transform: translateY(-3px); /* Subtle physical dynamic elevation */
+  transform: translateY(-3px); 
   box-shadow: 0 8px 20px rgba(109, 7, 26, 0.3);
 }
 
@@ -216,9 +243,15 @@
   }
   
   .std-photos { 
-    width: 280px; 
-    height: 350px; 
+    /* Slightly smaller on mobile so it fits the screen width perfectly */
+    width: 320px; 
+    height: 420px; 
     transform: translateY(40px); 
+  }
+
+  .polaroid {
+    /* Scales down just enough to not break mobile layouts */
+    width: 290px;
   }
   
   .std-content {
@@ -231,7 +264,7 @@
   }
   
   .add-calendar-btn {
-    width: 100%; /* Spans comfortably on narrow viewpoints */
+    width: 100%; 
     max-width: 290px;
     padding: 14px 20px;
   }

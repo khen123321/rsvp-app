@@ -4,7 +4,13 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: #ffffff;
+  
+  /* Background SVG */
+  background-image: url('../assets/bgImage/bg2.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  
   overflow: hidden;
   perspective: 1200px;
   cursor: pointer; 
@@ -28,17 +34,9 @@
 
 /* --- 2. THE NEW LETTER ZOOM ANIMATION --- */
 @keyframes letterZoom {
-  0% {
-    transform: scale(1) translateY(0);
-    opacity: 1;
-  }
-  80% {
-    opacity: 1; 
-  }
-  100% {
-    transform: scale(40) translateY(-10px);
-    opacity: 0;
-  }
+  0% { transform: scale(1) translateY(0); opacity: 1; }
+  80% { opacity: 1; }
+  100% { transform: scale(40) translateY(-10px); opacity: 0; }
 }
 
 .scene-container .letter-wrapper.is-zooming {
@@ -50,17 +48,15 @@
 
 /* --- 3. THE DROP & REVERSE ANIMATION --- */
 .drop-down {
-  transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1) 0s,
-              z-index 0s 1.5s; 
+  transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1) 0s, z-index 0s 1.5s; 
 }
 
 .envelope-wrapper.is-open .drop-down {
   transform: translateY(150vh);
-  transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1) 1.8s,
-              z-index 0s 1.1s; 
+  transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1) 1.8s, z-index 0s 1.1s; 
 }
 
-/* --- 4. ENVELOPE PIECES --- */
+/* --- 4. ENVELOPE PIECES (With Damask Pattern) --- */
 .envelope-back {
   position: absolute;
   top: 0;
@@ -68,7 +64,10 @@
   width: 100%;
   height: 100%;
   border-radius: 4px;
-  background-image: linear-gradient(to bottom, rgba(0,0,0,0.25), rgba(0,0,0,0.05));
+  background-color: #6A0F1F;
+  background-image: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.1)), url('../assets/bgImage/bg.svg');
+  background-size: cover;
+  background-position: center;
   z-index: 1;
 }
 
@@ -81,7 +80,10 @@
   clip-path: polygon(0 100%, 100% 100%, 100% 0, 50% 60%, 0 0);
   z-index: 3;
   border-radius: 0 0 4px 4px;
-  background-image: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(0,0,0,0.15) 100%);
+  background-color: #6A0F1F;
+  background-image: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(0,0,0,0.2) 100%), url('../assets/bgImage/bg.svg');
+  background-size: cover;
+  background-position: bottom center;
   box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
 
@@ -104,7 +106,10 @@
   clip-path: polygon(0 0, 100% 0, 50% 100%);
   transform-origin: top;
   filter: drop-shadow(0 8px 12px rgba(0,0,0,0.15));
-  background-image: linear-gradient(to bottom, rgba(255,255,255,0.05), rgba(0,0,0,0.1));
+  background-color: #6A0F1F;
+  background-image: linear-gradient(to bottom, rgba(255,255,255,0.05), rgba(0,0,0,0.15)), url('../assets/bgImage/bg.svg');
+  background-size: cover;
+  background-position: top center;
   transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1) 1.5s;
 }
 
@@ -134,15 +139,13 @@
   overflow: hidden;
   height: 95%; 
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  transition: height 1.5s cubic-bezier(0.25, 1, 0.4, 1) 0s,
-              box-shadow 1.5s ease 0s;
+  transition: height 1.5s cubic-bezier(0.25, 1, 0.4, 1) 0s, box-shadow 1.5s ease 0s;
 }
 
 .envelope-wrapper.is-open .letter {
   height: 90%; 
   box-shadow: 0 25px 50px rgba(0,0,0,0.18);
-  transition: height 1.5s cubic-bezier(0.25, 1, 0.4, 1) 1.8s,
-              box-shadow 1.5s ease 1.8s;
+  transition: height 1.5s cubic-bezier(0.25, 1, 0.4, 1) 1.8s, box-shadow 1.5s ease 1.8s;
 }
 
 .letter-image {
@@ -158,15 +161,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    to bottom, 
-    transparent 32.5%, 
-    rgba(0,0,0,0.06) 33%, 
-    transparent 33.5%, 
-    transparent 65.5%, 
-    rgba(0,0,0,0.06) 66%, 
-    transparent 66.5%
-  );
+  background: linear-gradient(to bottom, transparent 32.5%, rgba(0,0,0,0.06) 33%, transparent 33.5%, transparent 65.5%, rgba(0,0,0,0.06) 66%, transparent 66.5%);
   pointer-events: none;
   transition: opacity 1.5s ease 0s; 
 }
@@ -196,99 +191,37 @@
   filter: drop-shadow(0 3px 6px rgba(74, 4, 16, 0.35));
 }
 
-/* Shape A */
-.petal:nth-child(5n + 1) {
-  width: 22px;
-  height: 28px;
-  background: radial-gradient(ellipse at 40% 30%, #C0203A 0%, #8B0000 55%, #4A0410 100%);
-  border-radius: 50% 50% 55% 45% / 60% 60% 40% 40%;
-  transform-origin: 50% 80%;
-}
-
-/* Shape B */
-.petal:nth-child(5n + 2) {
-  width: 14px;
-  height: 32px;
-  background: radial-gradient(ellipse at 35% 25%, #D63050 0%, #9B0020 50%, #5A0015 100%);
-  border-radius: 50% 50% 45% 55% / 65% 65% 35% 35%;
-  transform-origin: 50% 85%;
-}
-
-/* Shape C */
-.petal:nth-child(5n + 3) {
-  width: 26px;
-  height: 20px;
-  background: radial-gradient(ellipse at 50% 20%, #BA1A35 0%, #800018 60%, #3D000C 100%);
-  border-radius: 50% 50% 30% 30% / 70% 70% 30% 30%;
-  transform-origin: 50% 75%;
-  box-shadow: inset 0 4px 8px rgba(0,0,0,0.25), inset 0 -2px 4px rgba(220,80,100,0.2);
-}
-
-/* Shape D */
-.petal:nth-child(5n + 4) {
-  width: 20px;
-  height: 24px;
-  background: radial-gradient(ellipse at 45% 35%, #CC2040 0%, #8B0000 45%, #4A0410 100%);
-  border-radius: 55% 45% 60% 40% / 50% 65% 35% 55%;
-  transform-origin: 55% 80%;
-  box-shadow: inset 2px 2px 6px rgba(255,120,140,0.15), inset -1px -1px 4px rgba(0,0,0,0.3);
-}
-
-/* Shape E */
-.petal:nth-child(5n + 5) {
-  width: 16px;
-  height: 16px;
-  background: radial-gradient(ellipse at 40% 30%, #E03560 0%, #A01030 55%, #5A0020 100%);
-  border-radius: 60% 40% 55% 45% / 55% 55% 45% 45%;
-  transform-origin: 50% 70%;
-}
+.petal:nth-child(5n + 1) { width: 22px; height: 28px; background: radial-gradient(ellipse at 40% 30%, #C0203A 0%, #8B0000 55%, #4A0410 100%); border-radius: 50% 50% 55% 45% / 60% 60% 40% 40%; transform-origin: 50% 80%; }
+.petal:nth-child(5n + 2) { width: 14px; height: 32px; background: radial-gradient(ellipse at 35% 25%, #D63050 0%, #9B0020 50%, #5A0015 100%); border-radius: 50% 50% 45% 55% / 65% 65% 35% 35%; transform-origin: 50% 85%; }
+.petal:nth-child(5n + 3) { width: 26px; height: 20px; background: radial-gradient(ellipse at 50% 20%, #BA1A35 0%, #800018 60%, #3D000C 100%); border-radius: 50% 50% 30% 30% / 70% 70% 30% 30%; transform-origin: 50% 75%; box-shadow: inset 0 4px 8px rgba(0,0,0,0.25), inset 0 -2px 4px rgba(220,80,100,0.2); }
+.petal:nth-child(5n + 4) { width: 20px; height: 24px; background: radial-gradient(ellipse at 45% 35%, #CC2040 0%, #8B0000 45%, #4A0410 100%); border-radius: 55% 45% 60% 40% / 50% 65% 35% 55%; transform-origin: 55% 80%; box-shadow: inset 2px 2px 6px rgba(255,120,140,0.15), inset -1px -1px 4px rgba(0,0,0,0.3); }
+.petal:nth-child(5n + 5) { width: 16px; height: 16px; background: radial-gradient(ellipse at 40% 30%, #E03560 0%, #A01030 55%, #5A0020 100%); border-radius: 60% 40% 55% 45% / 55% 55% 45% 45%; transform-origin: 50% 70%; }
 
 .petal::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    160deg,
-    rgba(255,255,255,0.18) 0%,
-    rgba(255,255,255,0.06) 30%,
-    transparent 55%
-  );
+  background: linear-gradient(160deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.06) 30%, transparent 55%);
   border-radius: inherit;
 }
 
 @keyframes fall {
-  0% {
-    top: -12%;
-    transform: rotate(0deg) translateX(0px) scale(var(--scale));
-    opacity: 0;
-  }
-  8% {
-    opacity: 0.9;
-  }
-  33% {
-    transform: rotate(210deg) translateX(var(--sway-a)) scale(var(--scale));
-    opacity: 0.85;
-  }
-  66% {
-    transform: rotate(480deg) translateX(var(--sway-b)) scale(var(--scale));
-    opacity: 0.8;
-  }
-  88% {
-    opacity: 0.7;
-  }
-  100% {
-    top: 112%;
-    transform: rotate(720deg) translateX(0px) scale(var(--scale));
-    opacity: 0;
-  }
+  0% { top: -12%; transform: rotate(0deg) translateX(0px) scale(var(--scale)); opacity: 0; }
+  8% { opacity: 0.9; }
+  33% { transform: rotate(210deg) translateX(var(--sway-a)) scale(var(--scale)); opacity: 0.85; }
+  66% { transform: rotate(480deg) translateX(var(--sway-b)) scale(var(--scale)); opacity: 0.8; }
+  88% { opacity: 0.7; }
+  100% { top: 112%; transform: rotate(720deg) translateX(0px) scale(var(--scale)); opacity: 0; }
 }
 
 /* --- 7. CLICK ANYWHERE HINT --- */
 .click-hint {
   position: absolute;
-  bottom: 40px;
+  bottom: -60px; 
   left: 50%;
   transform: translateX(-50%);
+  width: 100%;
+  text-align: center;
   font-family: 'Poppins', sans-serif;
   font-size: 0.9rem;
   font-weight: 300;
@@ -314,62 +247,11 @@
 
 /* --- 8. MOBILE RESPONSIVENESS --- */
 @media (max-width: 768px) {
-  .envelope-wrapper {
-    width: 345px;
-    height: 230px; 
-  }
-  .click-hint {
-    bottom: 30px;
-    font-size: 0.75rem;
-    letter-spacing: 2px;
-  }
+  .envelope-wrapper { width: 345px; height: 230px; }
+  .click-hint { bottom: -50px; font-size: 0.75rem; letter-spacing: 2px; }
 }
 
 @media (max-width: 380px) {
-  .envelope-wrapper {
-    width: 285px;
-    height: 190px;
-  }
-  /* --- CLICK ANYWHERE TEXT INDICATION --- */
-.scene-container {
-  /* Ensure cursor changes to pointer anywhere on screen */
-  cursor: pointer; 
-}
-
-.click-hint {
-  position: absolute;
-  bottom: 40px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-family: 'Poppins', sans-serif;
-  font-size: 1rem;
-  font-weight: 400;
-  letter-spacing: 3px;
-  color: #6A0F1F;
-  text-transform: uppercase;
-  z-index: 10000;
-  pointer-events: none; /* Prevents text from blocking the click */
-  animation: pulseText 2s ease-in-out infinite;
-  transition: opacity 0.5s ease;
-}
-
-/* Fades the text out during the final zoom transition */
-.click-hint.is-hidden {
-  opacity: 0;
-  animation: none;
-}
-
-@keyframes pulseText {
-  0% { opacity: 0.3; }
-  50% { opacity: 1; }
-  100% { opacity: 0.3; }
-}
-
-@media (max-width: 768px) {
-  .click-hint {
-    bottom: 30px;
-    font-size: 0.8rem;
-    letter-spacing: 2px;
-  }
-}
+  .envelope-wrapper { width: 285px; height: 190px; }
+  .click-hint { bottom: -45px; font-size: 0.7rem; }
 }

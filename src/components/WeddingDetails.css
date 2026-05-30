@@ -46,6 +46,7 @@
   display: flex; 
   align-items: center; 
   justify-content: center; 
+  flex-wrap: nowrap; /* Prevents the letters from breaking onto new lines */
   font-family: 'Poppins', sans-serif;
   text-transform: uppercase;
   line-height: 1.2;
@@ -66,6 +67,7 @@
   font-size: 2.2rem;
   font-weight: 400;
   letter-spacing: 4px;
+  white-space: nowrap; /* Keeps the rest of the word intact */
 }
 
 /* --- Specific Intersection Gaps --- */
@@ -138,7 +140,7 @@
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 2px;
-  white-space: nowrap; /* Forces text to one line */
+  white-space: nowrap; 
   box-shadow: 0 4px 15px rgba(109, 7, 26, 0.2);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   outline: none;
@@ -196,30 +198,29 @@
 }
 
 /* ==================================================
-   ✨ NEW ACCOMMODATION MODAL STYLES ✨
+   ✨ ACCOMMODATION MODAL STYLES ✨
 ================================================== */
 
 .hotel-modal-overlay {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(109, 7, 26, 0.5); /* Deep burgundy tint */
+  background: rgba(109, 7, 26, 0.5); 
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 100000; /* Stays on top of everything */
+  z-index: 100000; 
   padding: 20px;
   opacity: 1;
-  /* ✨ FIXED: Uses the unique modalFadeIn animation */
   animation: modalFadeIn 0.3s ease; 
 }
 
 .hotel-modal-content {
-  background-color: #fdfbf7; /* Warm white paper look */
+  background-color: #fdfbf7; 
   width: 100%;
   max-width: 750px;
-  max-height: 85vh; /* Prevents it from going off-screen */
+  max-height: 85vh; 
   border-radius: 16px;
   display: flex;
   flex-direction: column;
@@ -271,7 +272,7 @@
 
 .hotel-list-container {
   padding: 25px 30px;
-  overflow-y: auto; /* Allows scrolling inside the modal */
+  overflow-y: auto; 
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -380,7 +381,6 @@
   line-height: 1.4;
 }
 
-/* ✨ FIXED: Renamed to modalFadeIn to prevent conflicts */
 @keyframes modalFadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -392,7 +392,9 @@
 }
 
 
-/* --- Mobile Responsiveness --- */
+/* ==================================================
+   📱 MOBILE RESPONSIVENESS
+================================================== */
 @media (max-width: 1100px) {
   .venue-row {
     flex-direction: column;
@@ -426,23 +428,31 @@
 }
 
 @media (max-width: 600px) {
-  .script-cap {
-    font-size: 3.5rem;
-  }
-  .serif-text {
-    font-size: 1.6rem;
-    letter-spacing: 2px;
-  }
+  /* ✨ FIXED: We maintain the flex-direction: row from desktop by removing the column override */
   .card-title {
-    flex-direction: column; 
     align-items: center;
   }
-  .ceremony-card .script-cap, .reception-card .script-cap, .accommodation-card .script-cap {
-    padding-right: 0;
+
+  /* ✨ FIXED: Scaled the typography slightly more so it fits on one line without wrapping */
+  .script-cap {
+    font-size: 3.5rem;
+    padding-right: 5px; /* Added just a tiny gap back in */
+  }
+
+  .serif-text {
+    font-size: 1.3rem; /* Slightly smaller to fit standard iPhone screens width */
+    letter-spacing: 2px;
+  }
+
+  /* Resetting margins but protecting the right-padding for the side-by-side gap */
+  .ceremony-card .script-cap, 
+  .reception-card .script-cap, 
+  .accommodation-card .script-cap {
     margin-right: 0;
     margin-top: 0;
-    margin-bottom: 10px;
+    margin-bottom: 0;
   }
+
   .detail-btn {
     font-size: 0.75rem; 
     padding: 12px 15px;

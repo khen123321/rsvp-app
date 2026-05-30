@@ -1,5 +1,5 @@
 // src/App.jsx
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react'; // ✨ NEW: Imported useEffect
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 // Import all your existing components
@@ -9,6 +9,7 @@ import SaveTheDate from './components/SaveTheDate';
 import PhotoGallery from './components/PhotoGallery'; 
 import Countdown from './components/Countdown';
 import OurJourney from './components/OurJourney'; 
+import WeddingVideo from './components/WeddingVideo'; 
 import WeddingDetails from './components/WeddingDetails'; 
 import EventTimeline from './components/EventTimeline'; 
 import DressCode from './components/DressCode'; 
@@ -50,13 +51,14 @@ const Home = () => {
           
           <Navigation />
           
-          {/* NOTICE: The wrappers for gallery, timeline, and faq are gone 
-              because those IDs are now safely inside the components themselves! */}
           <div id="home"><Hero /></div>
           <SaveTheDate />
           <PhotoGallery /> 
           <Countdown />
           <div id="our-journey"><OurJourney /></div>
+          
+          <WeddingVideo />
+          
           <div id="wedding-details"><WeddingDetails /></div>
           <EventTimeline />
           <div id="dresscode"><DressCode /></div>
@@ -74,6 +76,18 @@ const Home = () => {
 };
 
 function App() {
+  // ✨ THE MAGIC FIX: Injects global canvas transparency on app load
+  useEffect(() => {
+    const style = document.createElement('style');
+    style.textContent = `
+      canvas {
+        background: transparent !important;
+        background-color: transparent !important;
+      }
+    `;
+    document.head.appendChild(style);
+  }, []);
+
   return (
     <Router>
       <Routes>

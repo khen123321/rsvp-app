@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import './FAQ.css';
 
 // Asset Import
-import bgDamask from '../assets/bgImage/bg.png';
+import bgDamask from '../assets/bgImage/bg.svg';
 
 const FAQ = () => {
   const [activeIndex, setActiveIndex] = useState(null);
@@ -28,9 +28,8 @@ const FAQ = () => {
     setActiveIndex(activeIndex === index ? null : index);
   };
 
-  // ✨ THE FIX: This function intercepts the click and forces a smooth scroll
   const scrollToSection = (e, targetId) => {
-    e.preventDefault(); // Stops the instant jump
+    e.preventDefault(); 
     const element = document.getElementById(targetId);
     if (element) {
       element.scrollIntoView({ 
@@ -38,6 +37,19 @@ const FAQ = () => {
         block: 'start' 
       });
     }
+  };
+
+  const openAccommodationsModal = (e) => {
+    e.preventDefault();
+    
+    // 1. Smooth scroll to the Wedding Details section
+    const element = document.getElementById('wedding-details');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    
+    // 2. Dispatch a custom event to tell WeddingDetails.jsx to open its modal
+    document.dispatchEvent(new Event('openHotelModal'));
   };
 
   const faqData = [
@@ -49,8 +61,7 @@ const FAQ = () => {
       q: "HOW DO I GET TO THE CEREMONY VENUE?",
       a: (
         <>
-          Guests may arrange their own transportation going to and from the venue. Travel time is approximately 1hr & 30 mins from CDO, depending on traffic, so we recommend leaving early. 
-          {/* ✨ Updated to trigger the smooth scroll */}
+          Guests may arrange their own transportation going to and from the venue. Travel time is approximately 1hr & 30 mins from CDO, depending on traffic, so we recommend leaving early. <br/><br/>
           <a href="#wedding-details" onClick={(e) => scrollToSection(e, 'wedding-details')} className="faq-inline-link">CLICK HERE FOR THE MAP</a>
         </>
       )
@@ -71,8 +82,7 @@ const FAQ = () => {
       q: "WHAT SHOULD I WEAR?",
       a: (
         <>
-          We encourage guests to follow the indicated dress code to match the theme of our special day. 
-          {/* ✨ Updated to trigger the smooth scroll */}
+          We encourage guests to follow the indicated dress code to match the theme of our special day. <br/><br/>
           <a href="#dresscode" onClick={(e) => scrollToSection(e, 'dresscode')} className="faq-inline-link">CLICK HERE FOR THE DRESSCODE.</a>
         </>
       )
@@ -83,7 +93,7 @@ const FAQ = () => {
     },
     {
       q: "CAN I TAKE PHOTOS AND SHARE THEM?",
-      a: "Yes! After the ceremony, feel free to take photos and share them using our wedding hashtag #them forever. #ANGELOtooktherightLANIEtoforever"
+      a: "Yes! After the ceremony, feel free to take photos and share them using our wedding hashtag #ANGELOtooktherightLANIEtoforever"
     },
     {
       q: "CAN I USE MY PHONE DURING THE CEREMONY?",
@@ -95,7 +105,12 @@ const FAQ = () => {
     },
     {
       q: "ARE THERE ACCOMMODATION OPTIONS NEARBY?",
-      a: "Yes! If you plan to stay overnight, you may check nearby accommodations via our wedding website. Kindly note that bookings and expenses will be at your own arrangement."
+      a: (
+        <>
+          Yes! If you plan to stay overnight, we have prepared a list of nearby options. Kindly note that bookings and expenses will be at your own arrangement.<br/><br/>
+          <a href="#wedding-details" onClick={openAccommodationsModal} className="faq-inline-link">CLICK HERE TO VIEW</a>
+        </>
+      )
     },
     {
       q: "WHAT SHOULD I EXPECT WEATHER-WISE?",
@@ -139,7 +154,11 @@ const FAQ = () => {
                 onClick={() => toggleAccordion(index)}
               >
                 <span>{item.q}</span>
-                <span className="faq-icon">{activeIndex === index ? '−' : '+'}</span>
+                {/* ✨ NEW: The icon wrapper that allows the smooth CSS cross-fade! */}
+                <span className="faq-icon-wrapper">
+                  <span className="icon-plus">+</span>
+                  <span className="icon-minus">−</span>
+                </span>
               </div>
               <div className="faq-answer">
                 <div className="faq-answer-content">

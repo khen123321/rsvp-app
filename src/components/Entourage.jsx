@@ -2,8 +2,7 @@
 import { useState, useEffect, useRef } from 'react';
 import './Entourage.css';
 
-// Asset Imports
-import bgDamask from '../assets/bgImage/bg.png';
+import bgDamask from '../assets/bgImage/bg.svg';
 
 const Entourage = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -78,7 +77,7 @@ const Entourage = () => {
           <p className="nuptials-tag">Nuptials</p>
         </div>
 
-        {/* === PARENTS (Split Side-by-Side) === */}
+        {/* === PARENTS === */}
         <div className="invite-split-row" style={{ marginBottom: '40px' }}>
           <div className="invite-col align-right">
             <h4 className="invite-role">PARENTS OF THE GROOM</h4>
@@ -90,28 +89,30 @@ const Entourage = () => {
           </div>
         </div>
 
-        {/* === OFFICIANT (Centered) === */}
+        {/* === OFFICIANT === */}
         <div className="invite-center-block" style={{ marginBottom: '60px' }}>
           <h4 className="invite-role">OFFICIATING PRIEST</h4>
           <p className="invite-name">Rev. Fr. Fermin P. Tan Jr., SSJV</p>
         </div>
 
-        {/* === PRINCIPAL SPONSORS === */}
+        {/* === PRINCIPAL SPONSORS (✨ THE FIX: Mapped Row-by-Row) === */}
         <h3 className="section-script-title pinyon-font">Principal Sponsors</h3>
         
-        <div className="invite-split-row">
-          <div className="invite-col align-right">
-            {ninongs.map((name, i) => <p key={i} className="invite-name">{name}</p>)}
-          </div>
-          <div className="invite-col align-left">
-            {ninangs.map((name, i) => <p key={i} className="invite-name">{name}</p>)}
-          </div>
+        <div className="sponsors-grid-container">
+          {ninongs.map((ninong, index) => (
+            <div className="sponsor-pair-row" key={index}>
+              <p className="invite-name align-right">{ninong}</p>
+              <p className="invite-name align-left">{ninangs[index]}</p>
+            </div>
+          ))}
         </div>
 
         {/* === THE ENTOURAGE === */}
-        <div className="invite-divider"></div>
-        <h3 className="section-script-title pinyon-font">The Entourage</h3>
-
+        {/* ✨ ADDED: marginTop here pushes the entire Entourage section down */}
+        <div className="invite-divider" style={{ marginTop: '80px' }}></div>
+        <h3 className="section-script-title pinyon-font" style={{ marginBottom: '50px' }}>
+          The Entourage
+        </h3>
         {/* Best Man / Maid of Honor */}
         <div className="invite-split-row">
           <div className="invite-col align-right">
@@ -136,13 +137,13 @@ const Entourage = () => {
           </div>
         </div>
 
-        {/* Candle (Centered) */}
+        {/* Candle */}
         <div className="invite-center-block" style={{ marginTop: '40px' }}>
           <h4 className="invite-role">CANDLE</h4>
           <p className="invite-name">Mrs. Gretchen A. Caidic<br/>Mr. Jefrey M. Caidic</p>
         </div>
 
-        {/* Veil / Cord (Split) */}
+        {/* Veil / Cord */}
         <div className="invite-split-row" style={{ marginTop: '20px' }}>
           <div className="invite-col align-right">
             <h4 className="invite-role">VEIL</h4>
@@ -154,13 +155,13 @@ const Entourage = () => {
           </div>
         </div>
 
-        {/* Ring Security (Centered) */}
+        {/* Ring Security */}
         <div className="invite-center-block" style={{ marginTop: '40px' }}>
           <h4 className="invite-role">RING SECURITY</h4>
           <p className="invite-name">Mr. Agustineus Francis G. Vidal</p>
         </div>
 
-        {/* Coin Bearer / Bible Bearer (Split) */}
+        {/* Coin / Bible */}
         <div className="invite-split-row" style={{ marginTop: '20px' }}>
           <div className="invite-col align-right">
             <h4 className="invite-role">COIN BEARER</h4>
@@ -172,16 +173,16 @@ const Entourage = () => {
           </div>
         </div>
 
-        {/* Petals & Blooms (Title Centered, Names Split) */}
+        {/* Petals & Blooms */}
         <div className="invite-center-block" style={{ marginTop: '40px' }}>
           <h4 className="invite-role">PETALS & BLOOMS</h4>
-          <div className="invite-split-row" style={{ marginTop: '10px' }}>
-            <div className="invite-col align-right">
-              {petalsLeft.map((name, i) => <p key={i} className="invite-name">{name}</p>)}
-            </div>
-            <div className="invite-col align-left">
-              {petalsRight.map((name, i) => <p key={i} className="invite-name">{name}</p>)}
-            </div>
+          <div className="sponsors-grid-container" style={{ marginTop: '10px' }}>
+            {petalsLeft.map((name, index) => (
+              <div className="sponsor-pair-row" key={index}>
+                <p className="invite-name align-right">{name}</p>
+                <p className="invite-name align-left">{petalsRight[index]}</p>
+              </div>
+            ))}
           </div>
         </div>
 

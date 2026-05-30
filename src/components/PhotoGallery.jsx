@@ -1,28 +1,28 @@
 // src/components/PhotoGallery.jsx
 import './PhotoGallery.css';
-import bgImage from '../assets/bgImage/bg.png'; 
-import img1 from '../assets/coupleImage/img1.png';
-import img2 from '../assets/coupleImage/img2.png';
-import img3 from '../assets/coupleImage/img3.png';
+import bgImage from '../assets/bgImage/bg.svg'; 
+
+// Imported your new SVG graphics
+import img1 from '../assets/photogallery/28.svg';
+import img2 from '../assets/photogallery/29.svg';
+import img3 from '../assets/photogallery/30.svg';
 
 const PhotoGallery = () => {
-  // Duplicating the images array creates the seamless infinite loop
-  const carouselImages = [img1, img2, img3, img1, img2, img3,img1, img2, img3, img1, img2, img3,img1, img2, img3, img1, img2, img3];
+  // Just your 3 stunning images, no duplicates!
+  const galleryImages = [img1, img2, img3];
 
   return (
     <section 
-      id="gallery" /* ✨ THIS IS THE MAGIC FIX ✨ */
+      id="gallery" /* ✨ STILL HAS THE MAGIC FIX ✨ */
       className="photo-gallery" 
       style={{ backgroundImage: `url(${bgImage})` }}
     >
-      <div className="carousel-wrapper">
-        <div className="carousel-track">
-          {carouselImages.map((src, index) => (
-            <div className="gallery-item" key={index}>
-              <img src={src} alt={`Couple Moment ${index + 1}`} />
-            </div>
-          ))}
-        </div>
+      <div className="gallery-wrapper">
+        {galleryImages.map((src, index) => (
+          <div className="gallery-item" key={index}>
+            <img src={src} alt={`Couple Moment ${index + 1}`} />
+          </div>
+        ))}
       </div>
     </section>
   );

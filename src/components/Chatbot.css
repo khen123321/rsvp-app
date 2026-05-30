@@ -152,7 +152,7 @@
 .message-wrapper.user { align-items: flex-end; }
 
 .message {
-  max-width: 82%;
+  max-width: 85%; /* Gave it slightly more room for lists */
   padding: 14px 18px;
   border-radius: 20px;
   font-size: 0.9rem;
@@ -177,6 +177,46 @@
   color: #F4EBE1;
   border-bottom-right-radius: 4px;
 }
+
+/* =========================================
+   ✨ PRO AI MARKDOWN STYLES (NEW) ✨
+   ========================================= */
+.markdown-body {
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.6; /* Slightly taller line-height for readability */
+}
+
+.markdown-body p {
+  margin: 0 0 12px 0;
+}
+
+.markdown-body p:last-child {
+  margin: 0;
+}
+
+.markdown-body strong {
+  font-weight: 700;
+  color: #6D071A; /* Makes bold text match your theme! */
+}
+
+.markdown-body ul, .markdown-body ol {
+  margin: 8px 0 12px 0;
+  padding-left: 22px;
+}
+
+.markdown-body li {
+  margin-bottom: 6px;
+}
+
+.markdown-body h3 {
+  font-size: 0.95rem;
+  color: #6D071A;
+  margin: 14px 0 6px 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+/* ========================================= */
 
 /* Beautiful Admin Access CTA Link */
 .admin-cta-wrapper {

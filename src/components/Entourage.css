@@ -42,7 +42,6 @@
   text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
 }
 
-/* MATCHED IMAGE: Serif font, slightly larger, tighter letter spacing */
 .nuptials-tag {
   font-family: 'Georgia', serif; 
   font-size: clamp(1.2rem, 3vw, 1.6rem);
@@ -61,16 +60,34 @@
   text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
 }
 
+/* ✨ THE FIX: Bulletproof Grid Layouts */
 .invite-split-row {
-  display: flex;
-  justify-content: center;
-  /* Uses a flexible gap that shrinks automatically on smaller screens */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: clamp(15px, 5vw, 200px); 
   width: 100%;
+  align-items: start;
+}
+
+/* New specific class to hold our mapped Principal Sponsor rows */
+.sponsors-grid-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 5px; /* Tiny gap between each vertical row */
+}
+
+/* Forces the partners to stay perfectly aligned horizontally */
+.sponsor-pair-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(15px, 5vw, 200px); /* Keeps your exact custom spacing */
+  width: 100%;
+  align-items: start; /* If one wraps, they both stay pinned to the top line together */
 }
 
 .invite-col {
-  flex: 1;
+  min-width: 0; 
 }
 
 .align-right {
@@ -98,12 +115,12 @@
   color: #e8dcb8;
 }
 
-/* MATCHED IMAGE: Names are now Serif to match the parents and entourage list */
 .invite-name {
   font-family: 'Georgia', serif; 
   font-size: clamp(0.9rem, 1.8vw, 1.1rem);
   font-weight: 400;
-  margin: 0 0 5px 0;
+  margin: 0; /* Removed bottom margin because the grid handles spacing now */
   line-height: 1.3;
   color: #F5F5DC;
- }
+  word-wrap: break-word; 
+}

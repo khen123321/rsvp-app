@@ -79,6 +79,7 @@
 
 .right-img { 
   justify-self: end; 
+  transform: translateX(20px); /* Pushes the image 30 pixels to the right */
 }
 
 .dress-content {

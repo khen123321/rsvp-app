@@ -1,66 +1,138 @@
 // src/components/RsvpForm.jsx
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { QRCodeSVG } from 'qrcode.react';
+import confetti from 'canvas-confetti';
 import './RsvpForm.css';
-// 1. Added the background image import
-import bgDamask from '../assets/bgImage/bg2.png'; 
+import bgDamask from '../assets/bgImage/bg2.png';
+
+// Set guests to default '1' in the background since they are RSVPing individually
+const initialState = {
+  fullName: '',
+  guests: '1', 
+  attending: '',
+  contactNumber: '',
+  message: '',
+};
 
 const RsvpForm = () => {
-  const [formData, setFormData] = useState({
-    fullName: '',
-    guests: '',
-    attending: '',
-    contactNumber: '',
-    message: ''
-  });
-
-  // UI States
+  const [formData, setFormData] = useState(initialState);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState(''); // 'success' or 'error'
+  const [submitStatus, setSubmitStatus] = useState('');
   const [ticketId, setTicketId] = useState('');
-  const [submittedData, setSubmittedData] = useState(null); // To display on the ticket
-
+  const [submittedData, setSubmittedData] = useState(null);
+  
   const scriptURL = 'https://script.google.com/macros/s/AKfycbznkiN0O6QaZO4EOeSTenStE-LILt7mxMOP8pfldsGQIedc-_OwTTKoe5q8jKJjJOi0/exec';
+
+  // Watch for canvas creation and force transparent background
+  useEffect(() => {
+    const forceCanvasTransparent = (canvas) => {
+      canvas.style.cssText = `
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        pointer-events: none !important;
+        z-index: 999999 !important;
+        background: transparent !important;
+        background-color: transparent !important;
+      `;
+    };
+
+    // Style existing canvases
+    const styleExisting = () => {
+      const canvases = document.querySelectorAll('canvas');
+      canvases.forEach(forceCanvasTransparent);
+    };
+
+    // Watch for new canvases being added to the DOM
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        mutation.addedNodes.forEach((node) => {
+          if (node.nodeName === 'CANVAS') {
+            forceCanvasTransparent(node);
+          }
+        });
+      });
+    });
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+
+    // Style any existing canvases
+    styleExisting();
+
+    // Cleanup
+    return () => observer.disconnect();
+  }, []);
+
+  const fireConfetti = () => {
+    const colors = ['#6D071A', '#5C2A21', '#F4EBE1', '#FDF9F0', '#C9A84C'];
+    
+    confetti({
+      particleCount: 160,
+      spread: 90,
+      origin: { y: 0.6 },
+      colors,
+    });
+    
+    setTimeout(() => {
+      confetti({ 
+        particleCount: 80, 
+        angle: 60, 
+        spread: 55, 
+        origin: { x: 0 }, 
+        colors 
+      });
+      confetti({ 
+        particleCount: 80, 
+        angle: 120, 
+        spread: 55, 
+        origin: { x: 1 }, 
+        colors 
+      });
+    }, 250);
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value
-    }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setSubmitStatus(''); 
+    setSubmitStatus('');
 
-    // 1. Generate a random Ticket ID (e.g., RSVP-A7B2X9)
     const generatedId = 'RSVP-' + Math.random().toString(36).substring(2, 8).toUpperCase();
 
-    // 2. Package the data for Google Sheets
     const formToSubmit = new FormData();
     formToSubmit.append('fullName', formData.fullName);
     formToSubmit.append('guests', formData.guests);
     formToSubmit.append('attending', formData.attending);
     formToSubmit.append('contactNumber', formData.contactNumber);
     formToSubmit.append('message', formData.message);
-    formToSubmit.append('ticketId', generatedId); // Sends the generated ID to your sheet
+    formToSubmit.append('ticketId', generatedId);
 
     try {
-      // 3. Send to Google Sheets
       await fetch(scriptURL, {
         method: 'POST',
         body: formToSubmit,
-        mode: 'no-cors' 
+        mode: 'no-cors',
       });
 
-      // 4. Save data for the ticket and show success screen
       setTicketId(generatedId);
       setSubmittedData(formData);
       setSubmitStatus('success');
-      
-    } catch (error) {
-      console.error('Error submitting form:', error);
+
+      if (formData.attending === 'yes') {
+        setTimeout(() => fireConfetti(), 300);
+      }
+
+    } catch (err) {
+      console.error(err);
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
@@ -68,20 +140,19 @@ const RsvpForm = () => {
   };
 
   return (
-    <section 
-      className="rsvp-section" 
+    <section
+      className="rsvp-section"
       id="rsvp"
-      // 2. Applied the background image inline to the main section wrapper
-      style={{ 
+      style={{
         backgroundImage: `url(${bgDamask})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat'
+        backgroundRepeat: 'no-repeat',
       }}
     >
       <div className="rsvp-container">
-        
-        {/* Left Column: Vertical Text */}
+
+        {/* Left vertical RSVP */}
         <div className="rsvp-left">
           <span className="kindly-text">Kindly</span>
           <div className="rsvp-vertical-text">
@@ -92,38 +163,43 @@ const RsvpForm = () => {
           </div>
         </div>
 
-        {/* Vertical Dotted Divider */}
-        <div className="rsvp-divider"></div>
+        <div className="rsvp-divider" />
 
-        {/* Right Column: Dynamic Content Area */}
         <div className="rsvp-right">
-          
-          {/* Conditional Rendering: Show Ticket if Success, otherwise show Form */}
-          {submitStatus === 'success' ? (
-            
+
+          {submitStatus === 'success' && submittedData ? (
+
             <div className="success-view animate-fade-in">
-              <h2 className="success-title">Thank you so much for your response!</h2>
-              
+              <h2 className="success-title">
+                {submittedData.attending === 'yes' ? "Thank you so much for your response!" : "We'll miss you!"}
+              </h2>
+
               <div className="success-message">
                 <p>
-                  Kindly note that your RSVP will be considered final, as we have limited seats available due to our venue capacity. Should your plans change, we would truly appreciate it if you could inform us ahead of time.
+                  {submittedData.attending === 'yes'
+                    ? "Kindly note that your RSVP will be considered final, as we have limited seats available due to our venue capacity. Should your plans change, we would truly appreciate it if you could inform us ahead of time. Please take a screenshot of your digital ticket below."
+                    : "Thank you for letting us know. We will miss you on our special day!"}
                 </p>
                 <p className="success-footer">
-                  Thank you so much for your understanding and support. We can’t wait to celebrate with you! 🤍
+                  {submittedData.attending === 'yes'
+                    ? "We can't wait to celebrate with you! 🤍"
+                    : "With love, Angelo & Lanie 🤍"}
                 </p>
               </div>
 
-              {/* Only show the ticket if they are actually attending */}
               {submittedData.attending === 'yes' && (
                 <div className="digital-ticket">
-                  <div className="ticket-cutout-top"></div>
-                  <div className="ticket-cutout-bottom"></div>
-                  
+                  <div className="ticket-cutout-top" />
+                  <div className="ticket-cutout-bottom" />
+
                   <div className="ticket-left">
                     <p className="ticket-label">ADMIT</p>
-                    <h3 className="ticket-guests">{submittedData.guests} {submittedData.guests > 1 ? 'GUESTS' : 'GUEST'}</h3>
+                    <h3 className="ticket-guests">
+                      {submittedData.guests}{' '}
+                      {Number(submittedData.guests) > 1 ? 'GUESTS' : 'GUEST'}
+                    </h3>
                     <p className="ticket-name">{submittedData.fullName}</p>
-                    
+
                     <div className="ticket-details">
                       <div className="detail-col">
                         <span className="detail-label">DATE</span>
@@ -136,15 +212,17 @@ const RsvpForm = () => {
                     </div>
                   </div>
 
-                  <div className="ticket-divider"></div>
+                  <div className="ticket-divider" />
 
                   <div className="ticket-right">
-                    {/* Generates a live QR code based on the Ticket ID */}
-                    <img 
-                      src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${ticketId}&color=5C2A21&bgcolor=FDF9F0`} 
-                      alt="RSVP QR Code" 
-                      className="qr-code"
-                    />
+                    <div className="qr-code">
+                      <QRCodeSVG
+                        value={`Name: ${submittedData.fullName} | ID: ${ticketId} | Guests: ${submittedData.guests}`}
+                        size={100}
+                        fgColor="#5C2A21"
+                        bgColor="transparent"
+                      />
+                    </div>
                     <span className="scan-text">SCAN FOR ENTRY</span>
                   </div>
                 </div>
@@ -152,31 +230,37 @@ const RsvpForm = () => {
             </div>
 
           ) : (
-            
-            /* The RSVP Form */
-            <>
+
+            <div className="animate-fade-in">
               <h2 className="rsvp-title">Will you be there?</h2>
+              
+              {/* General instructions */}
               <p className="rsvp-description">
                 We would be truly grateful if you could kindly confirm your attendance by completing the form below. You may also reply through our personal Facebook accounts or message HM Events at 0917-723-3000.
               </p>
 
+              {/* ✨ FIRST NOTE: Tucked closer to the bottom one */}
+              <p className="rsvp-description" style={{ fontStyle: 'italic', opacity: 0.85, marginBottom: '8px' }}>
+                Kindly note: If multiple guests are attending under one invitation, we respectfully ask that each guest fill out the RSVP form individually for proper seat allocation and coordination.
+              </p>
+
+              {/* ✨ SECOND NOTE: Tucked closer to the top one */}
+              <p className="rsvp-description" style={{ fontStyle: 'italic', opacity: 0.85, marginTop: '0' }}>
+                We also kindly ask everyone to follow the number of seats allocated in your invitation. As much as we would love to accommodate everyone, we humbly request no plus ones please.
+              </p>
+
               <form className="rsvp-form" onSubmit={handleSubmit}>
-                
-                <div className="form-group">
-                  <label htmlFor="fullName">Full Name</label>
-                  <input type="text" id="fullName" name="fullName" value={formData.fullName} onChange={handleChange} required disabled={isSubmitting} />
-                </div>
 
                 <div className="form-group">
-                  <label htmlFor="guests">Number of Guests Attending (including yourself):</label>
-                  <input type="number" id="guests" name="guests" min="1" value={formData.guests} onChange={handleChange} required disabled={isSubmitting} />
+                  <label htmlFor="fullName">Full Name</label>
+                  <input type="text" id="fullName" name="fullName" placeholder="e.g. John Doe" value={formData.fullName} onChange={handleChange} required disabled={isSubmitting} />
                 </div>
 
                 <div className="form-group radio-group">
                   <p className="radio-question">
                     Will you be able to join us as we celebrate our wedding on July 11, 2026 (Saturday) at Manolo Fortich, Bukidnon?
                   </p>
-                  
+
                   <label className="radio-label">
                     <input type="radio" name="attending" value="yes" checked={formData.attending === 'yes'} onChange={handleChange} required disabled={isSubmitting} />
                     <span className="custom-radio"></span>
@@ -192,7 +276,7 @@ const RsvpForm = () => {
 
                 <div className="form-group">
                   <label htmlFor="contactNumber">Contact Number:</label>
-                  <input type="tel" id="contactNumber" name="contactNumber" value={formData.contactNumber} onChange={handleChange} required disabled={isSubmitting} />
+                  <input type="tel" id="contactNumber" name="contactNumber" placeholder="For urgent updates" value={formData.contactNumber} onChange={handleChange} required disabled={isSubmitting} />
                 </div>
 
                 <div className="form-group">
@@ -202,14 +286,14 @@ const RsvpForm = () => {
 
                 <div className="submit-container">
                   <button type="submit" className="submit-btn" disabled={isSubmitting}>
-                    {isSubmitting ? 'SUBMITTING...' : 'SUBMIT'}
+                    {isSubmitting ? 'SUBMITTING...' : 'SUBMIT RSVP'}
                   </button>
                   {submitStatus === 'error' && (
                     <p className="status-message error">Oops! Something went wrong. Please try again.</p>
                   )}
                 </div>
               </form>
-            </>
+            </div>
           )}
 
         </div>

@@ -1,11 +1,15 @@
+// src/components/Chatbot.jsx
 import { useState, useRef, useEffect } from 'react';
+import ReactMarkdown from 'react-markdown'; // ✨ NEW: The secret to Pro AI formatting
 import './Chatbot.css';
 
 const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState('');
+  
+  // Starting message with standard Markdown formatting
   const [messages, setMessages] = useState([
-    { sender: 'bot', text: "Hi! I'm your wedding assistant. Ask me anything about the venue, schedule, or dress code." }
+    { sender: 'bot', text: "Hi! I'm your wedding assistant. Ask me anything about the **venue**, **schedule**, or **dress code**." }
   ]);
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef(null);
@@ -52,7 +56,7 @@ const Chatbot = () => {
       const data = await response.json();
       setMessages(prev => [...prev, { sender: 'bot', text: data.text }]);
     } catch {
-      setMessages(prev => [...prev, { sender: 'bot', text: "I'm experiencing a brief delay. Please try asking again in a moment." }]);
+      setMessages(prev => [...prev, { sender: 'bot', text: "I'm experiencing a brief delay. Please try asking again in a moment. 🙏" }]);
     } finally {
       setIsLoading(false);
     }
@@ -98,7 +102,16 @@ const Chatbot = () => {
             {messages.map((msg, index) => (
               <div key={index} className={`message-wrapper ${msg.sender}`}>
                 <div className={`message ${msg.sender}`}>
-                  <p>{msg.text}</p>
+                  
+                  {/* ✨ THE UPGRADE: If it is the user, render plain text. If it is the bot, render Markdown! */}
+                  {msg.sender === 'user' ? (
+                    <p>{msg.text}</p>
+                  ) : (
+                    <ReactMarkdown className="markdown-body">
+                      {msg.text}
+                    </ReactMarkdown>
+                  )}
+
                 </div>
                 
                 {/* Properly Formatted CTA Link */}

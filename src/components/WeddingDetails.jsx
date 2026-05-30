@@ -11,8 +11,8 @@ import place2 from '../assets/placeImage/place2.png';
 const accommodations = [
   {
     id: 1,
-    name: "Mountain Pines Place (reception venue)",
-    address: "Bagalangit, Manolo Fortich, Bukidnon, Libona, Philippines, 8706",
+    name: "Mountain Pines Place (Reception Venue)",
+    address: "Sitio Bagalangit Rd, Manolo Fortich, 8703 Bukidnon",
     contact: "0917 549 6406",
     fb: "https://www.facebook.com/mountainpinesplace",
     map: "https://maps.app.goo.gl/MZQW9JrVqRX53sUE7"

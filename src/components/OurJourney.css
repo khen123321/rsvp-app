@@ -5,7 +5,7 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  padding: clamp(20px, 100px) 0;
+  padding: clamp(40px, 10vw, 100px) 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -28,13 +28,22 @@
 }
 
 .journey-header {
-  margin-bottom: clamp(40px, 6vw, 60px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Space before the paragraph starts */
+  margin-bottom: clamp(30px, 5vw, 50px);
 }
 
 .journey-leaf {
-  width: clamp(100px, 15vw, 160px); 
+  /* Enlarged responsive sizing */
+  width: clamp(250px, 30vw, 550px); 
   height: auto;
-  filter: drop-shadow(0 6px 12px rgba(0,0,0,0.3));
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+  
+  /* Negative margins to pull the title close and remove invisible empty space */
+  margin-top: -40px;
+  margin-bottom: 20px; 
   
   opacity: 0;
   transform: scale(0.4);
@@ -50,23 +59,35 @@
 .journey-title {
   color: #F5F5DC; 
   font-family: 'Poppins', sans-serif;
-  font-size: clamp(2.5rem, 6vw, 3.5rem);
+  font-size: clamp(2.5rem, 6vw, 3.8rem);
   font-weight: 300;
-  letter-spacing: clamp(5px, 2vw, 10px);
+  letter-spacing: clamp(4px, 2vw, 8px);
   text-transform: uppercase;
-  line-height: 1.1;
+  
+  /* Crucial: Tight line-height prevents huge invisible gaps */
+  line-height: 1; 
   margin: 0;
+  
+  position: relative;
+  z-index: 1;
 }
 
 .script-font {
   display: block;
   font-family: 'Pinyon Script', cursive;
-  font-size: clamp(4.5rem, 10vw, 6.5rem);
+  font-size: clamp(3.5rem, 10vw, 5rem);
   text-transform: none;
   letter-spacing: 2px;
-  margin-top: clamp(-15px, -3vw, -25px); 
   font-weight: 400;
   color: #F5F5DC;
+  
+  /* Pulls "Together" UP into "OUR JOURNEY" */
+  margin-top: clamp(-20px, -4vw, -45px); 
+  
+  position: relative;
+  /* Ensures the cursive swoops ON TOP of the block letters */
+  z-index: 2; 
+  text-shadow: 2px 2px 4px rgba(109, 7, 26, 0.3);
 }
 
 /* --- TEXT BLOCK --- */
@@ -78,7 +99,7 @@
   /* Constrain the width so the justified text forms a nice clean block */
   max-width: 1200px;
   margin: 0 auto;
-  margin-top: clamp(30px, 6vw, 50px);
+  margin-top: 10px; 
   padding: 0 clamp(20px, 5vw, 40px);
 }
 
@@ -89,7 +110,7 @@
   margin-bottom: clamp(30px, 4vw, 40px);
   opacity: 0.95;
   
-  /* THE FIX: Justified text configuration */
+  /* Justified text configuration */
   text-align: justify;
   text-justify: inter-word;
   
@@ -110,4 +131,3 @@
   font-weight: 400;
   text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
 }
-
