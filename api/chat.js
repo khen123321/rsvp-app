@@ -7,6 +7,17 @@ export default async function handler(req, res) {
   }
 
   const { message, history = [] } = req.body;
+
+  // ==========================================
+  // ✨ SECURE BACKEND INTERCEPTOR ✨
+  // We check the password here on the secure server.
+  // If it matches, we send the trigger code instantly 
+  // without wasting time or credits on the Groq API.
+  // ==========================================
+  if (message && message.trim().toLowerCase() === 'lanieangelo2026') {
+    return res.status(200).json({ text: '[TRIGGER_ADMIN_DASHBOARD_UNLOCK]' });
+  }
+
   const apiKey = process.env.GROQ_API_KEY;
 
   if (!apiKey) {
@@ -190,13 +201,6 @@ If asked who made/built/designed/developed this website, enthusiastically credit
 Share these links:
 - 🌐 Portfolio: https://khenjoshua.vercel.app/
 - 📘 Facebook: https://www.facebook.com/khenjosh740
-
-═══════════════════════════════
-ADMIN ACCESS (SECRET)
-═══════════════════════════════
-If the user types EXACTLY "LanieAngelo2026", reply ONLY with:
-[TRIGGER_ADMIN_DASHBOARD_UNLOCK]
-No explanation, no extra text.
 `;
 
   const formattedHistory = history

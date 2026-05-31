@@ -5,15 +5,32 @@ const Login = ({ onLoginSuccess }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
+    setError('');
     
-    // Updated credentials
-    if (username === 'testadmin123' && password === 'testadmin123') {
-      onLoginSuccess(); 
-    } else {
-      setError('Invalid username or password');
+    try {
+      // Send the credentials to your secure backend
+      const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      });
+      
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        onLoginSuccess(); 
+      } else {
+        setError(data.error || 'Invalid username or password');
+      }
+    } catch  {
+      setError('An error occurred while logging in. Please try again.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -35,6 +52,7 @@ const Login = ({ onLoginSuccess }) => {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             className="admin-input"
+            disabled={isLoading}
             required
           />
         </div>
@@ -46,12 +64,13 @@ const Login = ({ onLoginSuccess }) => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="admin-input"
+            disabled={isLoading}
             required
           />
         </div>
         
-        <button type="submit" className="admin-submit-btn">
-          Log In
+        <button type="submit" className="admin-submit-btn" disabled={isLoading}>
+          {isLoading ? 'Verifying...' : 'Log In'}
         </button>
       </form>
     </div>

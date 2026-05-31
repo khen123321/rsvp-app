@@ -1,6 +1,6 @@
 // src/components/Chatbot.jsx
 import { useState, useRef, useEffect } from 'react';
-import ReactMarkdown from 'react-markdown'; // ✨ NEW: The secret to Pro AI formatting
+import ReactMarkdown from 'react-markdown'; 
 import './Chatbot.css';
 
 const Chatbot = () => {
@@ -26,35 +26,30 @@ const Chatbot = () => {
 
     setMessages(prev => [...prev, { sender: 'user', text: userMessage }]);
     setInput('');
-
-    // --- SECRET CODE INTERCEPTOR ---
-    if (userMessage.trim().toLowerCase() === 'lanieangelo2026') {
-      setIsLoading(true);
-      
-      setTimeout(() => {
-        setMessages(prev => [...prev, { 
-          sender: 'bot', 
-          text: "Admin credentials verified. Access the portal below:",
-          link: "/admin?access_token=secret_temp_token_123" 
-        }]);
-        setIsLoading(false);
-      }, 1000);
-      
-      return;
-    }
-    // -------------------------------
-
     setIsLoading(true);
 
     try {
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: userMessage })
+        // Optionally pass history here if you want the bot to remember the conversation context
+        body: JSON.stringify({ message: userMessage, history: messages }) 
       });
       
       const data = await response.json();
-      setMessages(prev => [...prev, { sender: 'bot', text: data.text }]);
+
+      // --- SECURE BACKEND INTERCEPTOR ---
+      // We check if the secure server sent back our special trigger code
+      if (data.text.trim() === '[TRIGGER_ADMIN_DASHBOARD_UNLOCK]') {
+        setMessages(prev => [...prev, { 
+          sender: 'bot', 
+          text: "Admin credentials verified. Please access the secure portal below:",
+          link: "/admin-login" 
+        }]);
+      } else {
+        setMessages(prev => [...prev, { sender: 'bot', text: data.text }]);
+      }
+
     } catch {
       setMessages(prev => [...prev, { sender: 'bot', text: "I'm experiencing a brief delay. Please try asking again in a moment. 🙏" }]);
     } finally {
@@ -103,7 +98,6 @@ const Chatbot = () => {
               <div key={index} className={`message-wrapper ${msg.sender}`}>
                 <div className={`message ${msg.sender}`}>
                   
-                  {/* ✨ THE UPGRADE: If it is the user, render plain text. If it is the bot, render Markdown! */}
                   {msg.sender === 'user' ? (
                     <p>{msg.text}</p>
                   ) : (
