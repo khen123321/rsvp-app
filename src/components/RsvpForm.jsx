@@ -245,9 +245,9 @@ const RsvpForm = () => {
               </p>
 
               {/* ✨ SECOND NOTE: Tucked closer to the top one */}
-              <p className="rsvp-description" style={{ fontStyle: 'italic', opacity: 0.85, marginTop: '0' }}>
-                We also kindly ask everyone to follow the number of seats allocated in your invitation. As much as we would love to accommodate everyone, we humbly request no plus ones please.
-              </p>
+<p className="rsvp-description" style={{ fontStyle: 'italic', opacity: 0.85, marginTop: '0' }}>
+  We also kindly ask everyone to follow the number of seats allocated in your invitation. As much as we would love to accommodate everyone, we humbly request <strong>no plus ones please</strong>.
+</p>
 
               <form className="rsvp-form" onSubmit={handleSubmit}>
 

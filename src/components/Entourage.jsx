@@ -95,14 +95,16 @@ const Entourage = () => {
           <p className="invite-name">Rev. Fr. Fermin P. Tan Jr., SSJV</p>
         </div>
 
-        {/* === PRINCIPAL SPONSORS (✨ THE FIX: Mapped Row-by-Row) === */}
+        {/* === PRINCIPAL SPONSORS === */}
         <h3 className="section-script-title pinyon-font">Principal Sponsors</h3>
         
         <div className="sponsors-grid-container">
-          {ninongs.map((ninong, index) => (
+          {/* ✨ THE FIX: We map over ninangs (the longer list) instead of ninongs */}
+          {ninangs.map((ninang, index) => (
             <div className="sponsor-pair-row" key={index}>
-              <p className="invite-name align-right">{ninong}</p>
-              <p className="invite-name align-left">{ninangs[index]}</p>
+              {/* If there is no Ninong for this row, it will just render a blank space */}
+              <p className="invite-name align-right">{ninongs[index] || ""}</p>
+              <p className="invite-name align-left">{ninang}</p>
             </div>
           ))}
         </div>

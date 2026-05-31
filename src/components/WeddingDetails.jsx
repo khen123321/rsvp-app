@@ -231,7 +231,7 @@ const WeddingDetails = () => {
 
           {/* Travel Time Text */}
           <p className="travel-info">
-            Travel time from the ceremony venue to the reception is approximately 30-35 minutes.
+            Travel time from the ceremony venue to the reception venue is approximately 30-35 minutes.
           </p>
 
           {/* Bottom Row: Accommodation */}
