@@ -1,5 +1,4 @@
 import { useState, useEffect, useMemo } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
 import Login from './login';
 import Scanner from './Scanner';
 import './admin.css';
@@ -66,9 +65,8 @@ const GuestCard = ({ guest }) => {
 };
 
 const Admin = () => {
-  const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
-
+  // ✨ REMOVED: useNavigate and useSearchParams are no longer needed
+  
   const [isLoggedIn, setIsLoggedIn] = useState(
     () => sessionStorage.getItem('isAdminLoggedIn') === 'true'
   );
@@ -76,11 +74,7 @@ const Admin = () => {
   const [view, setView] = useState('list');
   const [search, setSearch] = useState('');
 
-  const hasAccess = searchParams.get('access_token') === 'secret_temp_token_123';
-
-  useEffect(() => {
-    if (!hasAccess) navigate('/', { replace: true });
-  }, [hasAccess, navigate]);
+  // ✨ REMOVED: hasAccess and its useEffect redirect logic 
 
   useEffect(() => {
     if (!isLoggedIn) return;
@@ -133,7 +127,9 @@ const Admin = () => {
     ? Math.round((attending.length / guests.length) * 100)
     : 0;
 
-  if (!hasAccess) return null;
+  // ✨ REMOVED: if (!hasAccess) return null;
+
+  // If not logged in, show our new secure Login component
   if (!isLoggedIn) return <Login onLoginSuccess={handleLogin} />;
 
   return (
