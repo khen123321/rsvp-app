@@ -32,7 +32,7 @@ const Entourage = () => {
     "Ms. Gabrielle Frances R. Figuracion", "Mrs. Lourdes A. Rubin", "Mrs. Mariel Jean P. Schmith", 
     "Mrs. Maria Theresa S. Sulatan", "Mrs. Jagilyn P. Agolito", "Mrs. Teresa S. Tingson", 
     "Mrs. Marites P. Vicente", "Ms. Andria Lois M. Linaac", "Mrs. Maria Theresa Nanaman Larrazabal", 
-    "Dr. Hochille Mae B. Uy", "Mrs. Jowena Mauricio"
+    "Dr. Hochille Mae B. Uy", "Mrs. Khen Mauricio"
   ];
 
   const ninongs = [
