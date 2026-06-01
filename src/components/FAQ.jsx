@@ -154,7 +154,7 @@ const FAQ = () => {
                 onClick={() => toggleAccordion(index)}
               >
                 <span>{item.q}</span>
-                {/* ✨ NEW: The icon wrapper that allows the smooth CSS cross-fade! */}
+                {/*   NEW: The icon wrapper that allows the smooth CSS cross-fade! */}
                 <span className="faq-icon-wrapper">
                   <span className="icon-plus">+</span>
                   <span className="icon-minus">−</span>

@@ -13,7 +13,7 @@ const PhotoGallery = () => {
 
   return (
     <section 
-      id="gallery" /* ✨ STILL HAS THE MAGIC FIX ✨ */
+      id="gallery" /*   STILL HAS THE MAGIC FIX   */
       className="photo-gallery" 
       style={{ backgroundImage: `url(${bgImage})` }}
     >

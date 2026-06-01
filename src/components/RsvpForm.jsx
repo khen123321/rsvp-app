@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import { QRCodeSVG } from 'qrcode.react';
 import confetti from 'canvas-confetti';
 import './RsvpForm.css';
-import bgDamask from '../assets/bgImage/bg2.png';
 
 // Set guests to default '1' in the background since they are RSVPing individually
 const initialState = {
@@ -144,7 +143,8 @@ const RsvpForm = () => {
       className="rsvp-section"
       id="rsvp"
       style={{
-        backgroundImage: `url(${bgDamask})`,
+        /*   UPDATED: Pointing directly to the public folder! */
+        backgroundImage: `url('/bg2.png')`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
@@ -239,15 +239,15 @@ const RsvpForm = () => {
                 We would be truly grateful if you could kindly confirm your attendance by completing the form below. You may also reply through our personal Facebook accounts or message HM Events at 0917-723-3000.
               </p>
 
-              {/* ✨ FIRST NOTE: Tucked closer to the bottom one */}
+              {/*   FIRST NOTE: Tucked closer to the bottom one */}
               <p className="rsvp-description" style={{ fontStyle: 'italic', opacity: 0.85, marginBottom: '8px' }}>
                 Kindly note: If multiple guests are attending under one invitation, we respectfully ask that each guest fill out the RSVP form individually for proper seat allocation and coordination.
               </p>
 
-              {/* ✨ SECOND NOTE: Tucked closer to the top one */}
-<p className="rsvp-description" style={{ fontStyle: 'italic', opacity: 0.85, marginTop: '0' }}>
-  We also kindly ask everyone to follow the number of seats allocated in your invitation. As much as we would love to accommodate everyone, we humbly request <strong>no plus ones please</strong>.
-</p>
+              {/*   SECOND NOTE: Tucked closer to the top one */}
+              <p className="rsvp-description" style={{ fontStyle: 'italic', opacity: 0.85, marginTop: '0' }}>
+                We also kindly ask everyone to follow the number of seats allocated in your invitation. As much as we would love to accommodate everyone, we humbly request <strong>no plus ones please</strong>.
+              </p>
 
               <form className="rsvp-form" onSubmit={handleSubmit}>
 

@@ -195,7 +195,7 @@
 .tap-hint {
   position: absolute;
   bottom: -40px;
-  left: 50%;
+  left: 42%;
   transform: translateX(-50%);
   font-size: 0.75rem;
   color: #6D071A;
@@ -234,28 +234,55 @@
   box-shadow: 0 4px 10px rgba(109, 7, 26, 0.2);
 }
 
-/* --- Mobile Responsiveness --- */
+/* =========================================
+   ✨ MOBILE RESPONSIVENESS (UPDATED)
+   ========================================= */
 
+/* Tablets & Standard Phones */
 @media (max-width: 850px) {
+  
+  .save-the-date {
+    padding: 60px 15px; 
+  }
+
   .std-container { 
     flex-direction: column; 
-    gap: 60px; 
+    gap: 40px; 
   }
   
   .std-photos { 
-    /* Slightly smaller on mobile so it fits the screen width perfectly */
-    width: 320px; 
-    height: 420px; 
-    transform: translateY(40px); 
+    width: 300px; 
+    height: 400px; 
+    transform: translateY(40px);
+    margin: 0 auto; 
   }
 
   .polaroid {
-    /* Scales down just enough to not break mobile layouts */
-    width: 290px;
+    width: 280px; 
+    left: 50% !important; 
+    margin-left: -140px; /* Half of width to perfectly center */
+  }
+
+  .std-logo {
+    width: 180px; 
   }
   
   .std-content {
     transform: translateY(40px);
+    width: 100%;
+  }
+
+  .std-title {
+    font-size: 2rem;
+    letter-spacing: 4px;
+  }
+  
+  .std-month {
+    font-size: 1.2rem;
+  }
+
+  .calendar-grid {
+    gap: 10px; 
   }
 
   .save-the-date.animate-in .std-photos,
@@ -265,7 +292,69 @@
   
   .add-calendar-btn {
     width: 100%; 
-    max-width: 290px;
+    max-width: 280px;
     padding: 14px 20px;
+    margin-top: 30px;
+  }
+}
+
+/* ✨ NEW: Tiny Screens (iPhone SE / Small Androids) */
+@media (max-width: 480px) {
+  
+  .save-the-date {
+    padding: 50px 10px; /* Maximize screen real estate */
+  }
+
+  .std-photos { 
+    width: 100%; 
+    height: 350px; /* Shrink height so calendar isn't pushed too far down */
+  }
+
+  /* Shrink polaroids safely so they don't hit the screen edges */
+  .polaroid {
+    width: 240px; 
+    margin-left: -120px; /* Safely center the new smaller size */
+    padding: 10px 10px 25px 10px; /* Tighter internal padding */
+  }
+
+  .photo-caption {
+    font-size: 0.95rem;
+    margin-top: 10px;
+  }
+
+  .std-logo {
+    width: 140px; /* Scale logo down so it still looks proportionate behind the smaller photos */
+  }
+
+  /* Shrink calendar headers to prevent text breaking */
+  .std-title {
+    font-size: 1.6rem;
+    letter-spacing: 3px;
+  }
+  
+  .std-month {
+    font-size: 1rem;
+    margin-bottom: 20px;
+  }
+
+  /* Tighter calendar grid for tiny screens */
+  .calendar-grid {
+    gap: 8px 5px; 
+  }
+
+  .calendar-day-label {
+    font-size: 0.7rem;
+  }
+
+  .calendar-date {
+    font-size: 0.85rem;
+    height: 25px; /* Shorter calendar rows */
+  }
+
+  .heart-circle {
+    width: 45px; /* Shrink the heart so it doesn't cover neighboring numbers */
+    height: 45px;
+    margin-top: -22.5px;
+    margin-left: -22.5px;
   }
 }

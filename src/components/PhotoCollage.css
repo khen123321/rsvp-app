@@ -2,7 +2,7 @@
 
 .collage-section {
   /* Using your specific background image */
-  background-image: url('../assets/bgImage/bg2.png'); 
+  background-image: url('/bg2.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

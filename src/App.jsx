@@ -1,5 +1,5 @@
 // src/App.jsx
-import { useState, useRef, useEffect } from 'react'; // ✨ NEW: Imported useEffect
+import { useState, useRef, useEffect } from 'react'; 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 // Import all your existing components
@@ -63,7 +63,12 @@ const Home = () => {
           <EventTimeline />
           <div id="dresscode"><DressCode /></div>
           <div id="entourage"><Entourage /></div>
-          <PhotoCollage />
+          
+          {/* ✨ THE FIX: Added the style to stop the zero-height ghost bug! */}
+          <div id="photo-collage" style={{ minHeight: '100vh', overflow: 'hidden' }}>
+            <PhotoCollage />
+          </div>
+          
           <div id="faq"><FAQ /></div>
           <div id="rsvp"><RsvpForm /></div>
           
@@ -76,7 +81,7 @@ const Home = () => {
 };
 
 function App() {
-  // ✨ THE MAGIC FIX: Injects global canvas transparency on app load
+  // THE MAGIC FIX: Injects global canvas transparency on app load
   useEffect(() => {
     const style = document.createElement('style');
     style.textContent = `
@@ -92,7 +97,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/Admin" element={<Admin />} />
+        <Route path="/admin" element={<Admin />} />
       </Routes>
     </Router>
   );

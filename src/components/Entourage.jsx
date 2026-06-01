@@ -32,7 +32,7 @@ const Entourage = () => {
     "Ms. Gabrielle Frances R. Figuracion", "Mrs. Lourdes A. Rubin", "Mrs. Mariel Jean P. Schmith", 
     "Mrs. Maria Theresa S. Sulatan", "Mrs. Jagilyn P. Agolito", "Mrs. Teresa S. Tingson", 
     "Mrs. Marites P. Vicente", "Ms. Andria Lois M. Linaac", "Mrs. Maria Theresa Nanaman Larrazabal", 
-    "Dr. Hochille Mae B. Uy", "Mrs. Khen Mauricio"
+    "Dr. Hochille Mae B. Uy", "Mrs. Jowena Mauricio"
   ];
 
   const ninongs = [
@@ -99,7 +99,7 @@ const Entourage = () => {
         <h3 className="section-script-title pinyon-font">Principal Sponsors</h3>
         
         <div className="sponsors-grid-container">
-          {/* ✨ THE FIX: We map over ninangs (the longer list) instead of ninongs */}
+          {/*   THE FIX: We map over ninangs (the longer list) instead of ninongs */}
           {ninangs.map((ninang, index) => (
             <div className="sponsor-pair-row" key={index}>
               {/* If there is no Ninong for this row, it will just render a blank space */}
@@ -110,7 +110,7 @@ const Entourage = () => {
         </div>
 
         {/* === THE ENTOURAGE === */}
-        {/* ✨ ADDED: marginTop here pushes the entire Entourage section down */}
+        {/*   ADDED: marginTop here pushes the entire Entourage section down */}
         <div className="invite-divider" style={{ marginTop: '80px' }}></div>
         <h3 className="section-script-title pinyon-font" style={{ marginBottom: '50px' }}>
           The Entourage

@@ -1,7 +1,7 @@
 // src/components/WeddingVideo.jsx
 import './WeddingVideo.css';
 
-// ✨ Import your newly converted MP4 file here!
+//   Import your newly converted MP4 file here!
 import myVideo from '../assets/L1.mov'; 
 
 const WeddingVideo = () => {

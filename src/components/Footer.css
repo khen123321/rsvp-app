@@ -1,8 +1,8 @@
 /* Slim Wedding Footer Styles */
 .wedding-footer-slim {
   background-color: #6D071A; /* Signature Dark Red */
-  /* ✨ NEW: The SVG Background Image */
-  background-image: url('../assets/bgImage/bg.svg'); 
+  /*   NEW: The SVG Background Image */
+  background-image: url('/bg.svg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -32,7 +32,7 @@
 }
 
 .footer-names-mini {
-  font-family: 'Pinyon Script', cursive; /* ✨ FIXED Typo here */
+  font-family: 'Pinyon Script', cursive; /*   FIXED Typo here */
   font-size: 1.5rem;
   letter-spacing: 1px;
 }
@@ -74,7 +74,7 @@
   }
 
   .footer-main-row {
-    /* ✨ Instead of a single column, we allow it to wrap naturally */
+    /*   Instead of a single column, we allow it to wrap naturally */
     flex-wrap: wrap; 
     justify-content: center;
     row-gap: 5px;
@@ -82,14 +82,14 @@
   }
 
   .footer-names-mini {
-    /* ✨ Forces the names to take the full width so they sit on their own line */
+    /*   Forces the names to take the full width so they sit on their own line */
     width: 100%; 
     text-align: center;
     font-size: 1.8rem; /* Kept slightly larger so it stands out */
     margin-bottom: 2px;
   }
 
-  /* ✨ Magic trick: Hides ONLY the first dot (after the names), 
+  /*   Magic trick: Hides ONLY the first dot (after the names), 
      but keeps the dot between the Date and Location! */
   .footer-dot:nth-child(2) {
     display: none; 

@@ -24,9 +24,6 @@ const GuestCard = ({ guest }) => {
         </div>
 
         <div className="guest-toggle-indicators">
-          {guest.isAttending && guest.guestsCount > 0 && (
-            <span className="guest-badge" title="Additional guests">+{guest.guestsCount}</span>
-          )}
           <svg className={`chevron ${isOpen ? 'rotated' : ''}`} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
             <polyline points="6 9 12 15 18 9" />
           </svg>
@@ -44,12 +41,6 @@ const GuestCard = ({ guest }) => {
               <span className="meta-label">Ticket ID</span>
               <span className="meta-value mono">{guest.id}</span>
             </div>
-            {guest.isAttending && (
-              <div className="meta-row">
-                <span className="meta-label">Party Size</span>
-                <span className="meta-value">{1 + (guest.guestsCount || 0)}</span>
-              </div>
-            )}
           </div>
 
           {guest.message && (
@@ -65,16 +56,12 @@ const GuestCard = ({ guest }) => {
 };
 
 const Admin = () => {
-  // ✨ REMOVED: useNavigate and useSearchParams are no longer needed
-  
   const [isLoggedIn, setIsLoggedIn] = useState(
     () => sessionStorage.getItem('isAdminLoggedIn') === 'true'
   );
   const [guests, setGuests] = useState(null);
   const [view, setView] = useState('list');
   const [search, setSearch] = useState('');
-
-  // ✨ REMOVED: hasAccess and its useEffect redirect logic 
 
   useEffect(() => {
     if (!isLoggedIn) return;
@@ -107,12 +94,11 @@ const Admin = () => {
     setIsLoggedIn(false);
   };
 
-  const { attending, declined, totalHeadcount } = useMemo(() => {
-    if (!guests) return { attending: [], declined: [], totalHeadcount: 0 };
+  const { attending, declined } = useMemo(() => {
+    if (!guests) return { attending: [], declined: [] };
     const a = guests.filter((g) => g.isAttending);
     const d = guests.filter((g) => !g.isAttending);
-    const head = a.reduce((sum, g) => sum + 1 + (g.guestsCount || 0), 0);
-    return { attending: a, declined: d, totalHeadcount: head };
+    return { attending: a, declined: d };
   }, [guests]);
 
   const filterGuests = (list) =>
@@ -126,8 +112,6 @@ const Admin = () => {
   const responseRate = guests && guests.length > 0
     ? Math.round((attending.length / guests.length) * 100)
     : 0;
-
-  // ✨ REMOVED: if (!hasAccess) return null;
 
   // If not logged in, show our new secure Login component
   if (!isLoggedIn) return <Login onLoginSuccess={handleLogin} />;
@@ -213,15 +197,6 @@ const Admin = () => {
                 </div>
                 <span className="kpi-value">{attending.length}</span>
                 <span className="kpi-foot">of {guests.length} invited</span>
-              </div>
-
-              <div className="kpi-card kpi-info">
-                <div className="kpi-top">
-                  <span className="kpi-label">Headcount</span>
-                  <span className="kpi-icon">◉</span>
-                </div>
-                <span className="kpi-value">{totalHeadcount}</span>
-                <span className="kpi-foot">incl. plus-ones</span>
               </div>
 
               <div className="kpi-card kpi-danger">

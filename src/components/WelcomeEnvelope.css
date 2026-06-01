@@ -5,8 +5,8 @@
   align-items: center;
   min-height: 100vh;
   
-  /* Background SVG */
-  background-image: url('../assets/bgImage/bg2.png');
+  /*   FIX: Updated to public folder path */
+  background-image: url('/bg2.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -65,7 +65,8 @@
   height: 100%;
   border-radius: 4px;
   background-color: #6A0F1F;
-  background-image: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.1)), url('../assets/bgImage/bg.svg');
+  /*   FIX: Updated to public folder path */
+  background-image: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.1)), url('/bg.svg');
   background-size: cover;
   background-position: center;
   z-index: 1;
@@ -81,7 +82,8 @@
   z-index: 3;
   border-radius: 0 0 4px 4px;
   background-color: #6A0F1F;
-  background-image: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(0,0,0,0.2) 100%), url('../assets/bgImage/bg.svg');
+  /*   FIX: Updated to public folder path */
+  background-image: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, rgba(0,0,0,0.2) 100%), url('/bg.svg');
   background-size: cover;
   background-position: bottom center;
   box-shadow: 0 10px 30px rgba(0,0,0,0.1);
@@ -107,7 +109,8 @@
   transform-origin: top;
   filter: drop-shadow(0 8px 12px rgba(0,0,0,0.15));
   background-color: #6A0F1F;
-  background-image: linear-gradient(to bottom, rgba(255,255,255,0.05), rgba(0,0,0,0.15)), url('../assets/bgImage/bg.svg');
+  /*   FIX: Updated to public folder path */
+  background-image: linear-gradient(to bottom, rgba(255,255,255,0.05), rgba(0,0,0,0.15)), url('/bg.svg');
   background-size: cover;
   background-position: top center;
   transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1) 1.5s;

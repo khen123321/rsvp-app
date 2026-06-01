@@ -44,7 +44,7 @@ const Chatbot = () => {
         setMessages(prev => [...prev, { 
           sender: 'bot', 
           text: "Admin credentials verified. Please access the secure portal below:",
-          link: "/admin-login" 
+          link: "/admin" 
         }]);
       } else {
         setMessages(prev => [...prev, { sender: 'bot', text: data.text }]);

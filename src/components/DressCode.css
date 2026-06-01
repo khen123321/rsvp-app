@@ -73,13 +73,13 @@
 
 /* Keeps your desktop downward nudge intact */
 .left-img { 
-  justify-self: start; 
-  transform: translateY(150px); 
+  justify-self: end; /* Changed to 'end' so it sits perfectly next to the text */
+  transform: translateX(60px) translateY(80px); /* Changed position so it aligns with the right side */
 }
 
 .right-img { 
-  justify-self: end; 
-  transform: translateX(20px); /* Pushes the image 30 pixels to the right */
+  justify-self: start; /* Changed to 'start' so it sits perfectly next to the text */
+  transform: translateX(-40px) translateY(-10px); /* Changed position to align with left side */
 }
 
 .dress-content {
@@ -91,9 +91,10 @@
 
 /* --- Illustrations --- */
 .dress-illustration {
-  height: 280px; 
+  height: 320px; /* Base height */
   width: auto;
   object-fit: contain;
+  transform: scale(1.4); /* Scaled up to make it MASSIVE without breaking your text grid! */
 }
 
 /* --- Typography --- */
@@ -167,34 +168,59 @@
 
 
 /* =========================================
-   📱 MOBILE & TABLET RESPONSIVENESS
+   ✨ MOBILE & TABLET RESPONSIVENESS (IMPROVED)
    ========================================= */
 @media (max-width: 992px) {
+  
+  .dress-section {
+    padding: 60px 15px; 
+  }
+
+  /* Shrink the massive header for tablets */
+  .dress-title {
+    font-size: 3rem;
+    letter-spacing: 4px;
+  }
+  
+  .script-code {
+    font-size: 4rem;
+    transform: translateY(4px);
+  }
+
   .dress-layout {
     grid-template-columns: 1fr; /* Stacks to a single column */
-    gap: 30px;
+    gap: 40px; /* Better spacing between the stacked sections */
   }
 
   /* Reorders the grid elements into a clean stack */
   .left-img { 
     order: 1; 
     justify-self: center; 
-    transform: translateY(0); /* ✨ THE FIX: Resets the push so it doesn't overlap text! ✨ */
+    transform: translateY(0); /* Resets the desktop push */
   }
+  
   .principal-text { 
     order: 2; 
-    margin-bottom: 20px;
   }
+  
   .right-img { 
     order: 3; 
     justify-self: center; 
+    transform: translateX(0); /* Reset this too so it sits perfectly center */
   }
+  
   .guest-text { 
     order: 4; 
   }
 
   .dress-illustration {
     height: 240px; 
+    transform: scale(1); /* Resets the massive desktop size back to normal for tablets */
+  }
+
+  /* Prevents layout breaking if there are too many swatches */
+  .color-palette {
+    flex-wrap: wrap; 
   }
 
   .note-text br, .climate-text br {
@@ -204,12 +230,33 @@
 
 /* Tiny screens / mobile phones optimization */
 @media (max-width: 480px) {
+  
+  /* ✨ THE HEADER FIX: Shrink it enough to fit perfectly on small screens */
+  .dress-title {
+    font-size: 2.2rem;
+    letter-spacing: 2px;
+  }
+  
+  .script-code {
+    font-size: 3rem;
+    transform: translateY(2px); /* Adjusts the cursive alignment slightly */
+  }
+
+  .dress-layout {
+    gap: 30px; 
+  }
+
   .color-swatch {
-    width: 80px; /* Scales down swatches slightly so they fit cleanly side-by-side */
-    height: 80px;
+    width: 70px; 
+    height: 70px;
+    border-width: 2px;
   }
   
   .color-palette {
     gap: 10px;
+  }
+
+  .dress-illustration {
+    height: 200px; 
   }
 }

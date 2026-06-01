@@ -2,9 +2,6 @@
 import { useState, useEffect, useRef } from 'react';
 import './DressCode.css';
 
-// Background Import
-import bgDamask from '../assets/bgImage/bg2.png';
-
 // Character Illustration Imports
 import principalDressImg from '../assets/principaldress.png';
 import guestDressImg from '../assets/guestdress.png';
@@ -35,7 +32,12 @@ const DressCode = () => {
     <section 
       ref={sectionRef}
       className={`dress-section ${isVisible ? 'animate-in' : ''}`}
-      style={{ backgroundImage: `url(${bgDamask})` }}
+      style={{
+        backgroundImage: `url('/bg2.png')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}
       id="dresscode"
     >
       <div className="dress-container">
@@ -58,7 +60,6 @@ const DressCode = () => {
           {/* 2. Center-Left Text */}
           <div className="dress-content principal-text">
             <h3 className="column-subtitle">PRINCIPAL SPONSORS</h3>
-            {/* Exact wording, no bolding, exact line breaks */}
             <p className="attire-info">
               Gentlemen: Traditional Beige Barong <br />
               with Brown Pants <br />
@@ -74,7 +75,6 @@ const DressCode = () => {
           {/* 3. Center-Right Text */}
           <div className="dress-content guest-text">
             <h3 className="column-subtitle">GUESTS</h3>
-            {/* Exact wording, no bolding, exact line breaks */}
             <p className="attire-info">
               Gentlemen: Polo or Longsleeves <br />
               Ladies: Long gown or Formal Dress <br />

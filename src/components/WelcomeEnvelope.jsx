@@ -1,7 +1,6 @@
 // src/components/WelcomeEnvelope.jsx
 import { useState, useEffect } from 'react';
 import './WelcomeEnvelope.css';
-import letterImg from '../assets/letter.jpg';
 
 const WelcomeEnvelope = ({ onEnter }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -96,8 +95,9 @@ const WelcomeEnvelope = ({ onEnter }) => {
 
         <div className={`letter-wrapper ${isZooming ? 'is-zooming' : ''}`}>
           <div className="letter">
+            {/*   FIX: Pointing directly to the public folder */}
             <img
-              src={letterImg}
+              src="/letter.jpg"
               alt="Wedding Invitation"
               className="letter-image"
             />

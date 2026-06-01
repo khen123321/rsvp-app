@@ -39,7 +39,7 @@ const EventTimeline = () => {
 
   return (
     <section 
-      id="timeline" /* ✨ THIS IS THE MAGIC FIX FOR THE NAVBAR ✨ */
+      id="timeline" /* THIS IS THE MAGIC FIX FOR THE NAVBAR */
       ref={sectionRef}
       className={`timeline-section ${isVisible ? 'animate-in' : ''}`}
       style={{ backgroundImage: `url(${bgDamask})` }}

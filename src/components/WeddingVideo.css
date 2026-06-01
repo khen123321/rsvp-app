@@ -1,7 +1,7 @@
 /* src/components/WeddingVideo.css */
 
 .video-section {
-  background-image: url('../assets/bgImage/bg.svg'); 
+  background-image: url('/bg.svg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

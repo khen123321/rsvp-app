@@ -60,7 +60,7 @@
   text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
 }
 
-/* ✨ THE FIX: Bulletproof Grid Layouts */
+/*   THE FIX: Bulletproof Grid Layouts */
 .invite-split-row {
   display: grid;
   grid-template-columns: 1fr 1fr;

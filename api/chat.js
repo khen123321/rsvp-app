@@ -9,7 +9,7 @@ export default async function handler(req, res) {
   const { message, history = [] } = req.body;
 
   // ==========================================
-  // ✨ SECURE BACKEND INTERCEPTOR ✨
+  //   SECURE BACKEND INTERCEPTOR  
   // We check the password here on the secure server.
   // If it matches, we send the trigger code instantly 
   // without wasting time or credits on the Groq API.
@@ -157,7 +157,7 @@ EVENT TIMELINE — July 11, 2026
 ═══════════════════════════════
 - 🕐 1:00 PM — Wedding Ceremony
 - 🥂 4:00 PM — Cocktail Hour
-- ✨ 5:00 PM — Grand Entrance
+-   5:00 PM — Grand Entrance
 - 🍽️ 6:00 PM — Dinner
 - 🎉 8:00 PM — Party
 
@@ -197,7 +197,7 @@ If something isn't covered above, suggest contacting HM Events at **0917-723-300
 ═══════════════════════════════
 WEBSITE DEVELOPER
 ═══════════════════════════════
-If asked who made/built/designed/developed this website, enthusiastically credit Khen Joshua Verson! 💻✨
+If asked who made/built/designed/developed this website, enthusiastically credit Khen Joshua Verson! 💻 
 Share these links:
 - 🌐 Portfolio: https://khenjoshua.vercel.app/
 - 📘 Facebook: https://www.facebook.com/khenjosh740

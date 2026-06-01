@@ -9,19 +9,50 @@
   --white: #ffffff;
 }
 
-body, html {
-  margin: 0;
-  padding: 0;
-  background-color: var(--accent-beige); /* Beige background for the whole site */
-  font-family: 'Poppins', sans-serif;
-  color: var(--text-dark);
-}
+/* =========================================
+   ✨ THE ULTIMATE MOBILE OVERFLOW FIX 
+   ========================================= */
 
-* {
+*, *::before, *::after {
   box-sizing: border-box;
 }
 
-/* --- App Layout --- */
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  background-color: var(--accent-beige); 
+  font-family: 'Poppins', sans-serif;
+  color: var(--text-dark);
+  overflow-x: hidden; /* Prevents side-to-side scrolling */
+}
+
+/* Make ALL images scale down automatically on phones */
+img, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* The Invisible Wall: Stops elements from stretching the screen */
+#root {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  padding: 0; 
+}
+
+.main-wrapper {
+  width: 100%;
+  max-width: 100vw; 
+  overflow-x: hidden !important; 
+  position: relative;
+}
+
+/* =========================================
+   APP LAYOUT & COMPONENTS
+   ========================================= */
+
 .form-section {
   background-color: #eef2f6;
   min-height: 100vh;

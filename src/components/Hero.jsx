@@ -1,12 +1,11 @@
 // src/components/Hero.jsx
 import './Hero.css';
 import logo from '../assets/logo.png';
-import heroBg from "../assets/bgImage/hero.webp";
 
 const Hero = () => {
-  // Pass the image as a CSS variable to the background layer
+  //   FIX: Pass the public image path directly to the CSS variable
   const heroStyle = {
-    '--hero-bg': `url(${heroBg})`
+    '--hero-bg': `url('/hero.webp')`
   };
 
   return (

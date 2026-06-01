@@ -133,7 +133,7 @@ const accommodations = [
 
 const WeddingDetails = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false); // ✨ Added Modal State
+  const [isModalOpen, setIsModalOpen] = useState(false); //   Added Modal State
   const sectionRef = useRef(null);
 
   useEffect(() => {
@@ -247,7 +247,7 @@ const WeddingDetails = () => {
                   accommodation options and contact details. Kindly note that all bookings 
                   and related expenses will be at the guest's own arrangement and expense.
                 </p>
-                {/* ✨ Changed from <a> tag to <button> to trigger modal */}
+                {/*   Changed from <a> tag to <button> to trigger modal */}
                 <button 
                   onClick={() => setIsModalOpen(true)}
                   className="detail-btn centered-btn"
@@ -261,7 +261,7 @@ const WeddingDetails = () => {
         </div>
       </section>
 
-      {/* ✨ THE ACCOMMODATION MODAL */}
+      {/*   THE ACCOMMODATION MODAL */}
       {isModalOpen && (
         <div className="hotel-modal-overlay" onClick={() => setIsModalOpen(false)}>
           <div className="hotel-modal-content" onClick={(e) => e.stopPropagation()}>

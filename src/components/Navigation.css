@@ -73,12 +73,14 @@
   position: relative;
 }
 
-.nav-links li:hover {
+/* HOVER & ACTIVE STATES */
+.nav-links li:hover,
+.nav-links li.active {
   color: #ffffff; 
   transform: translateY(-2px); 
 }
 
-/* Simple underline effect that appears on hover */
+/* Simple underline effect */
 .nav-links li::after {
   content: '';
   position: absolute;
@@ -90,26 +92,29 @@
   transition: width 0.3s ease;
 }
 
-.nav-links li:hover::after {
+/* Extend underline on hover AND when active */
+.nav-links li:hover::after,
+.nav-links li.active::after {
   width: 100%;
 }
 
 /* =========================================
-   ✨ DYNAMIC LIGHT MODE (For Dark Backgrounds) 
+    DYNAMIC LIGHT MODE (For Dark Backgrounds) 
    ========================================= */
-
-/* Notice: The background-color is NOT changed here, so it stays clear! */
 
 /* 1. Change link text to Beige */
 .main-nav.nav-light-mode .nav-links li {
   color: #F5F5DC; 
 }
 
-.main-nav.nav-light-mode .nav-links li:hover {
+/* Highlight color for light mode */
+.main-nav.nav-light-mode .nav-links li:hover,
+.main-nav.nav-light-mode .nav-links li.active {
   color: #ffffff;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.3); /* Adds a soft glow when active on dark backgrounds */
 }
 
-/* 2. Change the hover underline to white */
+/* 2. Change the hover/active underline to white */
 .main-nav.nav-light-mode .nav-links li::after {
   background-color: #ffffff;
 }

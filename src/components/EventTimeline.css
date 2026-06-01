@@ -17,17 +17,17 @@
 }
 
 .timeline-container {
-  max-width: 1400px;
+  max-width: 1000px; /* ✨ Safely bounds the whole section to prevent the massive gap */
   width: 90%;
   display: flex;
-  justify-content: space-between;
+  justify-content: center; /* Pushes the two halves together in the middle */
   align-items: flex-start;
-  gap: 40px;
+  gap: 80px; /* ✨ The exact size of the space between the Title and the Timeline */
 }
 
 /* --- Left Side: Title Position --- */
 .timeline-left {
-  flex: 1;
+  flex: 0 1 auto; /* Stops the title from stretching away to the left edge */
   padding-top: 20px;
 }
 
@@ -60,21 +60,32 @@
 
 /* --- Right Side: Timeline Path --- */
 .timeline-right {
-  flex: 1.2;
+  flex: 0 1 550px; /* Keeps the zigzag neatly contained instead of stretching to the right edge */
   position: relative;
   padding: 40px 0;
   width: 100%;
 }
 
+/* ✨ THE MAGIC FIX: The line now starts at 0 height! */
 .vertical-line-path {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
   top: 0;
-  bottom: 0;
+  height: 0; /* Starts hidden */
   width: 2px;
   background-color: #F5F5DC;
   opacity: 0.6;
+}
+
+/* ✨ THE ANIMATION: Draws the line downwards over 2.5 seconds */
+.timeline-section.animate-in .vertical-line-path {
+  animation: drawLine 2.5s linear forwards;
+}
+
+@keyframes drawLine {
+  0% { height: 0; }
+  100% { height: 100%; }
 }
 
 .diamond-end {
@@ -84,27 +95,41 @@
   width: 12px;
   height: 12px;
   background-color: #F5F5DC;
+  opacity: 0; /* Start hidden so they don't pop early */
 }
 
 .diamond-end.top { top: -6px; }
-.diamond-end.bottom { bottom: -6px; }
+/* Because the bottom diamond is attached to the bottom of the animating line, it physically rides the line down! */
+.diamond-end.bottom { bottom: -6px; } 
+
+.timeline-section.animate-in .diamond-end {
+  animation: fadeDiamond 0.3s ease forwards;
+}
+
+@keyframes fadeDiamond {
+  to { opacity: 1; }
+}
 
 /* --- Row & Animation Positioning --- */
 .timeline-row {
   display: flex;
   width: 100%;
-  margin-bottom: clamp(40px, 6vw, 60px);
+  /* ✨ Tighter vertical spacing between timeline events */
+  margin-bottom: clamp(15px, 3vw, 30px); 
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateY(20px) scale(0.95);
 }
 
 .timeline-section.animate-in .timeline-row {
-  animation: popUpStagger 0.8s ease forwards;
-  animation-delay: calc(var(--index) * 0.4s);
+  /* Gives a slight 'spring' effect when it pops out */
+  animation: popUpStagger 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  
+  /* TIMING MAGIC: Syncs the pop-out perfectly with the descending line */
+  animation-delay: calc(0.3s + (var(--index) * 0.45s));
 }
 
 @keyframes popUpStagger {
-  to { opacity: 1; transform: translateY(0); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 .event-item-wrapper {
@@ -151,14 +176,12 @@
   font-size: clamp(0.85rem, 2vw, 1.5rem);
   font-weight: 300;
   margin: 0;
-  /* Removes nowrap so text can stack on tiny screens */
   white-space: normal; 
   line-height: 1.2;
 }
 
 .icon-connector-group {
   position: relative;
-  /* Shrinks icons perfectly for mobile */
   width: clamp(40px, 8vw, 80px);
   height: clamp(40px, 8vw, 80px);
   display: flex;
@@ -188,29 +211,72 @@
 .row-right .horizontal-connector { left: calc(var(--connector-width) * -1); }
 
 /* =========================================
-   MOBILE RESPONSIVE LAYOUT
+   ✨ MOBILE RESPONSIVE LAYOUT 
 ========================================= */
+
 @media (max-width: 900px) {
+  .timeline-section {
+    padding: 60px 15px; 
+  }
+
   .timeline-container { 
     flex-direction: column; 
     align-items: center; 
+    gap: 20px;
   }
   
   .timeline-left { 
     text-align: center; 
-    margin-bottom: 50px; /* Space between title and zigzag */
+    margin-bottom: 40px; 
     padding-top: 0;
   }
   
   .timeline-right {
     width: 100%;
     padding: 0;
+    flex: none;
+  }
+  
+  .timeline-main-title {
+    font-size: 3.5rem;
+    letter-spacing: 4px;
   }
 }
 
-/* For very tiny screens (like iPhone SE), tighten the gaps slightly so the zigzag fits perfectly */
+@media (max-width: 600px) {
+  .timeline-row {
+    margin-bottom: 20px; 
+  }
+
+  .event-time-tag { font-size: 1.1rem; }
+  .event-name-tag { font-size: 0.9rem; }
+
+  .icon-connector-group {
+    width: 45px;
+    height: 45px;
+  }
+  
+  .timeline-main-title { font-size: 2.8rem; }
+  .script-of { font-size: 2.5rem; }
+}
+
 @media (max-width: 480px) {
+  .timeline-section { padding: 40px 5px; }
+
   .event-text-group { margin: 0 8px; }
-  .row-left .event-item-wrapper { padding-right: 12px; }
-  .row-right .event-item-wrapper { padding-left: 12px; }
-} 
+  
+  .row-left .event-item-wrapper { padding-right: 15px; }
+  .row-right .event-item-wrapper { padding-left: 15px; }
+
+  .event-time-tag { font-size: 0.9rem; }
+
+  .event-name-tag {
+    font-size: 0.75rem; 
+    word-break: break-word; 
+  }
+
+  .icon-connector-group {
+    width: 32px; 
+    height: 32px;
+  }
+}

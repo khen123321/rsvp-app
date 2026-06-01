@@ -5,34 +5,61 @@ import logo from '../assets/logo.png';
 
 const Navigation = () => {
   const [navColor, setNavColor] = useState('dark');
+  const [activeSection, setActiveSection] = useState('home');
 
-  // Radar to detect which section is underneath the navbar
   useEffect(() => {
     const handleScroll = () => {
-      const darkSections = ['our-journey', 'gallery', 'timeline', 'entourage', 'faq'];
+      // 1. Color Radar 
+      const darkSections = ['our-journey', 'timeline', 'entourage', 'faq'];
       let isOverDark = false;
 
       for (const id of darkSections) {
         const el = document.getElementById(id);
         if (el) {
           const rect = el.getBoundingClientRect();
-          
-          // ✨ THE FIX: Massive Hitbox! 
-          // If the top of the section is above 100px (just below the navbar)
-          // AND the bottom of the section hasn't completely scrolled away yet (above 0px)
           if (rect.top <= 100 && rect.bottom >= 10) {
             isOverDark = true;
-            break; // Stop looking once we find one!
+            break;
           }
         }
       }
-
       setNavColor(isOverDark ? 'light' : 'dark');
+
+      // 2. ✨ THE "STICKY MEMORY" VISIBILITY RADAR ✨
+      const allSections = ['home', 'our-journey', 'wedding-details', 'photo-collage', 'faq', 'rsvp'];
+      
+      let currentActive = null; // ✨ THE FIX: Removed the 'home' fallback!
+      let maxVisibleHeight = 0; 
+
+      for (const id of allSections) {
+        const el = document.getElementById(id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          
+          const visibleTop = Math.max(0, rect.top);
+          const visibleBottom = Math.min(window.innerHeight, rect.bottom);
+          const visibleHeight = Math.max(0, visibleBottom - visibleTop);
+
+          // Only count it if it's actually taking up space on the screen
+          if (visibleHeight > maxVisibleHeight && visibleHeight > 0) {
+            maxVisibleHeight = visibleHeight;
+            currentActive = id;
+          }
+        }
+      }
+      
+      // Force RSVP to highlight if we hit the absolute bottom of the page
+      if (window.innerHeight + Math.round(window.scrollY) >= document.documentElement.scrollHeight - 50) {
+        setActiveSection('rsvp');
+      } else if (currentActive) {
+        // ✨ THE FIX: Only update the highlight if a tracked section is ACTUALLY visible!
+        // If we are in an untracked gap (like Dress Code), it ignores this and keeps the previous highlight.
+        setActiveSection(currentActive);
+      }
     };
 
-    // Use 'true' to ensure the scroll is captured even if a parent container is the one scrolling
     window.addEventListener('scroll', handleScroll, true);
-    handleScroll(); // Run immediately on mount
+    handleScroll(); 
 
     return () => window.removeEventListener('scroll', handleScroll, true);
   }, []);
@@ -55,12 +82,35 @@ const Navigation = () => {
 
         {/* Right Side: Links */}
         <ul className="nav-links">
-          <li onClick={() => scrollToSection('home')}>HOME</li>
-          <li onClick={() => scrollToSection('our-journey')}>OUR STORY</li>
-          <li onClick={() => scrollToSection('wedding-details')}>DETAILS</li>
-          <li onClick={() => scrollToSection('gallery')}>GALLERY</li>
-          <li onClick={() => scrollToSection('faq')}>FAQS</li>
-          <li onClick={() => scrollToSection('rsvp')}>RSVP</li>
+          <li 
+            className={activeSection === 'home' ? 'active' : ''} 
+            onClick={() => scrollToSection('home')}
+          >HOME</li>
+          
+          <li 
+            className={activeSection === 'our-journey' ? 'active' : ''} 
+            onClick={() => scrollToSection('our-journey')}
+          >OUR STORY</li>
+          
+          <li 
+            className={activeSection === 'wedding-details' ? 'active' : ''} 
+            onClick={() => scrollToSection('wedding-details')}
+          >DETAILS</li>
+          
+          <li 
+            className={activeSection === 'photo-collage' ? 'active' : ''} 
+            onClick={() => scrollToSection('photo-collage')}
+          >GALLERY</li>
+          
+          <li 
+            className={activeSection === 'faq' ? 'active' : ''} 
+            onClick={() => scrollToSection('faq')}
+          >FAQS</li>
+          
+          <li 
+            className={activeSection === 'rsvp' ? 'active' : ''} 
+            onClick={() => scrollToSection('rsvp')}
+          >RSVP</li>
         </ul>
 
       </div>

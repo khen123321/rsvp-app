@@ -3,9 +3,8 @@ import { useState, useEffect, useRef } from 'react';
 import './SaveTheDate.css';
 
 // --- Asset Imports ---
-import bgDamask from '../assets/bgImage/bg2.png'; 
 import heartScribble from '../assets/heart.gif'; 
-import logo from '../assets/logo.png'; // ✨ NEW: Logo import
+import logo from '../assets/logo.png'; 
 
 // Your custom SVG photos!
 import photo28 from '../assets/savethedate/28.svg';
@@ -60,7 +59,7 @@ const SaveTheDate = () => {
   ];
 
   // Calendar setup for July 2026 (Starts on a Wednesday)
-  const days = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
+  const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   const dates = [
     "", "", "", 1, 2, 3, 4,
     5, 6, 7, 8, 9, 10, 11,
@@ -73,8 +72,9 @@ const SaveTheDate = () => {
     <section 
       ref={sectionRef} 
       className={`save-the-date ${isVisible ? 'animate-in' : ''}`} 
-      style={{ 
-        backgroundImage: `url(${bgDamask})`,
+      style={{
+        /*   UPDATED: Pointing directly to the public folder! */
+        backgroundImage: `url('/bg2.png')`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat'
@@ -85,7 +85,7 @@ const SaveTheDate = () => {
         {/* LEFT SIDE: Interactive Polaroid Stack */}
         <div className="std-photos" onClick={handleThrow}>
           
-          {/* ✨ NEW: Logo container hidden underneath the polaroids */}
+          {/* Logo container hidden underneath the polaroids */}
           <div className={`std-logo-container ${topIndex < 0 ? 'revealed' : ''}`}>
             <img src={logo} alt="Wedding Logo" className="std-logo" />
           </div>

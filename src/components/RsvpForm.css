@@ -455,7 +455,7 @@ body > canvas {
     text-align: center;
   }
   
-  /* ✨ Changed text-align to justify for mobile readability ✨ */
+  /*   Changed text-align to justify for mobile readability   */
   .rsvp-description { 
     font-size: 0.9rem; 
     margin-bottom: 30px;
@@ -517,7 +517,7 @@ body > canvas {
     left: 0;
   }
   
-  /* ✨ Ensured the special note class is also justified if used later ✨ */
+  /*   Ensured the special note class is also justified if used later   */
   .rsvp-special-note {
     font-style: italic;
     font-size: 0.85rem;
