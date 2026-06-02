@@ -296,9 +296,17 @@
     padding: 14px 20px;
     margin-top: 30px;
   }
+
+  /* ✨ THE FIX: Forces the hint text to sit perfectly dead-center on mobile */
+  .tap-hint {
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    text-align: center;
+  }
 }
 
-/* ✨ NEW: Tiny Screens (iPhone SE / Small Androids) */
+/* Tiny Screens (iPhone SE / Small Androids) */
 @media (max-width: 480px) {
   
   .save-the-date {

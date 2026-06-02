@@ -81,11 +81,11 @@ const Entourage = () => {
         <div className="invite-split-row" style={{ marginBottom: '40px' }}>
           <div className="invite-col align-right">
             <h4 className="invite-role">PARENTS OF THE GROOM</h4>
-            <p className="invite-name">Mrs. Nenita G. Vidal<br/>P/Maj. Exudio A. Vidal, PNP (Ret)</p>
+            <p className="invite-name">P/Maj. Exudio A. Vidal, PNP (Ret)<br/>Mrs. Nenita G. Vidal</p>
           </div>
           <div className="invite-col align-left">
             <h4 className="invite-role">PARENTS OF THE BRIDE</h4>
-            <p className="invite-name">Mrs. Nenita M. Caidic<br/>TSG Ludelon B. Caidic PA (Ret) (†)</p>
+            <p className="invite-name">TSG Ludelon B. Caidic PA (Ret) †<br/>Mrs. Nenita M. Caidic</p>
           </div>
         </div>
 
@@ -123,7 +123,7 @@ const Entourage = () => {
           </div>
           <div className="invite-col align-left">
             <h4 className="invite-role">MAID OF HONOR</h4>
-            <p className="invite-name">Erika Toni M. Eblacas</p>
+            <p className="invite-name">Ms. Erika Toni M. Eblacas</p>
           </div>
         </div>
 
@@ -149,11 +149,11 @@ const Entourage = () => {
         <div className="invite-split-row" style={{ marginTop: '20px' }}>
           <div className="invite-col align-right">
             <h4 className="invite-role">VEIL</h4>
-            <p className="invite-name">Mrs. Jessalyn M. Vidal<br/>Mr. Michael Phillip G. Vidal</p>
+            <p className="invite-name">Mr. Michael Phillip G. Vidal<br/>Mrs. Jessalyn M. Vidal</p>
           </div>
           <div className="invite-col align-left">
             <h4 className="invite-role">CORD</h4>
-            <p className="invite-name">Mrs. Melan A. Caidic<br/>Mr. Bryan M. Caidic</p>
+            <p className="invite-name">Mr. Bryan M. Caidic<br/>Mrs. Melan A. Caidic</p>
           </div>
         </div>
 
