@@ -142,7 +142,7 @@ const Entourage = () => {
         {/* Candle */}
         <div className="invite-center-block" style={{ marginTop: '40px' }}>
           <h4 className="invite-role">CANDLE</h4>
-          <p className="invite-name">Mrs. Gretchen A. Caidic<br/>Mr. Jefrey M. Caidic</p>
+          <p className="invite-name">Mr. Jefrey M. Caidic<br/>Mrs. Gretchen A. Caidic</p>
         </div>
 
         {/* Veil / Cord */}
