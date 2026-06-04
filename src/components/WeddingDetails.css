@@ -161,8 +161,11 @@
   box-shadow: 0 4px 10px rgba(109, 7, 26, 0.2);
 }
 
+/* ✨ THE FIX: Bulletproof horizontal centering for the Accommodation Button */
 .centered-btn {
-  margin-top: 25px;
+  display: block;
+  margin: 25px auto 0 auto; 
+  align-self: center; 
   width: fit-content;
 }
 
@@ -201,7 +204,7 @@
   font-weight: 300;
 }
 
-/* ✨ THE FIX: Forces the paragraph text to perfectly justify on Web & Mobile! */
+/* Forces the paragraph text to perfectly justify on Web & Mobile! */
 .accommodation-content p {
   text-align: justify;
   text-justify: inter-word;
