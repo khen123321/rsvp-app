@@ -94,6 +94,7 @@
   font-size: 1.3rem;
   font-weight: 500;
   margin-bottom: 8px;
+  text-align: left; /* Keeps the venue name aligned to the side */
 }
 
 .venue-sub {
@@ -102,13 +103,7 @@
   font-weight: 300;
   margin-bottom: 30px;
   line-height: 1.4;
-  
-  /* ✨ TEXT JUSTIFICATION */
-  text-align: justify;
-  text-justify: inter-word;
-  -webkit-hyphens: auto;
-  -ms-hyphens: auto;
-  hyphens: auto;
+  text-align: left; /* Keeps the venue address safely aligned to the side */
 }
 
 /* --- Image & Button Alignment --- */
@@ -177,15 +172,12 @@
   font-size: 1.1rem;
   font-style: italic;
   font-weight: 300;
-  margin: 20px 0;
+  margin: 20px auto; 
   color: rgba(109, 7, 26, 0.8);
   
-  /* ✨ TEXT JUSTIFICATION */
-  text-align: justify;
-  text-justify: inter-word;
-  -webkit-hyphens: auto;
-  -ms-hyphens: auto;
-  hyphens: auto;
+  /* Keeps the travel time perfectly centered in the middle! */
+  text-align: center;
+  width: 100%;
 }
 
 /* --- Accommodation Card Specifics --- */
@@ -207,13 +199,17 @@
   line-height: 2;
   font-size: 1.15rem;
   font-weight: 300;
-  
-  /* ✨ TEXT JUSTIFICATION */
+}
+
+/* ✨ THE FIX: Forces the paragraph text to perfectly justify on Web & Mobile! */
+.accommodation-content p {
   text-align: justify;
   text-justify: inter-word;
   -webkit-hyphens: auto;
   -ms-hyphens: auto;
   hyphens: auto;
+  width: 100%;
+  margin: 0;
 }
 
 /* ==================================================
@@ -338,13 +334,6 @@
   font-size: 0.95rem;
   color: #444;
   line-height: 1.5;
-  
-  /* ✨ TEXT JUSTIFICATION */
-  text-align: justify;
-  text-justify: inter-word;
-  -webkit-hyphens: auto;
-  -ms-hyphens: auto;
-  hyphens: auto;
 }
 
 .hotel-details strong {
@@ -405,13 +394,7 @@
   color: #888;
   font-style: italic;
   line-height: 1.4;
-  
-  /* ✨ TEXT JUSTIFICATION */
-  text-align: justify;
-  text-justify: inter-word;
-  -webkit-hyphens: auto;
-  -ms-hyphens: auto;
-  hyphens: auto;
+  text-align: center;
 }
 
 @keyframes modalFadeIn {
@@ -483,12 +466,11 @@
     margin-bottom: 0;
   }
 
-  /* ✨ THE BUTTON FIX: Allows text to wrap safely inside the pill shape */
   .detail-btn {
     font-size: 0.75rem; 
     padding: 12px 20px; 
     letter-spacing: 1px;
-    white-space: normal; /* Removes the nowrap restriction */
+    white-space: normal; 
     line-height: 1.4; 
     max-width: 100%; 
   }
@@ -510,7 +492,6 @@
     padding: 15px;
   }
   
-  /* ✨ Apply the same safe-wrap fix to the modal buttons */
   .hotel-link-btn {
     width: 100%;
     text-align: center;
