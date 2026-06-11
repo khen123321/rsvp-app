@@ -388,7 +388,7 @@ button { font-family: inherit; }
   outline: none;
   padding: 0.7rem 0;
   background: transparent;
-  font-size: 16px; /* prevents iOS zoom on focus */
+  font-size: 16px; 
   color: var(--text);
   font-family: inherit;
 }
@@ -428,7 +428,9 @@ button { font-family: inherit; }
   border-radius: var(--radius);
   border: 1px solid var(--border);
   box-shadow: var(--shadow-xs);
-  overflow: hidden;
+  /* ✨ REMOVED overflow: hidden; so shadows don't clip! */
+  display: flex;
+  flex-direction: column;
 }
 
 .column-header {
@@ -438,6 +440,8 @@ button { font-family: inherit; }
   justify-content: space-between;
   align-items: center;
   background: var(--surface-2);
+  border-top-left-radius: var(--radius);
+  border-top-right-radius: var(--radius);
 }
 
 .column-title { display: flex; align-items: center; gap: 10px; }
@@ -472,17 +476,17 @@ button { font-family: inherit; }
 .badge-danger  { background: var(--danger-bg);  color: var(--danger); }
 
 .column-body {
-  padding: 0.75rem;
+  /* ✨ INCREASED PADDING: Gives the cards breathing room so shadows fit inside perfectly */
+  padding: 1rem;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  max-height: 70vh;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
+  gap: 0.75rem;
+  border-bottom-left-radius: var(--radius);
+  border-bottom-right-radius: var(--radius);
+  
+  /* ✨ THE FIX: Removed max-height and internal scrolling! 
+     The lists will now stretch down the page naturally so no content is ever cut off. */
 }
-
-.column-body::-webkit-scrollbar { width: 6px; }
-.column-body::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 3px; }
 
 .empty-state {
   text-align: center;
@@ -510,7 +514,6 @@ button { font-family: inherit; }
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   background: var(--surface);
-  overflow: hidden;
   transition: all 0.2s var(--ease);
   position: relative;
 }
@@ -520,6 +523,8 @@ button { font-family: inherit; }
   position: absolute;
   left: 0; top: 0; bottom: 0;
   width: 3px;
+  border-top-left-radius: var(--radius-sm);
+  border-bottom-left-radius: var(--radius-sm);
   background: transparent;
   transition: background 0.2s;
 }
@@ -537,6 +542,9 @@ button { font-family: inherit; }
 .guest-card.is-open {
   border-color: var(--text);
   box-shadow: var(--shadow-md);
+  /* ✨ ADDED Z-INDEX: Ensures the expanded card shadow floats ABOVE the card below it */
+  z-index: 10; 
+  transform: translateY(-2px);
 }
 
 .guest-card-toggle {
@@ -550,7 +558,7 @@ button { font-family: inherit; }
   border: none;
   cursor: pointer;
   text-align: left;
-  min-height: 56px; /* touch target */
+  min-height: 56px; 
 }
 
 .guest-identity { display: flex; align-items: center; gap: 12px; min-width: 0; flex: 1; }
@@ -620,22 +628,21 @@ button { font-family: inherit; }
 
 .chevron.rotated { transform: rotate(180deg); }
 
-/* Accordion */
+/* ✨ ACCORDION FIX: The layout logic is completely rebuilt so bottom text never cuts off */
 .guest-card-content {
   display: grid;
   grid-template-rows: 0fr;
-  transition: grid-template-rows 0.3s var(--ease);
+  transition: grid-template-rows 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.guest-card-content.expanded { grid-template-rows: 1fr; }
+.guest-card-content.expanded { 
+  grid-template-rows: 1fr; 
+}
 
 .guest-card-inner {
   overflow: hidden;
-  padding: 0 1.1rem;
-}
-
-.guest-card-content.expanded .guest-card-inner {
-  padding: 0 1.1rem 1rem;
+  min-height: 0;
+  padding: 0; /* Padding removed here to stop grid bugs */
 }
 
 .guest-meta {
@@ -643,7 +650,12 @@ button { font-family: inherit; }
   flex-direction: column;
   gap: 0;
   border-top: 1px dashed var(--border);
-  padding-top: 0.75rem;
+  padding: 0.75rem 1.1rem; /* Padding is placed securely on the child elements */
+}
+
+/* If no message exists, the meta box creates the final bottom padding */
+.guest-meta:last-child {
+  padding-bottom: 1.1rem;
 }
 
 .meta-row {
@@ -681,10 +693,10 @@ button { font-family: inherit; }
 .guest-message {
   position: relative;
   background: var(--surface-2);
-  padding: 0.85rem 1rem 0.85rem 2rem;
+  padding: 0.85rem 1rem 0.85rem 2.25rem; /* Extra left padding to protect text from quote mark */
   border-radius: var(--radius-sm);
   border: 1px solid var(--border);
-  margin-top: 0.75rem;
+  margin: 0.5rem 1.1rem 1.1rem; /* The margin here creates the final bottom space */
 }
 
 .message-quote {
@@ -767,8 +779,6 @@ button { font-family: inherit; }
   }
 
   .tab-btn { width: 100%; }
-
-  .column-body { max-height: none; }
 }
 
 /* ================================
@@ -813,19 +823,16 @@ button { font-family: inherit; }
 
   .column-header { padding: 0.75rem 1rem; }
   .column-header h2 { font-size: 0.85rem; }
-  .column-body { padding: 0.5rem; gap: 0.4rem; }
+  .column-body { padding: 0.75rem; gap: 0.5rem; }
 
   .guest-card-toggle { padding: 0.7rem 0.85rem 0.7rem 0.95rem; }
   .guest-avatar { width: 32px; height: 32px; font-size: 0.8rem; }
   .guest-name { font-size: 0.875rem; }
   .guest-subtle { font-size: 0.68rem; }
-  .guest-card-inner { padding: 0 0.95rem; }
-  .guest-card-content.expanded .guest-card-inner { padding: 0 0.95rem 0.85rem; }
 
   .meta-row { font-size: 0.8rem; padding: 0.35rem 0; }
   .meta-value.mono { font-size: 0.72rem; }
 
-  .guest-message { padding: 0.75rem 0.85rem 0.75rem 1.75rem; }
   .guest-message p { font-size: 0.8rem; }
 }
 

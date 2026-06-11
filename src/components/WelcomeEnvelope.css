@@ -220,13 +220,13 @@
 /* --- 7. CLICK ANYWHERE HINT --- */
 .click-hint {
   position: absolute;
-  bottom: -60px; 
+  bottom: -95px; 
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
   text-align: center;
   font-family: 'Poppins', sans-serif;
-  font-size: 0.9rem;
+  font-size: 1.9rem;
   font-weight: 300;
   letter-spacing: 3px;
   color: #6A0F1F; 
@@ -251,10 +251,10 @@
 /* --- 8. MOBILE RESPONSIVENESS --- */
 @media (max-width: 768px) {
   .envelope-wrapper { width: 345px; height: 230px; }
-  .click-hint { bottom: -50px; font-size: 0.75rem; letter-spacing: 2px; }
+  .click-hint { bottom: -50px; font-size: 1.25rem; letter-spacing: 2px; }
 }
 
 @media (max-width: 380px) {
   .envelope-wrapper { width: 285px; height: 190px; }
-  .click-hint { bottom: -45px; font-size: 0.7rem; }
+  .click-hint { bottom: -95px; font-size: 1.25rem; }
 }
