@@ -26,9 +26,9 @@ const Countdown = () => {
     return () => observer.disconnect();
   }, []);
 
-  // 2. Timer Logic: Counts down to July 11, 2026
+  // 2. Timer Logic: Counts down to July 11, 2026 at 1:00 PM (13:00:00)
   useEffect(() => {
-    const targetDate = new Date('July 11, 2026 00:00:00').getTime();
+    const targetDate = new Date('July 11, 2026 13:00:00').getTime();
     
     const timer = setInterval(() => {
       const now = new Date().getTime();
@@ -42,6 +42,8 @@ const Countdown = () => {
           seconds: Math.floor((difference / 1000) % 60),
         });
       } else {
+        // Stop the timer when it hits 0
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
         clearInterval(timer);
       }
     }, 1000);
