@@ -1,6 +1,7 @@
-/* src/index.css */
-
-@import url('https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Poppins:wght@300;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Poppins:wght@300;400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
   --primary-maroon: #6D071A;
@@ -9,237 +10,159 @@
   --white: #ffffff;
 }
 
-/* =========================================
-   ✨ THE ULTIMATE MOBILE OVERFLOW FIX 
-   ========================================= */
-
 *, *::before, *::after {
   box-sizing: border-box;
 }
 
-body, html {
+html,
+body {
   margin: 0;
   padding: 0;
   width: 100%;
-  background-color: var(--accent-beige); 
+  background-color: var(--accent-beige);
   font-family: 'Poppins', sans-serif;
   color: var(--text-dark);
-  overflow-x: hidden; /* Prevents side-to-side scrolling */
+  overflow-x: hidden;
 }
 
-/* Make ALL images scale down automatically on phones */
-img, video {
+img,
+video {
   max-width: 100%;
   height: auto;
   display: block;
 }
 
-/* The Invisible Wall: Stops elements from stretching the screen */
 #root {
   width: 100%;
   max-width: 100vw;
   overflow-x: hidden;
-  padding: 0; 
+  padding: 0;
 }
 
 .main-wrapper {
   width: 100%;
-  max-width: 100vw; 
-  overflow-x: hidden !important; 
+  max-width: 100vw;
+  overflow-x: hidden !important;
   position: relative;
 }
 
-/* =========================================
-   APP LAYOUT & COMPONENTS
-   ========================================= */
-
-.form-section {
-  background-color: #eef2f6;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  padding: 40px 20px;
+canvas {
+  background: transparent !important;
+  background-color: transparent !important;
 }
 
-/* --- Hero Section --- */
-.hero {
-  background-color: var(--color-primary);
-  color: var(--color-text-light);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 20px;
+@keyframes cinematicEntrance {
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.hero-title {
-  font-size: 4rem;
-  color: var(--color-accent);
-  margin: 0 0 10px 0;
+@keyframes letterZoom {
+  0% { transform: scale(1) translateY(0); opacity: 1; }
+  80% { opacity: 1; }
+  100% { transform: scale(40) translateY(-10px); opacity: 0; }
 }
 
-.hero-subtitle {
-  font-size: 1.5rem;
-  font-weight: 300;
+@keyframes fall {
+  0% { top: -12%; transform: rotate(0deg) translateX(0px) scale(var(--scale)); opacity: 0; }
+  8% { opacity: 0.9; }
+  33% { transform: rotate(210deg) translateX(var(--sway-a)) scale(var(--scale)); opacity: 0.85; }
+  66% { transform: rotate(480deg) translateX(var(--sway-b)) scale(var(--scale)); opacity: 0.8; }
+  88% { opacity: 0.7; }
+  100% { top: 112%; transform: rotate(720deg) translateX(0px) scale(var(--scale)); opacity: 0; }
 }
 
-/* --- Event Details Section --- */
-.details-section {
-  background-color: var(--color-bg-light);
-  color: var(--color-primary);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 40px 20px;
+@keyframes pulseHint {
+  0% { opacity: 0.4; }
+  50% { opacity: 1; }
+  100% { opacity: 0.4; }
 }
 
-.details-heading {
-  font-size: 2.5rem;
-  margin-bottom: 40px;
-  font-weight: 600;
+@keyframes numberPop {
+  0% { opacity: 0; transform: scale(0.6); }
+  100% { opacity: 1; transform: scale(1); }
 }
 
-.details-card {
-  background-color: #ffffff;
-  padding: 50px;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-  text-align: center;
-  width: 100%;
-  max-width: 500px;
+@keyframes heroBackgroundZoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.15); }
 }
 
-.details-subhead {
-  margin: 0 0 10px 0;
-  color: var(--color-primary);
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.details-subhead-location {
-  margin: 30px 0 10px 0;
-  color: var(--color-primary);
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.details-text {
-  margin: 5px 0;
-  color: #4a5568;
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-/* --- RSVP Form Section --- */
-.rsvp-wrapper {
-  width: 100%;
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.rsvp-container {
-  background-color: var(--color-primary);
-  color: var(--color-text-light);
-  padding: 40px;
-  border-radius: 12px;
-  max-width: 500px;
-  margin: 0 auto;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+@keyframes bounce {
+  0%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-4px); }
 }
 
-.rsvp-heading {
-  text-align: center;
-  margin-bottom: 24px;
-  color: var(--color-accent);
-  font-weight: 600;
-  font-size: 2rem;
+@keyframes musicPulse {
+  0% { box-shadow: 0 0 0 0 rgba(109, 7, 26, 0.7); }
+  70% { box-shadow: 0 0 0 15px rgba(109, 7, 26, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(109, 7, 26, 0); }
 }
 
-.rsvp-form {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(109, 7, 26, 0.5); }
+  70% { box-shadow: 0 0 0 10px rgba(109, 7, 26, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(109, 7, 26, 0); }
 }
 
-.input-row {
-  display: flex;
-  gap: 15px;
-  align-items: center;
+@keyframes drawLine {
+  from { height: 0; }
+  to { height: 100%; }
 }
 
-.input-group {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+@keyframes fadeDiamond {
+  to { opacity: 1; transform: translateX(-50%) rotate(45deg) scale(1); }
 }
 
-.input-group-guest {
-  flex: 1;
+@keyframes popUpStagger {
+  from { opacity: 0; transform: translateY(30px) scale(0.9); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-.input-group-contact {
-  flex: 2;
+@keyframes modalFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-.input-label {
-  font-size: 14px;
-  font-weight: 500;
-  color: #f0f0f0;
+@keyframes slideUpFade {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.input-field {
-  font-family: 'Poppins', sans-serif;
-  padding: 12px;
-  border-radius: 6px;
-  border: 1px solid var(--color-border);
-  background-color: #ffffff;
-  color: var(--color-primary);
-  font-size: 16px;
-  outline: none;
-  transition: border-color 0.3s ease;
+@keyframes popHeart {
+  0% { opacity: 0; transform: scale(0) rotate(-20deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0deg); }
 }
 
-.input-field:focus {
-  border-color: var(--color-accent);
+@keyframes modal-pop {
+  from { opacity: 0; transform: scale(0.9) translateY(20px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+@keyframes adminPulse {
+  0% { box-shadow: 0 0 0 0 rgba(13, 155, 108, 0.5); }
+  70% { box-shadow: 0 0 0 8px rgba(13, 155, 108, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(13, 155, 108, 0); }
 }
 
-.input-textarea {
-  resize: vertical;
-}
-
-.submit-btn {
-  font-family: 'Poppins', sans-serif;
-  background-color: var(--color-accent);
-  color: var(--color-primary);
-  border: none;
-  padding: 14px;
-  border-radius: 6px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  margin-top: 10px;
-  transition: all 0.3s ease;
-}
-
-/* Here is the hover effect that inline styles couldn't do! */
-.submit-btn:hover:not(:disabled) {
-  background-color: var(--color-accent-hover);
-  transform: translateY(-2px);
-}
-
-.submit-btn:disabled {
-  cursor: not-allowed;
-  opacity: 0.7;
-}
-
-.success-text {
-  text-align: center;
-  color: #f0f0f0;
-}
-
-/* Mobile Responsiveness */
-@media (max-width: 600px) {
-  .input-row {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  .hero-title {
-    font-size: 3rem;
-  }
+@keyframes adminFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
 }

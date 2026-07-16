@@ -24,7 +24,6 @@ import Admin from './components/admin/Admin';
 import WelcomeEnvelope from './components/WelcomeEnvelope';
 
 import bgMusic from './assets/bg-music.mp3';
-import './index.css';
 
 const Home = () => {
   const [hasEntered, setHasEntered] = useState(false);
@@ -64,7 +63,7 @@ const Home = () => {
           <div id="dresscode"><DressCode /></div>
           <div id="entourage"><Entourage /></div>
           
-          {/* ✨ THE FIX: Added the style to stop the zero-height ghost bug! */}
+          {/* âœ¨ THE FIX: Added the style to stop the zero-height ghost bug! */}
           <div id="photo-collage" style={{ minHeight: '100vh', overflow: 'hidden' }}>
             <PhotoCollage />
           </div>
